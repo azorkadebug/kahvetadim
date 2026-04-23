@@ -1,0 +1,16 @@
+---
+interface Props {
+  notes: string[];
+}
+const { notes } = Astro.props;
+---
+
+{notes.length > 0 && (
+  <div class="font-sans flex flex-wrap gap-2">
+    {notes.map((n) => (
+      <span class="px-3 py-1 rounded-full border border-[var(--color-line)] bg-[var(--color-bg)] text-sm text-[var(--color-ink)]">
+        {n}
+      </span>
+    ))}
+  </div>
+)}

@@ -1,0 +1,115 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DataStrip from '../../components/DataStrip.astro';
+import FlavorChips from '../../components/FlavorChips.astro';
+
+export async function getStaticPaths() {
+  const all = await getCollection('tadimlar');
+  return all.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+
+const fmt = (date: Date) =>
+  new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
+
+const subRatings = [
+  ['Aroma', d.rating.aroma],
+  ['Asidite', d.rating.acidity],
+  ['Gövde', d.rating.body],
+  ['Tatlılık', d.rating.sweetness],
+  ['Bitiş', d.rating.aftertaste],
+].filter(([, v]) => typeof v === 'number') as [string, number][];
+---
+
+<BaseLayout title={`${d.title} — Kahve Tadımları`} description={d.summary}>
+  <article>
+    <header class="py-8 md:py-12">
+      <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">
+        {fmt(d.date)} · {d.coffee.roaster}
+      </p>
+      <h1 class="mt-4 font-serif text-4xl md:text-6xl leading-[1.05] max-w-3xl">
+        {d.title}
+      </h1>
+      <p class="mt-6 font-serif text-xl text-[var(--color-ink-soft)] max-w-2xl leading-relaxed italic">
+        {d.summary}
+      </p>
+    </header>
+
+    {d.coverImage && (
+      <figure class="mb-10 -mx-6 md:mx-0">
+        <img src={d.coverImage} alt={d.title} class="w-full aspect-[16/9] object-cover" />
+      </figure>
+    )}
+
+    <DataStrip coffee={d.coffee} brew={d.brew} overall={d.rating.overall} />
+
+    <div class="prose-editorial mx-auto max-w-2xl py-12 font-serif text-lg leading-[1.75] text-[var(--color-ink)]">
+      <Content />
+    </div>
+
+    {(subRatings.length > 0 || d.rating.flavorNotes.length > 0) && (
+      <section class="border-t border-[var(--color-line)] py-10 grid md:grid-cols-2 gap-10">
+        {subRatings.length > 0 && (
+          <div>
+            <h3 class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)] mb-4">Damak profili</h3>
+            <dl class="space-y-3 font-sans text-sm">
+              {subRatings.map(([label, value]) => (
+                <div class="flex items-center gap-4">
+                  <dt class="w-24 text-[var(--color-ink-soft)]">{label}</dt>
+                  <dd class="flex-1 h-1 bg-[var(--color-line)] relative rounded-full">
+                    <span class="absolute inset-y-0 left-0 bg-[var(--color-accent)] rounded-full" style={`width:${value * 10}%`}></span>
+                  </dd>
+                  <span class="w-8 text-right tabular-nums">{value}</span>
+                </div>
+              ))}
+            </dl>
+          </div>
+        )}
+        {d.rating.flavorNotes.length > 0 && (
+          <div>
+            <h3 class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)] mb-4">Lezzet notları</h3>
+            <FlavorChips notes={d.rating.flavorNotes} />
+          </div>
+        )}
+      </section>
+    )}
+  </article>
+
+  <div class="mt-16 pt-8 border-t border-[var(--color-line)]">
+    <a href="/tadimlar" class="font-sans text-sm uppercase tracking-[0.2em] text-[var(--color-ink-soft)] hover:text-[var(--color-accent)]">
+      ← Arşive dön
+    </a>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  .prose-editorial p { margin: 0 0 1.25em; }
+  .prose-editorial p:first-of-type::first-letter {
+    font-family: var(--font-serif);
+    font-size: 4em;
+    font-weight: 500;
+    float: left;
+    line-height: 0.9;
+    padding: 0.1em 0.08em 0 0;
+    color: var(--color-accent);
+  }
+  .prose-editorial h2 { font-size: 1.75rem; margin: 2em 0 0.5em; font-weight: 500; }
+  .prose-editorial h3 { font-size: 1.3rem; margin: 1.6em 0 0.4em; font-weight: 500; }
+  .prose-editorial blockquote {
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1.25rem;
+    font-style: italic;
+    color: var(--color-ink-soft);
+    margin: 1.5em 0;
+  }
+  .prose-editorial em { font-style: italic; }
+  .prose-editorial strong { font-weight: 600; }
+  .prose-editorial a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+</style>

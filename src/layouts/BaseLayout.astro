@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Kahve tadım notlarım' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-[var(--color-bg)] text-[var(--color-ink)]">
+    <header class="border-b border-[var(--color-line)]">
+      <div class="mx-auto max-w-5xl px-6 py-6 flex items-baseline justify-between">
+        <a href="/" class="font-serif text-2xl tracking-tight">
+          Kahve <span class="italic text-[var(--color-accent)]">Tadımları</span>
+        </a>
+        <nav class="font-sans text-sm uppercase tracking-widest text-[var(--color-ink-soft)] flex gap-6">
+          <a href="/tadimlar" class="hover:text-[var(--color-ink)]">Arşiv</a>
+          <a href="/hakkinda" class="hover:text-[var(--color-ink)]">Hakkında</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-5xl px-6 py-12">
+      <slot />
+    </main>
+
+    <footer class="mt-24 border-t border-[var(--color-line)]">
+      <div class="mx-auto max-w-5xl px-6 py-8 font-sans text-sm text-[var(--color-ink-soft)] flex justify-between">
+        <span>© {new Date().getFullYear()} Kahve Tadımları</span>
+        <span class="italic">demlemek, tatmak, yazmak</span>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  .font-serif { font-family: var(--font-serif); }
+  .font-sans { font-family: var(--font-sans); }
+</style>

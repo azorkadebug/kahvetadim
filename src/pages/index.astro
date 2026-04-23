@@ -1,0 +1,65 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const all = await getCollection('tadimlar');
+const sorted = all.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const latest = sorted.slice(0, 3);
+
+const fmt = (d: Date) =>
+  new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }).format(d);
+---
+
+<BaseLayout title="Kahve Tadımları">
+  <section class="py-8 md:py-16 border-b border-[var(--color-line)]">
+    <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">Kişisel kahve defterim</p>
+    <h1 class="mt-4 font-serif text-5xl md:text-7xl leading-[1.05] max-w-3xl">
+      Demlediğim her fincanın <span class="italic text-[var(--color-accent)]">hikâyesi</span>.
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg text-[var(--color-ink-soft)] font-serif">
+      Menşeinden prosesine, demleme oranından damakta bıraktığı ize — tattığım kahveleri
+      burada tek tek yazıyorum.
+    </p>
+  </section>
+
+  <section class="py-12">
+    <h2 class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)] mb-8">Son Tadımlar</h2>
+
+    {latest.length === 0 ? (
+      <p class="font-serif italic text-[var(--color-ink-soft)]">Henüz yazılmış tadım yok.</p>
+    ) : (
+      <div class="grid gap-12 md:gap-16">
+        {latest.map((t) => (
+          <article class="grid md:grid-cols-5 gap-8 items-start">
+            <a href={`/tadim/${t.id}`} class="md:col-span-2 block aspect-[4/5] bg-[var(--color-bg-soft)] border border-[var(--color-line)] overflow-hidden">
+              {t.data.coverImage && (
+                <img src={t.data.coverImage} alt={t.data.title} class="w-full h-full object-cover" />
+              )}
+            </a>
+            <div class="md:col-span-3">
+              <p class="font-sans text-xs uppercase tracking-[0.18em] text-[var(--color-ink-soft)]">
+                {fmt(t.data.date)} · {t.data.coffee.roaster}
+              </p>
+              <h3 class="mt-2 font-serif text-3xl md:text-4xl leading-tight">
+                <a href={`/tadim/${t.id}`} class="hover:text-[var(--color-accent)]">{t.data.title}</a>
+              </h3>
+              <p class="mt-4 text-[var(--color-ink-soft)] leading-relaxed">{t.data.summary}</p>
+              <p class="mt-6 font-sans text-sm">
+                <span class="text-[var(--color-accent)] font-medium">{t.data.rating.overall}/100</span>
+                <span class="text-[var(--color-ink-soft)]"> · {t.data.coffee.origin} · {t.data.brew.method}</span>
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
+
+    {sorted.length > 3 && (
+      <div class="mt-16 text-center">
+        <a href="/tadimlar" class="font-sans text-sm uppercase tracking-[0.2em] border-b border-[var(--color-ink)] pb-1 hover:text-[var(--color-accent)] hover:border-[var(--color-accent)]">
+          Tüm tadımlar →
+        </a>
+      </div>
+    )}
+  </section>
+</BaseLayout>

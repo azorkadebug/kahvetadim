@@ -1,0 +1,55 @@
+---
+interface Props {
+  coffee: {
+    roaster: string;
+    origin: string;
+    region?: string;
+    process: string;
+    roastDate?: Date;
+  };
+  brew: {
+    method: string;
+    ratio?: string;
+    time?: string;
+  };
+  overall: number;
+}
+
+const { coffee, brew, overall } = Astro.props;
+
+const processLabel: Record<string, string> = {
+  washed: 'Yıkanmış',
+  natural: 'Natural',
+  honey: 'Honey',
+  anaerobic: 'Anaerobik',
+  other: 'Diğer',
+};
+
+const fmt = (d?: Date) =>
+  d ? new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'short', year: 'numeric' }).format(d) : null;
+
+const items: { label: string; value: string }[] = [
+  { label: 'Kavurucu', value: coffee.roaster },
+  { label: 'Menşei', value: [coffee.origin, coffee.region].filter(Boolean).join(' · ') },
+  { label: 'Proses', value: processLabel[coffee.process] ?? coffee.process },
+  { label: 'Demleme', value: brew.method },
+];
+if (brew.ratio) items.push({ label: 'Oran', value: brew.ratio });
+if (brew.time) items.push({ label: 'Süre', value: brew.time });
+if (coffee.roastDate) items.push({ label: 'Kavurma', value: fmt(coffee.roastDate)! });
+---
+
+<div class="font-sans border-y border-[var(--color-line)] bg-[var(--color-bg-soft)]/60">
+  <dl class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-4 px-6 py-5">
+    {items.map(({ label, value }) => (
+      <div>
+        <dt class="text-[11px] uppercase tracking-[0.14em] text-[var(--color-ink-soft)]">{label}</dt>
+        <dd class="mt-0.5 text-sm text-[var(--color-ink)]">{value}</dd>
+      </div>
+    ))}
+    <div class="ml-auto text-right col-span-2 sm:col-span-1 flex sm:block items-baseline gap-3 justify-end">
+      <dt class="text-[11px] uppercase tracking-[0.14em] text-[var(--color-ink-soft)]">Puan</dt>
+      <dd class="font-serif text-3xl text-[var(--color-accent)] leading-none">{overall}<span class="text-base text-[var(--color-ink-soft)]">/100</span></dd>
+    </div>
+  </dl>
+</div>
