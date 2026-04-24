@@ -57,4 +57,12 @@ const tadimlar = defineCollection({
     }),
 });
 
-export const collections = { tadimlar };
+const sayfalar = defineCollection({
+  loader: glob({ pattern: '*/index.md', base: './src/content/sayfalar' }),
+  schema: z.object({
+    kicker: z.string().optional(),
+    title: z.string(),
+  }),
+});
+
+export const collections = { tadimlar, sayfalar };

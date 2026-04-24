@@ -1,9 +1,28 @@
-import { config, fields, collection } from '@keystatic/core';
+import { config, fields, collection, singleton } from '@keystatic/core';
 
 export default config({
   storage: { kind: 'local' },
   ui: {
     brand: { name: 'Kahve Tadımları' },
+  },
+  singletons: {
+    hakkinda: singleton({
+      label: 'Hakkında Sayfası',
+      path: 'src/content/sayfalar/hakkinda/',
+      format: { contentField: 'content', data: 'yaml' },
+      entryLayout: 'content',
+      schema: {
+        kicker: fields.text({
+          label: 'Üst Etiket',
+          description: 'Başlığın üstünde görünen küçük yazı. Örn: Hakkında',
+        }),
+        title: fields.text({ label: 'Başlık' }),
+        content: fields.markdoc({
+          label: 'Sayfa İçeriği',
+          extension: 'md',
+        }),
+      },
+    }),
   },
   collections: {
     tadimlar: collection({
