@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kahvetadim.com/sitemap-index.xml

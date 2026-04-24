@@ -4,9 +4,17 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
 }
 
-const { title, description = 'Kahve tadım notlarım' } = Astro.props;
+const {
+  title,
+  description = 'Tattığım kahvelerin menşeini, prosesini ve damakta bıraktığı izi tek tek yazdığım kişisel tadım defteri.',
+  ogImage = '/og.jpg',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImageURL = new URL(ogImage, Astro.site).toString();
 ---
 
 <!doctype html>
@@ -14,8 +22,29 @@ const { title, description = 'Kahve tadım notlarım' } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kahve Tadımları" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:locale" content="tr_TR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body class="bg-[var(--color-bg)] text-[var(--color-ink)]">
     <header class="border-b border-[var(--color-line)]">
@@ -24,8 +53,8 @@ const { title, description = 'Kahve tadım notlarım' } = Astro.props;
           Kahve <span class="italic text-[var(--color-accent)]">Tadımları</span>
         </a>
         <nav class="font-sans text-sm uppercase tracking-widest text-[var(--color-ink-soft)] flex gap-6">
-          <a href="/tadimlar" class="hover:text-[var(--color-ink)]">Arşiv</a>
-          <a href="/hakkinda" class="hover:text-[var(--color-ink)]">Hakkında</a>
+          <a href="/tadimlar/" class="hover:text-[var(--color-ink)]">Arşiv</a>
+          <a href="/hakkinda/" class="hover:text-[var(--color-ink)]">Hakkında</a>
         </nav>
       </div>
     </header>

@@ -18,7 +18,7 @@ const processLabel: Record<string, string> = {
 };
 ---
 
-<BaseLayout title="Arşiv — Kahve Tadımları">
+<BaseLayout title="Arşiv — Kahve Tadımları" description={`${sorted.length} kahve tadımının kronolojik listesi — menşei, proses, demleme yöntemi ve puan.`}>
   <section class="py-8 md:py-12 border-b border-[var(--color-line)]">
     <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">Arşiv</p>
     <h1 class="mt-3 font-serif text-4xl md:text-5xl">Tüm Tadımlar</h1>
@@ -45,7 +45,7 @@ const processLabel: Record<string, string> = {
             <tr class="border-b border-[var(--color-line)] hover:bg-[var(--color-bg-soft)]/50">
               <td class="py-4 pr-4 text-[var(--color-ink-soft)] whitespace-nowrap">{fmt(t.data.date)}</td>
               <td class="py-4 pr-4">
-                <a href={`/tadim/${t.id}`} class="font-serif text-lg hover:text-[var(--color-accent)]">{t.data.title}</a>
+                <a href={`/tadim/${t.id}/`} class="font-serif text-lg hover:text-[var(--color-accent)]">{t.data.title}</a>
                 <div class="text-xs text-[var(--color-ink-soft)]">{t.data.coffee.roaster}</div>
               </td>
               <td class="py-4 pr-4 hidden sm:table-cell">{t.data.coffee.origin}</td>

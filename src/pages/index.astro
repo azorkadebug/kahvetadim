@@ -31,7 +31,7 @@ const fmt = (d: Date) =>
       <div class="grid gap-12 md:gap-16">
         {latest.map((t) => (
           <article class="grid md:grid-cols-5 gap-8 items-start">
-            <a href={`/tadim/${t.id}`} class="md:col-span-2 block aspect-[4/5] bg-[var(--color-bg-soft)] border border-[var(--color-line)] overflow-hidden">
+            <a href={`/tadim/${t.id}/`} class="md:col-span-2 block aspect-[4/5] bg-[var(--color-bg-soft)] border border-[var(--color-line)] overflow-hidden">
               {t.data.coverImage && (
                 <img src={t.data.coverImage} alt={t.data.title} class="w-full h-full object-cover" />
               )}
@@ -41,7 +41,7 @@ const fmt = (d: Date) =>
                 {fmt(t.data.date)} · {t.data.coffee.roaster}
               </p>
               <h3 class="mt-2 font-serif text-3xl md:text-4xl leading-tight">
-                <a href={`/tadim/${t.id}`} class="hover:text-[var(--color-accent)]">{t.data.title}</a>
+                <a href={`/tadim/${t.id}/`} class="hover:text-[var(--color-accent)]">{t.data.title}</a>
               </h3>
               <p class="mt-4 text-[var(--color-ink-soft)] leading-relaxed">{t.data.summary}</p>
               <p class="mt-6 font-sans text-sm">
@@ -56,7 +56,7 @@ const fmt = (d: Date) =>
 
     {sorted.length > 3 && (
       <div class="mt-16 text-center">
-        <a href="/tadimlar" class="font-sans text-sm uppercase tracking-[0.2em] border-b border-[var(--color-ink)] pb-1 hover:text-[var(--color-accent)] hover:border-[var(--color-accent)]">
+        <a href="/tadimlar/" class="font-sans text-sm uppercase tracking-[0.2em] border-b border-[var(--color-ink)] pb-1 hover:text-[var(--color-accent)] hover:border-[var(--color-accent)]">
           Tüm tadımlar →
         </a>
       </div>
