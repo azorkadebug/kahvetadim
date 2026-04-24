@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const all = await getCollection('tadimlar');
@@ -33,7 +34,13 @@ const fmt = (d: Date) =>
           <article class="grid md:grid-cols-5 gap-8 items-start">
             <a href={`/tadim/${t.id}/`} class="md:col-span-2 block aspect-[4/5] bg-[var(--color-bg-soft)] border border-[var(--color-line)] overflow-hidden">
               {t.data.coverImage && (
-                <img src={t.data.coverImage} alt={t.data.title} class="w-full h-full object-cover" />
+                <Image
+                  src={t.data.coverImage}
+                  alt={t.data.title}
+                  widths={[320, 480, 640]}
+                  sizes="(min-width: 768px) 40vw, 100vw"
+                  class="w-full h-full object-cover"
+                />
               )}
             </a>
             <div class="md:col-span-3">
