@@ -9,6 +9,13 @@ const latest = sorted.slice(0, 3);
 
 const fmt = (d: Date) =>
   new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }).format(d);
+
+const processLabel: Record<string, string> = {
+  washed: 'Washed',
+  natural: 'Natural',
+  honey: 'Honey',
+  anaerobic: 'Anaerobic',
+};
 ---
 
 <BaseLayout title="Kahve Tadımları">
@@ -32,7 +39,7 @@ const fmt = (d: Date) =>
       <div class="grid gap-12 md:gap-16">
         {latest.map((t) => (
           <article class="grid md:grid-cols-5 gap-8 items-start">
-            <a href={`/tadim/${t.id}/`} class="md:col-span-2 block aspect-[4/5] bg-[var(--color-bg-soft)] border border-[var(--color-line)] overflow-hidden">
+            <a href={`/tadim/${t.id}/`} class="relative md:col-span-2 block aspect-[4/5] bg-[var(--color-bg-soft)] border border-[var(--color-line)] overflow-hidden">
               {t.data.coverImage && (
                 <Image
                   src={t.data.coverImage}
@@ -42,6 +49,10 @@ const fmt = (d: Date) =>
                   class="w-full h-full object-cover"
                 />
               )}
+              <div class="absolute top-4 right-4 bg-[var(--color-bg)] border border-[var(--color-line)] px-3 py-2 text-center min-w-[3.25rem]">
+                <div class="font-serif text-2xl leading-none text-[var(--color-accent)]">{t.data.rating.overall}</div>
+                <div class="mt-1 font-sans text-[9px] uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">Puan</div>
+              </div>
             </a>
             <div class="md:col-span-3">
               <p class="font-sans text-xs uppercase tracking-[0.18em] text-[var(--color-ink-soft)]">
@@ -51,9 +62,8 @@ const fmt = (d: Date) =>
                 <a href={`/tadim/${t.id}/`} class="hover:text-[var(--color-accent)]">{t.data.title}</a>
               </h3>
               <p class="mt-4 text-[var(--color-ink-soft)] leading-relaxed">{t.data.summary}</p>
-              <p class="mt-6 font-sans text-sm">
-                <span class="text-[var(--color-accent)] font-medium">{t.data.rating.overall}/100</span>
-                <span class="text-[var(--color-ink-soft)]"> · {t.data.coffee.origin} · {t.data.brew.method}</span>
+              <p class="mt-6 font-sans text-xs uppercase tracking-[0.18em] text-[var(--color-ink-soft)]">
+                {[t.data.coffee.origin, processLabel[t.data.coffee.process], t.data.coffee.variety].filter(Boolean).join(' · ')}
               </p>
             </div>
           </article>
