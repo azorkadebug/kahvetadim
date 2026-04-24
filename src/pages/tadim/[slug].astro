@@ -43,8 +43,8 @@ const subRatings = [
     </header>
 
     {d.coverImage && (
-      <figure class="mb-10 -mx-6 md:mx-0">
-        <img src={d.coverImage} alt={d.title} class="w-full aspect-[16/9] object-cover" />
+      <figure class="mb-10 bg-[var(--color-bg-soft)]/60 flex justify-center">
+        <img src={d.coverImage} alt={d.title} class="max-h-[75vh] w-auto max-w-full object-contain" />
       </figure>
     )}
 
