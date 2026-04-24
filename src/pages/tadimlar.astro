@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BrewIcon from '../components/BrewIcon.astro';
 
 const all = await getCollection('tadimlar');
 const sorted = all.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -49,7 +50,12 @@ const processLabel: Record<string, string> = {
               </td>
               <td class="py-4 pr-4 hidden sm:table-cell">{t.data.coffee.origin}</td>
               <td class="py-4 pr-4 hidden md:table-cell">{processLabel[t.data.coffee.process] ?? t.data.coffee.process}</td>
-              <td class="py-4 pr-4 hidden md:table-cell">{t.data.brew.method}</td>
+              <td class="py-4 pr-4 hidden md:table-cell">
+                <span class="inline-flex items-center gap-2">
+                  <BrewIcon method={t.data.brew.method} size={18} class="text-[var(--color-accent)]" />
+                  {t.data.brew.method}
+                </span>
+              </td>
               <td class="py-4 text-right font-medium text-[var(--color-accent)]">{t.data.rating.overall}</td>
             </tr>
           ))}

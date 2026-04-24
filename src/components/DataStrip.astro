@@ -1,4 +1,6 @@
 ---
+import BrewIcon from './BrewIcon.astro';
+
 interface Props {
   coffee: {
     roaster: string;
@@ -28,11 +30,13 @@ const processLabel: Record<string, string> = {
 const fmt = (d?: Date) =>
   d ? new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'short', year: 'numeric' }).format(d) : null;
 
-const items: { label: string; value: string }[] = [
+type Item = { label: string; value: string; icon?: 'brew' };
+
+const items: Item[] = [
   { label: 'Kavurucu', value: coffee.roaster },
   { label: 'Menşei', value: [coffee.origin, coffee.region].filter(Boolean).join(' · ') },
   { label: 'Proses', value: processLabel[coffee.process] ?? coffee.process },
-  { label: 'Demleme', value: brew.method },
+  { label: 'Demleme', value: brew.method, icon: 'brew' },
 ];
 if (brew.ratio) items.push({ label: 'Oran', value: brew.ratio });
 if (brew.time) items.push({ label: 'Süre', value: brew.time });
@@ -41,10 +45,13 @@ if (coffee.roastDate) items.push({ label: 'Kavurma', value: fmt(coffee.roastDate
 
 <div class="font-sans border-y border-[var(--color-line)] bg-[var(--color-bg-soft)]/60">
   <dl class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-4 px-6 py-5">
-    {items.map(({ label, value }) => (
+    {items.map(({ label, value, icon }) => (
       <div>
         <dt class="text-[11px] uppercase tracking-[0.14em] text-[var(--color-ink-soft)]">{label}</dt>
-        <dd class="mt-0.5 text-sm text-[var(--color-ink)]">{value}</dd>
+        <dd class="mt-0.5 text-sm text-[var(--color-ink)] flex items-center gap-2">
+          {icon === 'brew' && <BrewIcon method={brew.method} size={20} class="text-[var(--color-accent)] shrink-0" />}
+          <span>{value}</span>
+        </dd>
       </div>
     ))}
     <div class="ml-auto text-right col-span-2 sm:col-span-1 flex sm:block items-baseline gap-3 justify-end">

@@ -13,6 +13,7 @@ const methodEnum = z.enum([
   'V60',
   'Chemex',
   'AeroPress',
+  'Orea',
   'Espresso',
   'French Press',
   'Moka',
