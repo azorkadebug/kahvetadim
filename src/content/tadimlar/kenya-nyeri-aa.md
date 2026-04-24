@@ -1,6 +1,7 @@
 ---
 title: "Kenya Nyeri AA — Gakuyu-ini"
 date: 2026-04-18
+coverImage: "/sample-cover.jpg"
 summary: "Bir kaşık demlendiğinde mutfak reçel kokuyordu. Bu kahvenin hikâyesini anlatmak için frenk üzümü demek zorundayım — ama iş o kadar basit değil."
 coffee:
   roaster: "Probador"
