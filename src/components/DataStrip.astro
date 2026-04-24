@@ -1,5 +1,6 @@
 ---
 import BrewIcon from './BrewIcon.astro';
+import GrinderIcon from './GrinderIcon.astro';
 
 interface Props {
   coffee: {
@@ -11,6 +12,7 @@ interface Props {
   };
   brew: {
     method: string;
+    grindSize?: string;
     ratio?: string;
     time?: string;
   };
@@ -30,7 +32,7 @@ const processLabel: Record<string, string> = {
 const fmt = (d?: Date) =>
   d ? new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'short', year: 'numeric' }).format(d) : null;
 
-type Item = { label: string; value: string; icon?: 'brew' };
+type Item = { label: string; value: string; icon?: 'brew' | 'grind' };
 
 const items: Item[] = [
   { label: 'Kavurucu', value: coffee.roaster },
@@ -38,25 +40,31 @@ const items: Item[] = [
   { label: 'Proses', value: processLabel[coffee.process] ?? coffee.process },
   { label: 'Demleme', value: brew.method, icon: 'brew' },
 ];
+if (brew.grindSize) items.push({ label: 'Öğütüm', value: brew.grindSize, icon: 'grind' });
 if (brew.ratio) items.push({ label: 'Oran', value: brew.ratio });
 if (brew.time) items.push({ label: 'Süre', value: brew.time });
 if (coffee.roastDate) items.push({ label: 'Kavurma', value: fmt(coffee.roastDate)! });
 ---
 
 <div class="font-sans border-y border-[var(--color-line)] bg-[var(--color-bg-soft)]/60">
-  <dl class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-4 px-6 py-5">
-    {items.map(({ label, value, icon }) => (
-      <div>
-        <dt class="text-[11px] uppercase tracking-[0.14em] text-[var(--color-ink-soft)]">{label}</dt>
-        <dd class="mt-0.5 text-sm text-[var(--color-ink)] flex items-center gap-2">
-          {icon === 'brew' && <BrewIcon method={brew.method} size={20} class="text-[var(--color-accent)] shrink-0" />}
-          <span>{value}</span>
-        </dd>
-      </div>
-    ))}
-    <div class="ml-auto text-right col-span-2 sm:col-span-1 flex sm:block items-baseline gap-3 justify-end">
+  <div class="flex flex-col md:flex-row">
+    <dl class="flex-1 grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-4 px-6 py-5">
+      {items.map(({ label, value, icon }) => (
+        <div>
+          <dt class="text-[11px] uppercase tracking-[0.14em] text-[var(--color-ink-soft)]">{label}</dt>
+          <dd class="mt-0.5 text-sm text-[var(--color-ink)] flex items-center gap-2">
+            {icon === 'brew' && <BrewIcon method={brew.method} size={20} class="text-[var(--color-accent)] shrink-0" />}
+            {icon === 'grind' && <GrinderIcon size={20} class="text-[var(--color-accent)] shrink-0" />}
+            <span>{value}</span>
+          </dd>
+        </div>
+      ))}
+    </dl>
+    <div class="flex items-baseline gap-3 md:flex-col md:items-end md:justify-center md:gap-1 px-6 py-4 md:py-5 border-t md:border-t-0 md:border-l border-[var(--color-line)] md:min-w-[140px]">
       <dt class="text-[11px] uppercase tracking-[0.14em] text-[var(--color-ink-soft)]">Puan</dt>
-      <dd class="font-serif text-3xl text-[var(--color-accent)] leading-none">{overall}<span class="text-base text-[var(--color-ink-soft)]">/100</span></dd>
+      <dd class="font-serif text-3xl md:text-4xl text-[var(--color-accent)] leading-none">
+        {overall}<span class="text-base text-[var(--color-ink-soft)]">/100</span>
+      </dd>
     </div>
-  </dl>
+  </div>
 </div>

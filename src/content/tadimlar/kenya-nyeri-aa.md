@@ -12,7 +12,7 @@ coffee:
   roastDate: 2026-04-05
 brew:
   method: V60
-  grindSize: "Medium-fine (Comandante 22 klik)"
+  grindSize: "Comandante 23 Klik"
   ratio: "1:16"
   water: "15g / 240g, 94°C"
   time: "3:20"
