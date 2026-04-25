@@ -29,6 +29,7 @@ const tadimlar = defineCollection({
       date: z.coerce.date(),
       coverImage: image().optional(),
       summary: z.string(),
+      seoDescription: z.string().optional(),
       coffee: z.object({
         roaster: z.string(),
         origin: z.string(),

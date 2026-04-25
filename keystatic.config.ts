@@ -55,6 +55,12 @@ export default config({
           multiline: true,
           description: 'Ana sayfada ve arşiv kartlarında görünen kısa tanıtım',
         }),
+        seoDescription: fields.text({
+          label: 'SEO Açıklaması',
+          multiline: true,
+          description: 'Google sonuçlarında ve link önizlemelerinde görünen meta description (155-160 karakter ideal). Boş bırakılırsa Özet kullanılır.',
+          validation: { isRequired: false },
+        }),
         coffee: fields.object(
           {
             roaster: fields.text({ label: 'Kavurucu' }),

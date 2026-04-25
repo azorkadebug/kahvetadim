@@ -20,6 +20,43 @@ const d = entry.data;
 const fmt = (date: Date) =>
   new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
 
+const pageURL = new URL(Astro.url.pathname, Astro.site).toString();
+const productName = [d.coffee.roaster, d.coffee.origin, d.coffee.region].filter(Boolean).join(' — ');
+const coverURL = d.coverImage ? new URL(d.coverImage.src, Astro.site).toString() : undefined;
+
+const reviewLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Review',
+  itemReviewed: {
+    '@type': 'Product',
+    name: productName || d.title,
+    category: 'Coffee',
+    brand: { '@type': 'Brand', name: d.coffee.roaster },
+    ...(coverURL ? { image: coverURL } : {}),
+    ...(d.coffee.farm || d.coffee.variety || d.coffee.process
+      ? {
+          additionalProperty: [
+            d.coffee.farm && { '@type': 'PropertyValue', name: 'Çiftlik', value: d.coffee.farm },
+            d.coffee.variety && { '@type': 'PropertyValue', name: 'Çeşit', value: d.coffee.variety },
+            d.coffee.process && { '@type': 'PropertyValue', name: 'Proses', value: d.coffee.process },
+          ].filter(Boolean),
+        }
+      : {}),
+  },
+  author: { '@type': 'Person', name: 'Sabri', url: 'https://kahvetadim.com/hakkinda/' },
+  publisher: { '@type': 'Organization', name: 'Kahvetadim.com', url: 'https://kahvetadim.com/' },
+  datePublished: d.date.toISOString().slice(0, 10),
+  reviewRating: {
+    '@type': 'Rating',
+    ratingValue: d.rating.overall,
+    bestRating: 100,
+    worstRating: 0,
+  },
+  name: d.title,
+  reviewBody: d.summary,
+  url: pageURL,
+};
+
 const subRatings = [
   ['Aroma', d.rating.aroma],
   ['Asidite', d.rating.acidity],
@@ -29,7 +66,13 @@ const subRatings = [
 ].filter(([, v]) => typeof v === 'number') as [string, number][];
 ---
 
-<BaseLayout title={`${d.title} — Kahve Tadımları`} description={d.summary}>
+<BaseLayout
+  title={`${d.title} — Kahve Tadımları`}
+  description={d.seoDescription ?? d.summary}
+  ogImage={`/og/${entry.id}.png`}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(reviewLd)} is:inline />
+
   <article>
     <header class="py-8 md:py-12">
       <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">
