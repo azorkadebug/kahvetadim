@@ -21,7 +21,7 @@ const processLabel: Record<string, string> = {
 <BaseLayout title="Kahve Tadımları">
   <section class="py-8 md:py-16 border-b border-[var(--color-line)]">
     <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">Kişisel kahve defterim</p>
-    <h1 class="mt-4 font-serif text-5xl md:text-7xl leading-[1.05] max-w-3xl">
+    <h1 class="mt-4 font-serif text-4xl sm:text-5xl md:text-7xl leading-[1.05] max-w-3xl break-words">
       Demlediğim her fincanın <span class="italic text-[var(--color-accent)]">hikâyesi</span>.
     </h1>
     <p class="mt-6 max-w-2xl text-lg text-[var(--color-ink-soft)] font-serif">
@@ -58,7 +58,7 @@ const processLabel: Record<string, string> = {
               <p class="font-sans text-xs uppercase tracking-[0.18em] text-[var(--color-ink-soft)]">
                 {fmt(t.data.date)} · {t.data.coffee.roaster}
               </p>
-              <h3 class="mt-2 font-serif text-3xl md:text-4xl leading-tight">
+              <h3 class="mt-2 font-serif text-2xl sm:text-3xl md:text-4xl leading-tight break-words">
                 <a href={`/tadim/${t.id}/`} class="hover:text-[var(--color-accent)]">{t.data.title}</a>
               </h3>
               <p class="mt-4 text-[var(--color-ink-soft)] leading-relaxed">{t.data.summary}</p>

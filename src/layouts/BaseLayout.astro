@@ -21,7 +21,7 @@ const ogImageURL = new URL(ogImage, Astro.site).toString();
 <html lang="tr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
@@ -50,23 +50,23 @@ const ogImageURL = new URL(ogImage, Astro.site).toString();
   </head>
   <body class="bg-[var(--color-bg)] text-[var(--color-ink)]">
     <header class="border-b border-[var(--color-line)]">
-      <div class="mx-auto max-w-5xl px-6 py-6 flex items-baseline justify-between">
-        <a href="/" class="font-serif text-2xl tracking-tight">
+      <div class="mx-auto max-w-5xl px-5 sm:px-6 py-5 sm:py-6 flex items-baseline justify-between gap-4">
+        <a href="/" class="font-serif text-xl sm:text-2xl tracking-tight whitespace-nowrap">
           Kahve <span class="italic text-[var(--color-accent)]">Tadımları</span>
         </a>
-        <nav class="font-sans text-sm uppercase tracking-widest text-[var(--color-ink-soft)] flex gap-6">
+        <nav class="font-sans text-xs sm:text-sm uppercase tracking-[0.18em] sm:tracking-widest text-[var(--color-ink-soft)] flex gap-4 sm:gap-6">
           <a href="/tadimlar/" class="hover:text-[var(--color-ink)]">Arşiv</a>
           <a href="/hakkinda/" class="hover:text-[var(--color-ink)]">Hakkında</a>
         </nav>
       </div>
     </header>
 
-    <main class="mx-auto max-w-5xl px-6 py-12">
+    <main class="mx-auto max-w-5xl px-5 sm:px-6 py-8 sm:py-12">
       <slot />
     </main>
 
     <footer class="mt-24 border-t border-[var(--color-line)]">
-      <div class="mx-auto max-w-5xl px-6 py-8 font-sans text-sm text-[var(--color-ink-soft)] flex justify-between">
+      <div class="mx-auto max-w-5xl px-5 sm:px-6 py-6 sm:py-8 font-sans text-xs sm:text-sm text-[var(--color-ink-soft)] flex justify-between items-center gap-4">
         <span>© {new Date().getFullYear()} Kahvetadim.com</span>
         <a
           href="https://instagram.com/kahve.tadim"

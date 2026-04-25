@@ -22,10 +22,12 @@ html {
   color: var(--color-ink);
   font-family: var(--font-serif);
   font-feature-settings: "ss01", "ss02";
+  overflow-x: clip;
 }
 
 body {
   min-height: 100vh;
+  overflow-x: clip;
 }
 
 ::selection {
