@@ -34,7 +34,13 @@ Bu hafta sonumuzu neşelendiren kahvemiz Almanya, Münih'ten geliyor. Nordic kav
 
 ⚙️ **Demleme Reçetesi ve Süreci** Notlarıma bakarak demleme stratejimi belirledim. Daha önce Türk kahvesi dâhil her şekilde demlediğim ve beni her seferinde çok mutlu eden bir çekirdek bu. Su tuttuğunu hatırladığım için akışı rahatlatmak adına **Orea V4**'ün tabanını "Open" versiyonu ile değiştirdim.
 
-🌡️ **Su Sıcaklığı:** 94°C 💧 **Bloom (Ön Demleme):** 30 saniye 🌊 **Döküş:** 4 aşamalı (4x50g) ⏱️ **Toplam Süre:** 2:20 - 2:30
+🌡️ **Su Sıcaklığı:** 94°C
+
+💧 **Bloom (Ön Demleme):** 30 saniye
+
+🌊 **Döküş:** 4 aşamalı (4x50g)
+
+⏱️ **Toplam Süre:** 2:20 - 2:30
 
 **Burunda (Aroma)** Buzlukta geçen süre kahveyi kuru kokuda hiçbir şekilde kötü etkilememiş. Aksine, hala ilk günkü gibi diri ve güçlü.
 
