@@ -1,43 +1,37 @@
-# Astro Starter Kit: Minimal
+# Kahvetadım
 
-```sh
-npm create astro@latest -- --template minimal
+Tattığım kahvelerin menşeini, prosesini ve damakta bıraktığı izi tek tek yazdığım kişisel tadım defteri.
+
+🌐 **Yayında:** [https://kahvetadim.com](https://kahvetadim.com)
+📷 **Instagram:** [@kahve.tadim](https://instagram.com/kahve.tadim)
+
+## Tadımlar
+
+Specialty kahve odaklı — menşei, kavurucu, demleme reçetesi ve fincan profili dahil. Şu ana kadar yayınlanan tadımlar:
+
+- [Hue Colombia Oscar Hernandez](https://kahvetadim.com/tadim/hue-colombia-oscar-hernandez/) — Kolombiya Huila, natural Gesha, Hue (Selanik)
+- [Belayco Etiyopya Bensa Sidama](https://kahvetadim.com/tadim/hafta-sonunun-nesesi-muenih-ten-belayco/) — Café Blá (Münih), natural process
+- [Wilder Perez Gesha](https://kahvetadim.com/tadim/fincandaki-kirmizi-peru-dan-wilder-perez-gesha-milestones-coffee/) — Peru Amazonas, Milestones Coffee (Türkiye)
+
+## Teknik
+
+- **Stack:** Astro 5 + Tailwind v4 + MDX + Keystatic CMS (dev-only)
+- **Deploy:** Cloudflare Workers Static Assets, GitHub `main` → otomatik deploy
+- **Domain:** Apex canonical, `www` → 301 redirect via Cloudflare
+
+## Yeni tadım eklemek
+
+```bash
+npm run dev
+# Tarayıcıda http://localhost:4321/keystatic/
+# Form ile tadım ekle → Save
+git add .
+git commit -m "New tasting: <kahve adı>"
+git push
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Push sonrası Cloudflare otomatik deploy eder (~1-2 dakika).
 
-## 🚀 Project Structure
+## İletişim
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Geri bildirim ve önerilere açığım — Instagram DM: [@kahve.tadim](https://instagram.com/kahve.tadim)
