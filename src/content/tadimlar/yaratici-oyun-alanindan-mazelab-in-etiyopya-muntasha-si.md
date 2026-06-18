@@ -1,7 +1,7 @@
 ---
 title: 'Yaratıcı Oyun Alanından: Mazelab''in Etiyopya Muntasha''sı'
 date: 2026-06-18
-coverImage: ./yaratici-oyun-alanindan-mazelab-in-etiyopya-muntasha-si/coverImage.jpeg
+coverImage: ./yaratici-oyun-alanindan-mazelab-in-etiyopya-muntasha-si/coverImage.png
 summary: >-
   Adeta çiğnenen bir kahve, Muntasha; sıcak hali portakal kekremsiliğini
   andırıyor. 2-3 dakika içerisinde kırmızı meyveler, sarı erik ve turunçgiller —
