@@ -1,0 +1,4 @@
+Contact: mailto:sabri@amoro.org
+Expires: 2027-06-20T00:00:00.000Z
+Preferred-Languages: tr, en
+Canonical: https://kahvetadim.com/.well-known/security.txt
