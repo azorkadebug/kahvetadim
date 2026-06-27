@@ -1,38 +1,8 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
 
-export default config({
-  storage: { kind: 'local' },
-  ui: {
-    brand: { name: 'Kahve Tadımları' },
-  },
-  singletons: {
-    hakkinda: singleton({
-      label: 'Hakkında Sayfası',
-      path: 'src/content/sayfalar/hakkinda/',
-      format: { contentField: 'content', data: 'yaml' },
-      entryLayout: 'content',
-      schema: {
-        kicker: fields.text({
-          label: 'Üst Etiket',
-          description: 'Başlığın üstünde görünen küçük yazı. Örn: Hakkında',
-        }),
-        title: fields.text({ label: 'Başlık' }),
-        content: fields.markdoc({
-          label: 'Sayfa İçeriği',
-          extension: 'md',
-        }),
-      },
-    }),
-  },
-  collections: {
-    tadimlar: collection({
-      label: 'Tadımlar',
-      slugField: 'title',
-      path: 'src/content/tadimlar/*',
-      format: { contentField: 'content', data: 'yaml' },
-      entryLayout: 'content',
-      columns: ['title'],
-      schema: {
+// Tadım şeması hem TR hem EN koleksiyonunda kullanılıyor.
+// Görsel dizini koleksiyona göre değiştiği için parametre olarak alınıyor.
+const tadimSchema = (imageDirectory: string) => ({
         title: fields.slug({
           name: { label: 'Başlık' },
           slug: {
@@ -46,7 +16,7 @@ export default config({
         }),
         coverImage: fields.image({
           label: 'Kapak Fotoğrafı',
-          directory: 'src/content/tadimlar',
+          directory: imageDirectory,
           publicPath: './',
           validation: { isRequired: false },
         }),
@@ -151,11 +121,64 @@ export default config({
           },
           { label: 'Puanlama' }
         ),
-        content: fields.markdoc({
-          label: 'Tadım Yazısı',
-          extension: 'md',
-        }),
-      },
+  content: fields.markdoc({
+    label: 'Tadım Yazısı',
+    extension: 'md',
+  }),
+});
+
+// Hakkında sayfası şeması (TR + EN ortak)
+const hakkindaSchema = {
+  kicker: fields.text({
+    label: 'Üst Etiket',
+    description: 'Başlığın üstünde görünen küçük yazı. Örn: Hakkında / About',
+  }),
+  title: fields.text({ label: 'Başlık' }),
+  content: fields.markdoc({
+    label: 'Sayfa İçeriği',
+    extension: 'md',
+  }),
+};
+
+export default config({
+  storage: { kind: 'local' },
+  ui: {
+    brand: { name: 'Kahve Tadımları' },
+  },
+  singletons: {
+    hakkinda: singleton({
+      label: 'Hakkında (Türkçe)',
+      path: 'src/content/sayfalar/hakkinda/',
+      format: { contentField: 'content', data: 'yaml' },
+      entryLayout: 'content',
+      schema: hakkindaSchema,
+    }),
+    about: singleton({
+      label: 'Hakkında (İngilizce)',
+      path: 'src/content/sayfalar/about/',
+      format: { contentField: 'content', data: 'yaml' },
+      entryLayout: 'content',
+      schema: hakkindaSchema,
+    }),
+  },
+  collections: {
+    tadimlar: collection({
+      label: 'Tadımlar (Türkçe)',
+      slugField: 'title',
+      path: 'src/content/tadimlar/*',
+      format: { contentField: 'content', data: 'yaml' },
+      entryLayout: 'content',
+      columns: ['title'],
+      schema: tadimSchema('src/content/tadimlar'),
+    }),
+    tadimlarEn: collection({
+      label: 'Tadımlar (İngilizce)',
+      slugField: 'title',
+      path: 'src/content/tadimlar/en/*',
+      format: { contentField: 'content', data: 'yaml' },
+      entryLayout: 'content',
+      columns: ['title'],
+      schema: tadimSchema('src/content/tadimlar/en'),
     }),
   },
 });

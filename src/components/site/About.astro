@@ -1,0 +1,38 @@
+---
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations, type Lang } from '../../i18n/ui';
+import { localizePath } from '../../i18n/utils';
+
+interface Props {
+  locale: Lang;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+// TR içeriği 'hakkinda', EN içeriği 'about' girdisinde tutuluyor.
+const entryId = locale === 'en' ? 'about' : 'hakkinda';
+const entry = await getEntry('sayfalar', entryId);
+if (!entry) throw new Error(`Hakkında sayfa içeriği bulunamadı: ${entryId}`);
+const { Content } = await render(entry);
+
+const otherLang: Lang = locale === 'tr' ? 'en' : 'tr';
+const altUrl = localizePath(otherLang, '/hakkinda/');
+---
+
+<BaseLayout
+  title={`${entry.data.title} — ${t('site.name')}`}
+  description={t('about.description')}
+  locale={locale}
+  altUrl={altUrl}
+>
+  <section class="py-8 md:py-16 max-w-2xl">
+    {entry.data.kicker && (
+      <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">{entry.data.kicker}</p>
+    )}
+    <h1 class="mt-4 font-serif text-4xl md:text-5xl leading-tight">{entry.data.title}</h1>
+    <div class="mt-8 font-serif text-lg leading-[1.75] text-[var(--color-ink)] [&>p]:mt-5 [&>p:first-child]:mt-0">
+      <Content />
+    </div>
+  </section>
+</BaseLayout>

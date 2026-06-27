@@ -13,6 +13,14 @@ const isDev = process.argv.slice(2).includes('dev');
 export default defineConfig({
   site: 'https://kahvetadim.com',
   trailingSlash: isDev ? 'ignore' : 'always',
+  i18n: {
+    defaultLocale: 'tr',
+    locales: ['tr', 'en'],
+    routing: {
+      // TR kökte (/...), EN /en/... altında. Varsayılan dil öneksiz kalır.
+      prefixDefaultLocale: false,
+    },
+  },
   vite: {
     plugins: [tailwindcss()]
   },

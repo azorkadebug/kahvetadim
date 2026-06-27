@@ -39,11 +39,30 @@ const wrapLines = (text, max, maxLines = 3) => {
   return lines;
 };
 
-const files = readdirSync(contentDir).filter((f) => f.endsWith('.md'));
+// TR dosyaları kökte, EN dosyaları en/ alt klasöründe.
+// Her biri için { path, slug (en/ önekli), lang, dir } topluyoruz.
+const collect = (dir, prefix, lang) =>
+  readdirSync(dir)
+    .filter((f) => f.endsWith('.md'))
+    .map((f) => ({
+      path: join(dir, f),
+      slug: prefix + f.replace(/\.md$/, ''),
+      lang,
+      dir,
+    }));
 
-for (const file of files) {
-  const slug = file.replace(/\.md$/, '');
-  const raw = readFileSync(join(contentDir, file), 'utf8');
+const entries = [...collect(contentDir, '', 'tr')];
+const enDir = join(contentDir, 'en');
+if (existsSync(enDir)) entries.push(...collect(enDir, 'en/', 'en'));
+
+// Etiketler dile göre
+const labels = {
+  tr: { score: 'PUAN' },
+  en: { score: 'SCORE' },
+};
+
+for (const { path: filePath, slug, lang, dir } of entries) {
+  const raw = readFileSync(filePath, 'utf8');
   const m = raw.match(/^---\n([\s\S]*?)\n---/);
   if (!m) continue;
   const data = yaml.load(m[1]);
@@ -74,7 +93,7 @@ for (const file of files) {
     <g transform="translate(1040, 60)">
       <circle cx="60" cy="60" r="60" fill="#c77b46"/>
       <text x="60" y="62" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="46" font-weight="500" fill="#faf7f2">${rating}</text>
-      <text x="60" y="96" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" letter-spacing="3" fill="#faf7f2">PUAN</text>
+      <text x="60" y="96" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" letter-spacing="3" fill="#faf7f2">${labels[lang].score}</text>
     </g>
 
     <text x="80" y="105" font-family="Inter, sans-serif" font-size="22" letter-spacing="6" fill="#c77b46">${escape(roaster.toUpperCase())}</text>
@@ -94,7 +113,7 @@ for (const file of files) {
 
   let pipeline;
   if (coverRel) {
-    const coverPath = resolve(contentDir, coverRel.replace(/^\.\//, ''));
+    const coverPath = resolve(dir, coverRel.replace(/^\.\//, ''));
     if (!existsSync(coverPath)) {
       console.warn(`  ! cover not found for ${slug}: ${coverPath} — using fallback bg`);
       pipeline = sharp({
@@ -115,9 +134,10 @@ for (const file of files) {
     .toBuffer();
 
   const outPath = join(outDir, `${slug}.png`);
+  mkdirSync(dirname(outPath), { recursive: true });
   writeFileSync(outPath, buf);
   const meta = await sharp(buf).metadata();
   console.log(`Generated public/og/${slug}.png  ${meta.width}x${meta.height}  ${(meta.size / 1024).toFixed(1)} KB`);
 }
 
-console.log(`\nTotal: ${files.length} OG image(s) generated.`);
+console.log(`\nTotal: ${entries.length} OG image(s) generated.`);

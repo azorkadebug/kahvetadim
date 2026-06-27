@@ -1,0 +1,167 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DataStrip from '../DataStrip.astro';
+import FlavorChips from '../FlavorChips.astro';
+import { useTranslations, type Lang } from '../../i18n/ui';
+import { formatDate, localizePath } from '../../i18n/utils';
+
+interface Props {
+  entry: CollectionEntry<'tadimlar'>;
+  locale: Lang;
+  /** Diğer dildeki eş tadımın yolu (yoksa null → o dilin ana sayfasına düşer). */
+  altUrl?: string | null;
+}
+const { entry, locale, altUrl = null } = Astro.props;
+const t = useTranslations(locale);
+const { Content } = await render(entry);
+const d = entry.data;
+
+const pageURL = new URL(Astro.url.pathname, Astro.site).toString();
+const productName = [d.coffee.roaster, d.coffee.origin, d.coffee.region].filter(Boolean).join(' — ');
+const coverURL = d.coverImage ? new URL(d.coverImage.src, Astro.site).toString() : undefined;
+const authorUrl = new URL(localizePath(locale, '/hakkinda/'), Astro.site).toString();
+
+const reviewLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Review',
+  inLanguage: locale,
+  itemReviewed: {
+    '@type': 'Product',
+    name: productName || d.title,
+    category: 'Coffee',
+    brand: { '@type': 'Brand', name: d.coffee.roaster },
+    ...(coverURL ? { image: coverURL } : {}),
+    ...(d.coffee.farm || d.coffee.variety || d.coffee.process
+      ? {
+          additionalProperty: [
+            d.coffee.farm && { '@type': 'PropertyValue', name: t('data.farm'), value: d.coffee.farm },
+            d.coffee.variety && { '@type': 'PropertyValue', name: t('data.variety'), value: d.coffee.variety },
+            d.coffee.process && { '@type': 'PropertyValue', name: t('data.process'), value: t(`process.${d.coffee.process}` as const) },
+          ].filter(Boolean),
+        }
+      : {}),
+  },
+  author: { '@type': 'Person', name: 'Sabri', url: authorUrl },
+  publisher: { '@type': 'Organization', name: 'Kahvetadim.com', url: 'https://kahvetadim.com/' },
+  datePublished: d.date.toISOString().slice(0, 10),
+  reviewRating: {
+    '@type': 'Rating',
+    ratingValue: d.rating.overall,
+    bestRating: 100,
+    worstRating: 0,
+  },
+  name: d.title,
+  reviewBody: d.summary,
+  url: pageURL,
+};
+
+const subRatings = [
+  [t('rating.aroma'), d.rating.aroma],
+  [t('rating.acidity'), d.rating.acidity],
+  [t('rating.body'), d.rating.body],
+  [t('rating.sweetness'), d.rating.sweetness],
+  [t('rating.aftertaste'), d.rating.aftertaste],
+].filter(([, v]) => typeof v === 'number') as [string, number][];
+---
+
+<BaseLayout
+  title={`${d.title} — ${t('site.name')}`}
+  description={d.seoDescription ?? d.summary}
+  ogImage={`/og/${entry.id}.png`}
+  locale={locale}
+  altUrl={altUrl}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(reviewLd)} is:inline />
+
+  <article>
+    <header class="py-6 sm:py-8 md:py-12">
+      <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">
+        {formatDate(locale, d.date)} · {d.coffee.roaster}
+      </p>
+      <h1 class="mt-4 font-serif text-3xl sm:text-4xl md:text-6xl leading-[1.1] max-w-3xl break-words">
+        {d.title}
+      </h1>
+      <p class="mt-5 font-serif text-base sm:text-lg md:text-xl text-[var(--color-ink-soft)] max-w-2xl leading-relaxed italic">
+        {d.summary}
+      </p>
+    </header>
+
+    {d.coverImage && (
+      <figure class="mb-10 bg-[var(--color-bg-soft)]/60 flex justify-center">
+        <Image
+          src={d.coverImage}
+          alt={d.title}
+          widths={[480, 768, 1200, 1600]}
+          sizes="(min-width: 1024px) 900px, 100vw"
+          class="max-h-[75vh] w-auto max-w-full object-contain"
+        />
+      </figure>
+    )}
+
+    <DataStrip coffee={d.coffee} brew={d.brew} overall={d.rating.overall} locale={locale} />
+
+    <div class="prose-editorial mx-auto max-w-2xl py-12 font-serif text-lg leading-[1.75] text-[var(--color-ink)]">
+      <Content />
+    </div>
+
+    {(subRatings.length > 0 || d.rating.flavorNotes.length > 0) && (
+      <section class="border-t border-[var(--color-line)] py-10 grid md:grid-cols-2 gap-10">
+        {subRatings.length > 0 && (
+          <div>
+            <h3 class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)] mb-4">{t('detail.palate')}</h3>
+            <dl class="space-y-3 font-sans text-sm">
+              {subRatings.map(([label, value]) => (
+                <div class="flex items-center gap-4">
+                  <dt class="w-24 text-[var(--color-ink-soft)]">{label}</dt>
+                  <dd class="flex-1 h-1 bg-[var(--color-line)] relative rounded-full">
+                    <span class="absolute inset-y-0 left-0 bg-[var(--color-accent)] rounded-full" style={`width:${value * 10}%`}></span>
+                  </dd>
+                  <span class="w-8 text-right tabular-nums">{value}</span>
+                </div>
+              ))}
+            </dl>
+          </div>
+        )}
+        {d.rating.flavorNotes.length > 0 && (
+          <div>
+            <h3 class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)] mb-4">{t('detail.flavors')}</h3>
+            <FlavorChips notes={d.rating.flavorNotes} />
+          </div>
+        )}
+      </section>
+    )}
+  </article>
+
+  <div class="mt-16 pt-8 border-t border-[var(--color-line)]">
+    <a href={localizePath(locale, '/tadimlar/')} class="font-sans text-sm uppercase tracking-[0.2em] text-[var(--color-ink-soft)] hover:text-[var(--color-accent)]">
+      {t('detail.back')}
+    </a>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  .prose-editorial p { margin: 0 0 1.25em; }
+  .prose-editorial p:first-of-type::first-letter {
+    font-family: var(--font-serif);
+    font-size: 4em;
+    font-weight: 500;
+    float: left;
+    line-height: 0.9;
+    padding: 0.1em 0.08em 0 0;
+    color: var(--color-accent);
+  }
+  .prose-editorial h2 { font-size: 1.75rem; margin: 2em 0 0.5em; font-weight: 500; }
+  .prose-editorial h3 { font-size: 1.3rem; margin: 1.6em 0 0.4em; font-weight: 500; }
+  .prose-editorial blockquote {
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1.25rem;
+    font-style: italic;
+    color: var(--color-ink-soft);
+    margin: 1.5em 0;
+  }
+  .prose-editorial em { font-style: italic; }
+  .prose-editorial strong { font-weight: 600; }
+  .prose-editorial a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+</style>

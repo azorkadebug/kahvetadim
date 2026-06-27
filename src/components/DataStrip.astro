@@ -1,6 +1,8 @@
 ---
 import BrewIcon from './BrewIcon.astro';
 import GrinderIcon from './GrinderIcon.astro';
+import { useTranslations, defaultLang, type Lang } from '../i18n/ui';
+import { formatDate } from '../i18n/utils';
 
 interface Props {
   coffee: {
@@ -17,33 +19,27 @@ interface Props {
     time?: string;
   };
   overall: number;
+  locale?: Lang;
 }
 
-const { coffee, brew, overall } = Astro.props;
-
-const processLabel: Record<string, string> = {
-  washed: 'Yıkanmış',
-  natural: 'Natural',
-  honey: 'Honey',
-  anaerobic: 'Anaerobik',
-  other: 'Diğer',
-};
+const { coffee, brew, overall, locale = defaultLang } = Astro.props;
+const t = useTranslations(locale);
 
 const fmt = (d?: Date) =>
-  d ? new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'short', year: 'numeric' }).format(d) : null;
+  d ? formatDate(locale, d, { day: 'numeric', month: 'short', year: 'numeric' }) : null;
 
 type Item = { label: string; value: string; icon?: 'brew' | 'grind' };
 
 const items: Item[] = [
-  { label: 'Kavurucu', value: coffee.roaster },
-  { label: 'Menşei', value: [coffee.origin, coffee.region].filter(Boolean).join(' · ') },
-  { label: 'Proses', value: processLabel[coffee.process] ?? coffee.process },
-  { label: 'Demleme', value: brew.method, icon: 'brew' },
+  { label: t('data.roaster'), value: coffee.roaster },
+  { label: t('data.origin'), value: [coffee.origin, coffee.region].filter(Boolean).join(' · ') },
+  { label: t('data.process'), value: t(`process.${coffee.process}` as const) },
+  { label: t('data.brew'), value: brew.method, icon: 'brew' },
 ];
-if (brew.grindSize) items.push({ label: 'Öğütüm', value: brew.grindSize, icon: 'grind' });
-if (brew.ratio) items.push({ label: 'Oran', value: brew.ratio });
-if (brew.time) items.push({ label: 'Süre', value: brew.time });
-if (coffee.roastDate) items.push({ label: 'Kavurma', value: fmt(coffee.roastDate)! });
+if (brew.grindSize) items.push({ label: t('data.grind'), value: brew.grindSize, icon: 'grind' });
+if (brew.ratio) items.push({ label: t('data.ratio'), value: brew.ratio });
+if (brew.time) items.push({ label: t('data.time'), value: brew.time });
+if (coffee.roastDate) items.push({ label: t('data.roasted'), value: fmt(coffee.roastDate)! });
 ---
 
 <div class="font-sans border-y border-[var(--color-line)] bg-[var(--color-bg-soft)]/60">
@@ -61,7 +57,7 @@ if (coffee.roastDate) items.push({ label: 'Kavurma', value: fmt(coffee.roastDate
       ))}
     </dl>
     <div class="flex items-baseline gap-3 md:flex-col md:items-end md:justify-center md:gap-1 px-6 py-4 md:py-5 border-t md:border-t-0 md:border-l border-[var(--color-line)] md:min-w-[140px]">
-      <dt class="text-[11px] uppercase tracking-[0.14em] text-[var(--color-ink-soft)]">Puan</dt>
+      <dt class="text-[11px] uppercase tracking-[0.14em] text-[var(--color-ink-soft)]">{t('data.score')}</dt>
       <dd class="font-serif text-3xl md:text-4xl text-[var(--color-accent)] leading-none">
         {overall}<span class="text-base text-[var(--color-ink-soft)]">/100</span>
       </dd>
