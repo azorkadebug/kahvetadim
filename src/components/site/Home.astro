@@ -1,0 +1,86 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations, type Lang } from '../../i18n/ui';
+import { formatDate, tastingLang, tastingSlug, tastingUrl, localizePath } from '../../i18n/utils';
+
+interface Props {
+  locale: Lang;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const all = await getCollection('tadimlar', (e) => tastingLang(e.id) === locale);
+const sorted = all.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const latest = sorted.slice(0, 3);
+
+const otherLang: Lang = locale === 'tr' ? 'en' : 'tr';
+const altUrl = localizePath(otherLang, '/');
+---
+
+<BaseLayout title={t('site.name')} locale={locale} altUrl={altUrl}>
+  <section class="py-8 md:py-16 border-b border-[var(--color-line)]">
+    <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">{t('home.kicker')}</p>
+    <h1 class="mt-4 font-serif text-4xl sm:text-5xl md:text-7xl leading-[1.05] max-w-3xl break-words">
+      {t('home.titlePre')}<span class="italic text-[var(--color-accent)]">{t('home.titleEm')}</span>{t('home.titlePost')}
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg text-[var(--color-ink-soft)] font-serif">
+      {t('home.intro')}
+    </p>
+  </section>
+
+  <section class="py-12">
+    <h2 class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)] mb-8">{t('home.latest')}</h2>
+
+    {latest.length === 0 ? (
+      <p class="font-serif italic text-[var(--color-ink-soft)]">{t('home.empty')}</p>
+    ) : (
+      <div class="grid gap-12 md:gap-16">
+        {latest.map((entry) => {
+          const href = tastingUrl(locale, tastingSlug(entry.id));
+          const tdata = entry.data;
+          return (
+            <article class="grid md:grid-cols-5 gap-8 items-start">
+              <a href={href} class="relative md:col-span-2 block aspect-[4/5] bg-[var(--color-bg-soft)] border border-[var(--color-line)] overflow-hidden">
+                {tdata.coverImage && (
+                  <Image
+                    src={tdata.coverImage}
+                    alt={tdata.title}
+                    widths={[320, 480, 640]}
+                    sizes="(min-width: 768px) 40vw, 100vw"
+                    class="w-full h-full object-cover"
+                  />
+                )}
+                <div class="absolute top-4 right-4 bg-[var(--color-bg)] border border-[var(--color-line)] px-3 py-2 text-center min-w-[3.25rem]">
+                  <div class="font-serif text-2xl leading-none text-[var(--color-accent)]">{tdata.rating.overall}</div>
+                  <div class="mt-1 font-sans text-[9px] uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">{t('data.score')}</div>
+                </div>
+              </a>
+              <div class="md:col-span-3">
+                <p class="font-sans text-xs uppercase tracking-[0.18em] text-[var(--color-ink-soft)]">
+                  {formatDate(locale, tdata.date)} · {tdata.coffee.roaster}
+                </p>
+                <h3 class="mt-2 font-serif text-2xl sm:text-3xl md:text-4xl leading-tight break-words">
+                  <a href={href} class="hover:text-[var(--color-accent)]">{tdata.title}</a>
+                </h3>
+                <p class="mt-4 text-[var(--color-ink-soft)] leading-relaxed">{tdata.summary}</p>
+                <p class="mt-6 font-sans text-xs uppercase tracking-[0.18em] text-[var(--color-ink-soft)]">
+                  {[tdata.coffee.origin, t(`process.${tdata.coffee.process}` as const), tdata.coffee.variety].filter(Boolean).join(' · ')}
+                </p>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    )}
+
+    {sorted.length > 3 && (
+      <div class="mt-16 text-center">
+        <a href={localizePath(locale, '/tadimlar/')} class="font-sans text-sm uppercase tracking-[0.2em] border-b border-[var(--color-ink)] pb-1 hover:text-[var(--color-accent)] hover:border-[var(--color-accent)]">
+          {t('home.all')}
+        </a>
+      </div>
+    )}
+  </section>
+</BaseLayout>

@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import TastingArticle from '../../../components/site/TastingArticle.astro';
+import { tastingLang, tastingSlug } from '../../../i18n/utils';
+
+export async function getStaticPaths() {
+  const all = await getCollection('tadimlar');
+  const trSlugs = new Set(
+    all.filter((e) => tastingLang(e.id) === 'tr').map((e) => tastingSlug(e.id))
+  );
+  return all
+    .filter((e) => tastingLang(e.id) === 'en')
+    .map((entry) => {
+      const slug = tastingSlug(entry.id);
+      return {
+        params: { slug },
+        props: { entry, altUrl: trSlugs.has(slug) ? `/tadim/${slug}/` : null },
+      };
+    });
+}
+
+const { entry, altUrl } = Astro.props;
+---
+<TastingArticle entry={entry} locale="en" altUrl={altUrl} />

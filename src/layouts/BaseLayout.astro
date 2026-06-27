@@ -1,48 +1,74 @@
 ---
 import '../styles/global.css';
+import { useTranslations, ogLocale, defaultLang, type Lang } from '../i18n/ui';
+import { localizePath } from '../i18n/utils';
 
 interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  locale?: Lang;
+  /** Diğer dildeki eş sayfanın yolu (yoksa o dilin ana sayfasına düşer). */
+  altUrl?: string | null;
 }
 
 const {
   title,
-  description = 'Tattığım kahvelerin menşeini, prosesini ve damakta bıraktığı izi tek tek yazdığım kişisel tadım defteri.',
+  locale = defaultLang,
+  description,
   ogImage = '/og.png',
+  altUrl = null,
 } = Astro.props;
+
+const t = useTranslations(locale);
+const desc = description ?? t('site.description');
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImageURL = new URL(ogImage, Astro.site).toString();
+
+const otherLang: Lang = locale === 'tr' ? 'en' : 'tr';
+const otherPath = altUrl ?? localizePath(otherLang, '/');
+
+// hreflang alternates: mevcut dil + (varsa) diğer dil + x-default (TR)
+const trURL = locale === 'tr' ? canonicalURL : altUrl ? new URL(altUrl, Astro.site).toString() : null;
+const enURL = locale === 'en' ? canonicalURL : altUrl ? new URL(altUrl, Astro.site).toString() : null;
+
+const navArchive = localizePath(locale, '/tadimlar/');
+const navAbout = localizePath(locale, '/hakkinda/');
+const homeHref = localizePath(locale, '/');
 ---
 
 <!doctype html>
-<html lang="tr">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={desc} />
     <link rel="canonical" href={canonicalURL} />
+
+    {trURL && <link rel="alternate" hreflang="tr" href={trURL} />}
+    {enURL && <link rel="alternate" hreflang="en" href={enURL} />}
+    {trURL && <link rel="alternate" hreflang="x-default" href={trURL} />}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" sizes="any" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Kahve Tadımları" />
+    <meta property="og:site_name" content={t('site.name')} />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={desc} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImageURL} />
-    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:locale" content={ogLocale[locale]} />
+    <meta property="og:locale:alternate" content={ogLocale[otherLang]} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={desc} />
     <meta name="twitter:image" content={ogImageURL} />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -52,12 +78,20 @@ const ogImageURL = new URL(ogImage, Astro.site).toString();
   <body class="bg-[var(--color-bg)] text-[var(--color-ink)]">
     <header class="border-b border-[var(--color-line)]">
       <div class="mx-auto max-w-5xl px-5 sm:px-6 py-5 sm:py-6 flex items-baseline justify-between gap-4">
-        <a href="/" class="font-serif text-xl sm:text-2xl tracking-tight whitespace-nowrap">
-          Kahve <span class="italic text-[var(--color-accent)]">Tadımları</span>
+        <a href={homeHref} class="font-serif text-xl sm:text-2xl tracking-tight whitespace-nowrap">
+          {t('site.brandLead')} <span class="italic text-[var(--color-accent)]">{t('site.brandAccent')}</span>
         </a>
-        <nav class="font-sans text-xs sm:text-sm uppercase tracking-[0.18em] sm:tracking-widest text-[var(--color-ink-soft)] flex gap-4 sm:gap-6">
-          <a href="/tadimlar/" class="hover:text-[var(--color-ink)]">Arşiv</a>
-          <a href="/hakkinda/" class="hover:text-[var(--color-ink)]">Hakkında</a>
+        <nav class="font-sans text-xs sm:text-sm uppercase tracking-[0.18em] sm:tracking-widest text-[var(--color-ink-soft)] flex items-center gap-4 sm:gap-6">
+          <a href={navArchive} class="hover:text-[var(--color-ink)]">{t('nav.archive')}</a>
+          <a href={navAbout} class="hover:text-[var(--color-ink)]">{t('nav.about')}</a>
+          <a
+            href={otherPath}
+            hreflang={otherLang}
+            aria-label={t('a11y.switchLang')}
+            class="pl-4 sm:pl-6 border-l border-[var(--color-line)] hover:text-[var(--color-accent)]"
+          >
+            {otherLang.toUpperCase()}
+          </a>
         </nav>
       </div>
     </header>
@@ -73,7 +107,7 @@ const ogImageURL = new URL(ogImage, Astro.site).toString();
           href="https://instagram.com/kahve.tadim"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Instagram'da @kahve.tadim"
+          aria-label={t('a11y.instagram')}
           class="inline-flex items-center text-[var(--color-ink-soft)] hover:text-[var(--color-accent)] transition-colors"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
