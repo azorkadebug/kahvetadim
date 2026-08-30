@@ -26,6 +26,7 @@ export const dateLocale: Record<Lang, string> = {
 // Sabit (statik) arayüz metinleri
 export const ui = {
   tr: {
+    'site.author': 'Sabri',
     'site.brandLead': 'Kahve',
     'site.brandAccent': 'Tadımları',
     'site.name': 'Kahve Tadımları',
@@ -75,6 +76,12 @@ export const ui = {
     'data.ratio': 'Oran',
     'data.time': 'Süre',
     'data.roasted': 'Kavurma',
+    'data.altitude': 'Rakım',
+    'data.roastLevel': 'Kavrum',
+    'data.roastMachine': 'Kavrum Makinesi',
+    'data.waterTemp': 'Su Sıcaklığı',
+    'data.bloom': 'Bloom',
+    'data.pour': 'Döküş',
     'data.score': 'Puan',
 
     'process.washed': 'Yıkanmış',
@@ -89,6 +96,7 @@ export const ui = {
     'a11y.switchLang': 'Dili değiştir',
   },
   en: {
+    'site.author': 'Sabri',
     'site.brandLead': 'Coffee',
     'site.brandAccent': 'Tastings',
     'site.name': 'Coffee Tastings',
@@ -138,6 +146,12 @@ export const ui = {
     'data.ratio': 'Ratio',
     'data.time': 'Time',
     'data.roasted': 'Roasted',
+    'data.altitude': 'Altitude',
+    'data.roastLevel': 'Roast',
+    'data.roastMachine': 'Roaster Machine',
+    'data.waterTemp': 'Water Temp',
+    'data.bloom': 'Bloom',
+    'data.pour': 'Pour',
     'data.score': 'Score',
 
     'process.washed': 'Washed',

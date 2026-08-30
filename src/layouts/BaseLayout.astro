@@ -77,18 +77,18 @@ const homeHref = localizePath(locale, '/');
   </head>
   <body class="bg-[var(--color-bg)] text-[var(--color-ink)]">
     <header class="border-b border-[var(--color-line)]">
-      <div class="mx-auto max-w-5xl px-5 sm:px-6 py-5 sm:py-6 flex items-baseline justify-between gap-4">
-        <a href={homeHref} class="font-serif text-xl sm:text-2xl tracking-tight whitespace-nowrap">
-          {t('site.brandLead')} <span class="italic text-[var(--color-accent)]">{t('site.brandAccent')}</span>
+      <div class="mx-auto max-w-5xl px-5 sm:px-6 py-5 sm:py-6 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
+        <a href={homeHref} class="font-serif text-xl sm:text-2xl tracking-tight">
+          {t('site.brandLead')} <span class="italic">{t('site.brandAccent')}</span>
         </a>
-        <nav class="font-sans text-xs sm:text-sm uppercase tracking-[0.18em] sm:tracking-widest text-[var(--color-ink-soft)] flex items-center gap-4 sm:gap-6">
-          <a href={navArchive} class="hover:text-[var(--color-ink)]">{t('nav.archive')}</a>
-          <a href={navAbout} class="hover:text-[var(--color-ink)]">{t('nav.about')}</a>
+        <nav class="font-sans text-xs sm:text-sm uppercase tracking-[0.14em] sm:tracking-widest text-[var(--color-ink-soft)] flex items-center gap-4 sm:gap-6">
+          <a href={navArchive} class="py-2 -my-2 hover:text-[var(--color-ink)]">{t('nav.archive')}</a>
+          <a href={navAbout} class="py-2 -my-2 hover:text-[var(--color-ink)]">{t('nav.about')}</a>
           <a
             href={otherPath}
             hreflang={otherLang}
             aria-label={t('a11y.switchLang')}
-            class="pl-4 sm:pl-6 border-l border-[var(--color-line)] hover:text-[var(--color-accent)]"
+            class="py-2 -my-2 pl-3 sm:pl-6 border-l border-[var(--color-line)] hover:text-[var(--color-ink)]"
           >
             {otherLang.toUpperCase()}
           </a>
@@ -108,7 +108,7 @@ const homeHref = localizePath(locale, '/');
           target="_blank"
           rel="noopener noreferrer"
           aria-label={t('a11y.instagram')}
-          class="inline-flex items-center text-[var(--color-ink-soft)] hover:text-[var(--color-accent)] transition-colors"
+          class="inline-flex items-center p-2 -m-2 text-[var(--color-ink-soft)] hover:text-[var(--color-ink)] transition-colors"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
             <rect x="3" y="3" width="18" height="18" rx="4.5" ry="4.5" />

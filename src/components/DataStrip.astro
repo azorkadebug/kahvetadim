@@ -11,12 +11,18 @@ interface Props {
     region?: string;
     process: string;
     roastDate?: Date;
+    altitude?: string;
+    roastLevel?: string;
+    roastMachine?: string;
   };
   brew: {
     method: string;
     grindSize?: string;
     ratio?: string;
     time?: string;
+    waterTemp?: string;
+    bloom?: string;
+    pour?: string;
   };
   overall: number;
   locale?: Lang;
@@ -28,39 +34,65 @@ const t = useTranslations(locale);
 const fmt = (d?: Date) =>
   d ? formatDate(locale, d, { day: 'numeric', month: 'short', year: 'numeric' }) : null;
 
-type Item = { label: string; value: string; icon?: 'brew' | 'grind' };
+/** num: sayısal alan → tabular-nums ile hizalanır. */
+type Item = { label: string; value: string; num?: boolean };
 
 const items: Item[] = [
   { label: t('data.roaster'), value: coffee.roaster },
   { label: t('data.origin'), value: [coffee.origin, coffee.region].filter(Boolean).join(' · ') },
   { label: t('data.process'), value: t(`process.${coffee.process}` as const) },
-  { label: t('data.brew'), value: brew.method, icon: 'brew' },
 ];
-if (brew.grindSize) items.push({ label: t('data.grind'), value: brew.grindSize, icon: 'grind' });
-if (brew.ratio) items.push({ label: t('data.ratio'), value: brew.ratio });
-if (brew.time) items.push({ label: t('data.time'), value: brew.time });
-if (coffee.roastDate) items.push({ label: t('data.roasted'), value: fmt(coffee.roastDate)! });
+if (coffee.altitude) items.push({ label: t('data.altitude'), value: coffee.altitude, num: true });
+if (coffee.roastLevel) items.push({ label: t('data.roastLevel'), value: coffee.roastLevel });
+if (coffee.roastMachine) items.push({ label: t('data.roastMachine'), value: coffee.roastMachine });
+if (brew.grindSize) items.push({ label: t('data.grind'), value: brew.grindSize, num: true });
+if (brew.ratio) items.push({ label: t('data.ratio'), value: brew.ratio, num: true });
+if (brew.time) items.push({ label: t('data.time'), value: brew.time, num: true });
+if (brew.waterTemp) items.push({ label: t('data.waterTemp'), value: brew.waterTemp, num: true });
+if (brew.bloom) items.push({ label: t('data.bloom'), value: brew.bloom, num: true });
+if (brew.pour) items.push({ label: t('data.pour'), value: brew.pour, num: true });
+if (coffee.roastDate) items.push({ label: t('data.roasted'), value: fmt(coffee.roastDate)!, num: true });
 ---
 
-<div class="font-sans border-y border-[var(--color-line)] bg-[var(--color-bg-soft)]/60">
-  <div class="flex flex-col md:flex-row">
-    <dl class="flex-1 grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-4 px-6 py-5">
-      {items.map(({ label, value, icon }) => (
+{/* Ölçüm paneli: sitenin kendine ait tek dili. Değerler gövde metniyle
+    yarışacak boyutta, etiketler geride; vurgu rengi yalnızca burada. */}
+<section class="font-sans border-y border-[var(--color-line)] bg-[var(--color-bg)]">
+  <div class="flex flex-col lg:flex-row lg:items-stretch">
+    {/* demleme yöntemi — el çizimi ikon, sitenin en özgün grafik varlığı */}
+    <div class="flex items-center gap-4 px-1 py-6 lg:pr-8 lg:border-r border-[var(--color-line)] lg:min-w-[15rem]">
+      <BrewIcon method={brew.method} size={56} class="text-[var(--color-accent)] shrink-0" />
+      <div>
+        <div class="text-[10px] uppercase tracking-[0.18em] text-[var(--color-ink-soft)]">{t('data.brew')}</div>
+        <div class="mt-1 text-xl leading-tight text-[var(--color-ink)]">{brew.method}</div>
+      </div>
+    </div>
+
+    <dl class="flex-1 grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-5 px-1 lg:px-8 pb-6 lg:py-6 border-t lg:border-t-0 border-[var(--color-line)] pt-6 lg:pt-6">
+      {items.map(({ label, value, num }) => (
         <div>
-          <dt class="text-[11px] uppercase tracking-[0.14em] text-[var(--color-ink-soft)]">{label}</dt>
-          <dd class="mt-0.5 text-sm text-[var(--color-ink)] flex items-center gap-2">
-            {icon === 'brew' && <BrewIcon method={brew.method} size={20} class="text-[var(--color-accent)] shrink-0" />}
-            {icon === 'grind' && <GrinderIcon size={20} class="text-[var(--color-accent)] shrink-0" />}
-            <span>{value}</span>
+          <dt class="text-[10px] uppercase tracking-[0.18em] text-[var(--color-ink-soft)]">{label}</dt>
+          <dd class={`mt-1 text-xl leading-tight text-[var(--color-ink)] ${num ? 'tnum' : ''}`}>
+            {label === t('data.grind') ? (
+              <span class="inline-flex items-center gap-2">
+                <GrinderIcon size={20} class="text-[var(--color-accent)] shrink-0" />
+                {value}
+              </span>
+            ) : (
+              value
+            )}
           </dd>
         </div>
       ))}
     </dl>
-    <div class="flex items-baseline gap-3 md:flex-col md:items-end md:justify-center md:gap-1 px-6 py-4 md:py-5 border-t md:border-t-0 md:border-l border-[var(--color-line)] md:min-w-[140px]">
-      <dt class="text-[11px] uppercase tracking-[0.14em] text-[var(--color-ink-soft)]">{t('data.score')}</dt>
-      <dd class="font-serif text-3xl md:text-4xl text-[var(--color-accent)] leading-none">
-        {overall}<span class="text-base text-[var(--color-ink-soft)]">/100</span>
-      </dd>
+
+    {/* puan: sayfanın ikinci büyük ölçek anı */}
+    <div class="flex items-baseline gap-4 lg:flex-col lg:items-end lg:justify-center lg:gap-0 px-1 lg:pl-8 py-6 border-t lg:border-t-0 lg:border-l border-[var(--color-line)] lg:min-w-[10rem]">
+      <div class="text-[10px] uppercase tracking-[0.18em] text-[var(--color-ink-soft)] lg:order-2 lg:mt-1">
+        {t('data.score')}
+      </div>
+      <div class="font-serif tnum text-6xl lg:text-7xl leading-[0.85] text-[var(--color-accent)] lg:order-1">
+        {overall}<span class="font-sans text-xs tracking-wide text-[var(--color-ink-soft)] align-super">/100</span>
+      </div>
     </div>
   </div>
-</div>
+</section>

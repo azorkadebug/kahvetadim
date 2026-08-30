@@ -54,6 +54,9 @@ const tadimSchema = (imageDirectory: string) => ({
               description: 'İsteğe bağlı',
               validation: { isRequired: false },
             }),
+            altitude: fields.text({ label: 'Rakım', description: 'Örn: 2400 m' }),
+            roastLevel: fields.text({ label: 'Kavrum', description: 'Örn: Açık – Açık/Orta' }),
+            roastMachine: fields.text({ label: 'Kavrum Makinesi', description: 'Örn: Probat 12' }),
           },
           { label: 'Kahve' }
         ),
@@ -78,6 +81,9 @@ const tadimSchema = (imageDirectory: string) => ({
             ratio: fields.text({ label: 'Oran', description: 'Örn: 1:16' }),
             water: fields.text({ label: 'Su', description: 'Örn: 15g / 240g, 94°C' }),
             time: fields.text({ label: 'Süre', description: 'Örn: 3:20' }),
+            waterTemp: fields.text({ label: 'Su Sıcaklığı', description: 'Örn: 94°C' }),
+            bloom: fields.text({ label: 'Bloom', description: 'Örn: 30 saniye' }),
+            pour: fields.text({ label: 'Döküş', description: 'Örn: 4 aşamalı (50/100/50/50)' }),
           },
           { label: 'Demleme' }
         ),

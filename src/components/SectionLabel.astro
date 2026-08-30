@@ -1,0 +1,19 @@
+---
+/**
+ * Bölüm başlığı — sayfayı bölen yapısal başlık (SON TADIMLAR, DAMAK PROFİLİ…).
+ * Üstündeki ince çizgi ile künye/meta satırlarından ayrılır; denetimde bu iki
+ * rol aynı tipografik davranışı paylaşıyordu ve hiyerarşi düzleşiyordu.
+ */
+interface Props {
+  as?: 'h2' | 'h3' | 'p';
+  class?: string;
+}
+const { as: Tag = 'h2', class: extra = '' } = Astro.props;
+---
+
+<div class={`flex items-center gap-4 ${extra}`}>
+  <Tag class="font-sans text-[11px] uppercase tracking-[0.2em] text-[var(--color-ink-soft)] shrink-0">
+    <slot />
+  </Tag>
+  <span class="flex-1 h-px bg-[var(--color-line)]" aria-hidden="true"></span>
+</div>

@@ -38,6 +38,10 @@ const tadimlar = defineCollection({
         variety: z.string().optional(),
         process: processEnum,
         roastDate: z.coerce.date().optional(),
+        // Gövde metnindeki "Kahve Künyesi" listesinden şeride taşındı.
+        altitude: z.string().optional(),
+        roastLevel: z.string().optional(),
+        roastMachine: z.string().optional(),
       }),
       brew: z.object({
         method: methodEnum,
@@ -45,6 +49,10 @@ const tadimlar = defineCollection({
         ratio: z.string().optional(),
         water: z.string().optional(),
         time: z.string().optional(),
+        // Gövde metnindeki emoji satırlarından şeride taşındı.
+        waterTemp: z.string().optional(),
+        bloom: z.string().optional(),
+        pour: z.string().optional(),
       }),
       rating: z.object({
         overall: z.number().min(0).max(100),

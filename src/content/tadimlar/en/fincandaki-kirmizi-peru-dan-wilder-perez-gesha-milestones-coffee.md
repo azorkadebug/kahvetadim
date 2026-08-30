@@ -14,12 +14,16 @@ coffee:
   variety: Gesha
   process: natural
   roastDate: 2026-05-20
+  altitude: '1700m'
 brew:
   method: V60
   grindSize: Kinu 3.7.2
   ratio: '1:16.6'
   water: '15/250'
-  time: '2:25-2:30'
+  time: '2:25 - 2:30'
+  waterTemp: '94°C'
+  bloom: '30 seconds'
+  pour: '5 stages (5x50g)'
 rating:
   overall: 90
   aroma: 9
@@ -33,28 +37,13 @@ rating:
     - red mulberry
     - Floral
 ---
-☕ **After a Long Break: Wilder Perez Gesha from Peru**
+## After a Long Break: Wilder Perez Gesha from Peru
 
 After a long break, we're back with another tasting. The reason for the pause wasn't that we'd fallen out of love with coffee — it was simply that we couldn't find any beans special and exciting enough to bring to the page and write about. But once you find a coffee this good, and then brew it well on top of that, there's no way you keep it to yourself! Let's get into the brewing process.
 
-🌱 **Coffee Profile**
+## Brew Recipe & Equipment
 
-- **Origin:** Peru, Amazonas (Luya Region)
-- **Producer:** Wilder Perez
-- **Variety:** Gesha
-- **Process:** Natural
-- **Altitude:** 1700m
-- **Roaster:** Milestones (relatively light by Turkish standards, omni roast)
-
-⚙️ **Brew Recipe & Equipment** For this brew I'm stepping a little outside my usual routine. Instead of my own grinder, the Comandante, this time I'm brewing with my dear friend Mertcan's **Kinu Titanium + Pour Over Burr**. On the dripper side, my much-loved duo of the **Origami Air** and **Abaca Plus** filter paper is on the job.
-
-🌡️ **Water Temperature:** 94°C
-
-💧 **Bloom:** 30 seconds
-
-🌊 **Pours:** 5 stages (5x50g)
-
-⏱️ **Total Time:** 2:25 - 2:30
+For this brew I'm stepping a little outside my usual routine. Instead of my own grinder, the Comandante, this time I'm brewing with my dear friend Mertcan's **Kinu Titanium + Pour Over Burr**. On the dripper side, my much-loved duo of the **Origami Air** and **Abaca Plus** filter paper is on the job.
 
 **On the Nose (Aroma)** Hot, warm, or cold, this coffee fills the nose so pleasantly at every stage. The aroma has a sweet, powerful profile with clear notes reminiscent of mulberry and grape molasses (pekmez).
 

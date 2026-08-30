@@ -2,7 +2,7 @@
 title: 'Hafta Sonunun Neşesi: Münih''ten Belayco'
 date: 2026-04-26
 coverImage: ./hafta-sonunun-nesesi-muenih-ten-belayco/coverImage.png
-summary: >
+summary: >-
   Bazı kahvelerin bir karakteri vardır; bir nota kahveye bir altlık gibi eşlik
   eder. İşte Belayco tam olarak böyle bir kahve.
 coffee:
@@ -17,7 +17,10 @@ brew:
   grindSize: 20 Klik
   ratio: '1:16.6'
   water: 12/200
-  time: 2.20-2.30
+  time: '2:20 - 2:30'
+  waterTemp: '94°C'
+  bloom: '30 saniye'
+  pour: '4 aşamalı (4x50g)'
 rating:
   overall: 89
   aroma: 9
@@ -32,15 +35,9 @@ rating:
 ---
 Bu hafta sonumuzu neşelendiren kahvemiz Almanya, Münih'ten geliyor. Nordic kavrumlar yapan Cafe Bla'nın kahvelerini 2025 yılının Haziran ayında edinmiş ve beni çok etkileyen bu kahveyi hemen buzluğa atmıştım. Aylar sonra tekrar buluşma vakti!
 
-⚙️ **Demleme Reçetesi ve Süreci** Notlarıma bakarak demleme stratejimi belirledim. Daha önce Türk kahvesi dâhil her şekilde demlediğim ve beni her seferinde çok mutlu eden bir çekirdek bu. Su tuttuğunu hatırladığım için akışı rahatlatmak adına **Orea V4**'ün tabanını "Open" versiyonu ile değiştirdim.
+## Demleme Reçetesi ve Süreci
 
-🌡️ **Su Sıcaklığı:** 94°C
-
-💧 **Bloom (Ön Demleme):** 30 saniye
-
-🌊 **Döküş:** 4 aşamalı (4x50g)
-
-⏱️ **Toplam Süre:** 2:20 - 2:30
+Notlarıma bakarak demleme stratejimi belirledim. Daha önce Türk kahvesi dâhil her şekilde demlediğim ve beni her seferinde çok mutlu eden bir çekirdek bu. Su tuttuğunu hatırladığım için akışı rahatlatmak adına **Orea V4**'ün tabanını "Open" versiyonu ile değiştirdim.
 
 **Burunda (Aroma)** Buzlukta geçen süre kahveyi kuru kokuda hiçbir şekilde kötü etkilememiş. Aksine, hala ilk günkü gibi diri ve güçlü.
 

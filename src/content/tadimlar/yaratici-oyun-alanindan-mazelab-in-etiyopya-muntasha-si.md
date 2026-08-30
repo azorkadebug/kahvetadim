@@ -13,12 +13,18 @@ coffee:
   farm: Muntasha Family
   variety: JARC 74158
   process: natural
+  altitude: '2400 m'
+  roastLevel: 'Açık – Açık/Orta'
+  roastMachine: 'Probat 12'
 brew:
   method: V60
   grindSize: Comandante 26 Klik
   ratio: '1:16.6'
   water: 15/250
   time: '2:25-2:30'
+  waterTemp: '92°C'
+  bloom: '30 saniye'
+  pour: '4 aşamalı (50/100/50/50)'
 rating:
   overall: 89
   aroma: 9
@@ -42,44 +48,24 @@ fotoğraf galerisiyle birleştirmek. İlk kafeleri latte art ile ün yapsa da Ja
 derinliğin tatta, kokuda ve o bütün duyusal yolculukta olduğunu fark etmiş. Bu yüzden Mazelab'i bir "yaratıcı oyun
 alanı" gibi tanımlıyorlar — kahveyi sanatla aynı masaya oturtan bir yer.
 
-Kavurma işine 2023'ün Mayıs'ında, sektörde altı yılı devirdikten sonra başlamışlar. Niyetleri nadir ya da pahalı olanın peşinden koşmak değil; kendi deyimleriyle "saklı kalmış, kendine has tatlar sunan" çekirdekleri avlamak. Bu yaklaşım, şeffaflık ve teruarı önemseyen bu sayfaya da iyi oturuyor. İşin ciddiyetini merak edenlere küçük bir not: 2024 Çekya Brewers Cup birinciliği Jackie'nin, 2025 Dünya Brewers şampiyonluğu ise Mazelab'in SOLO Dripper'ıyla kazanıldı. Yani fincanın arkasında hatırı sayılır bir birikim var. Kahvenin künyesine geçelim.
-
-🌱 **Kahve Künyesi**
-
-- **Orijin:** Etiyopya
-- **Bölge:** Arbegona, Sidama
-- **Üretici:** Muntasha Ailesi
-- **Varyete:** JARC 74158
-- **İşlem:** Doğal (Natural)
-- **Rakım:** 2400 m
-- **Kavrum:** Açık – Açık/Orta
-- **Kavrum Makinesi:** Probat 12
-- **Kavurucu:** Mazelab
+Kavurma işine 2023'ün Mayıs'ında, sektörde altı yılı devirdikten sonra başlamışlar. Niyetleri nadir ya da pahalı olanın peşinden koşmak değil; kendi deyimleriyle "saklı kalmış, kendine has tatlar sunan" çekirdekleri avlamak. Bu yaklaşım, şeffaflık ve teruarı önemseyen bu sayfaya da iyi oturuyor. İşin ciddiyetini merak edenlere küçük bir not: 2024 Çekya Brewers Cup birinciliği Jackie'nin, 2025 Dünya Brewers şampiyonluğu ise Mazelab'in SOLO Dripper'ıyla kazanıldı. Yani fincanın arkasında hatırı sayılır bir birikim var.
 
 Kavrum makinesi gibi bir detaya yer veren bir kavurucuya daha önce denk gelmemiştim; çok ince bir düşünce. Kavurucu spesifik bir tarif vermediği için uğraşıyor, en beğendiğimiz tarifi sitemize ekliyoruz.
 
-⚙️ **Demleme Reçetesi ve Ekipmanlar**
+## Demleme Reçetesi ve Ekipmanlar
 
 Yüksek ısıdan hoşlanmayan bu natural Etiyopya için favorim 92 derecede kalmak oldu, ısıyı yükselttiğimde bitter notalar kahveyi benden uzaklaştırdı. Klasik su tutan Etiyopya naturallerine selam olsun bu kahvemiz de öyle.
 
 Kahve rafımızdan emektar Origami Air S dripper'ımızı seçiyorum. Filtre kağıdı seçimim ise th3 oluyor, abaca plus yavaş, abaca ise çok hızlı kaldı.
 
-🌡️ **Su Sıcaklığı:** 92°C
-
-💧 **Bloom (Ön Demleme):** 30 saniye
-
-🌊 **Döküş:** 4 aşamalı (50/100/50/50)
-
-⏱️ **Toplam Süre:** 2:25-2:30
-
-**Burunda (Aroma)**
+### Burunda (Aroma)
 
 Çok renkli çok keyifli bir burunu var kahvenin, koklamaya doyamıyoruz. Tropik kokular bizi kahveye çekiyor.
 
-**Damakta**
+### Damakta
 
 Adeta çiğnenen bir kahve muntasha, sıcak hali portakal kekremsiliğini andırıyor. 2-3 dakika içerisinde kırmızı meyveler, sarı erik, turunçlar her yudumunda kompleks bir kahve. Kahve tekdüze değil, her tadımda farklı katmanları var ve geçişleri bizi etkiliyor. Asiditenin orta–orta düşük olduğu tatlımsı, lezzetli bir kahve.
 
-**Son Söz**
+### Son Söz
 
 Mazelab son dönemde beni en çok etkileyen kavurucu oluyor, umarım bir gün yerinde deneyimlemek nasip olur. Başka kahveleri ile sitemizde yer alacağına kesin gözüyle bakıyorum. Fincanınız sevdikleriniz ile birlikte, yudumlarınız hep keyifli olsun.

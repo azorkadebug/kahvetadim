@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DataStrip from '../DataStrip.astro';
 import FlavorChips from '../FlavorChips.astro';
+import SectionLabel from '../SectionLabel.astro';
 import { useTranslations, type Lang } from '../../i18n/ui';
 import { formatDate, localizePath } from '../../i18n/utils';
 
@@ -20,7 +21,9 @@ const d = entry.data;
 
 const pageURL = new URL(Astro.url.pathname, Astro.site).toString();
 const productName = [d.coffee.roaster, d.coffee.origin, d.coffee.region].filter(Boolean).join(' — ');
-const coverURL = d.coverImage ? new URL(d.coverImage.src, Astro.site).toString() : undefined;
+// Şemada ham kapak PNG'sine (2-6 MB) değil, build'in ürettiği hazır OG
+// görseline işaret et — crawler'lar bu alanı çekiyor.
+const coverURL = new URL(`/og/${entry.id}.png`, Astro.site).toString();
 const authorUrl = new URL(localizePath(locale, '/hakkinda/'), Astro.site).toString();
 
 const reviewLd = {
@@ -77,8 +80,10 @@ const subRatings = [
 
   <article>
     <header class="py-6 sm:py-8 md:py-12">
-      <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">
-        {formatDate(locale, d.date)} · {d.coffee.roaster}
+      {/* künye satırı: bölüm başlıklarından farklı rol → harf aralığı yok */}
+      <p class="font-sans text-xs text-[var(--color-ink-soft)]">
+        <span class="text-[var(--color-ink)]">{t('site.author')}</span>
+        {' · '}{formatDate(locale, d.date)} · {d.coffee.roaster}
       </p>
       <h1 class="mt-4 font-serif text-3xl sm:text-4xl md:text-6xl leading-[1.1] max-w-3xl break-words">
         {d.title}
@@ -88,54 +93,71 @@ const subRatings = [
       </p>
     </header>
 
+    {/* Ölçüm paneli başlığın hemen altında: sayfanın ilk "olay"ı bu. */}
+    <DataStrip coffee={d.coffee} brew={d.brew} overall={d.rating.overall} locale={locale} />
+
     {d.coverImage && (
-      <figure class="mb-10 bg-[var(--color-bg-soft)]/60 flex justify-center">
+      <figure class="mt-10">
         <Image
           src={d.coverImage}
           alt={d.title}
           widths={[480, 768, 1200, 1600]}
-          sizes="(min-width: 1024px) 900px, 100vw"
-          class="max-h-[75vh] w-auto max-w-full object-contain"
+          sizes="(min-width: 1024px) 1024px, 100vw"
+          class="w-full h-auto"
         />
+        <figcaption class="mt-3 font-sans text-xs text-[var(--color-ink-soft)]">
+          {[d.coffee.roaster, d.coffee.origin].filter(Boolean).join(' · ')}
+        </figcaption>
       </figure>
     )}
 
-    <DataStrip coffee={d.coffee} brew={d.brew} overall={d.rating.overall} locale={locale} />
+    {/* Gövde sola dayalı; sağdaki sütun ikinci okuma katmanı (ölçüm/nota).
+        Önceden gövde ortalanmış, başlık sola dayalıydı — göz her seferinde
+        108px zıplıyordu ve sağdaki alan boş kalıyordu. */}
+    <div class="py-12 grid lg:grid-cols-[minmax(0,42rem)_1fr] gap-x-12 xl:gap-x-16 gap-y-12 items-start">
+      <div class="prose-editorial font-serif text-lg leading-[1.75] text-[var(--color-ink)]">
+        <Content />
+      </div>
 
-    <div class="prose-editorial mx-auto max-w-2xl py-12 font-serif text-lg leading-[1.75] text-[var(--color-ink)]">
-      <Content />
+      {(subRatings.length > 0 || d.rating.flavorNotes.length > 0) && (
+        <aside class="lg:sticky lg:top-8 space-y-10">
+          {subRatings.length > 0 && (
+            <div>
+              <SectionLabel as="h3">{t('detail.palate')}</SectionLabel>
+              <dl class="mt-5 space-y-4 font-sans text-sm">
+                {subRatings.map(([label, value]) => (
+                  <div>
+                    <div class="flex items-baseline justify-between gap-3">
+                      <dt class="text-[var(--color-ink-soft)]">{label}</dt>
+                      <span class="tnum text-[var(--color-ink)]">{value}<span class="text-[var(--color-ink-soft)] text-xs">/10</span></span>
+                    </div>
+                    {/* cetvel: 10 çentikli ölçek, yükleme çubuğu değil */}
+                    <dd class="mt-1.5 relative h-2.5" aria-hidden="true">
+                      <div class="absolute inset-x-0 bottom-0 h-px bg-[var(--color-line)]"></div>
+                      <div class="absolute inset-x-0 bottom-0 flex justify-between">
+                        {Array.from({ length: 10 }).map((_, i) => (
+                          <span class={`w-px ${i < value ? 'h-2.5 bg-[var(--color-accent)]' : 'h-1 bg-[var(--color-line)]'}`}></span>
+                        ))}
+                      </div>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          )}
+          {d.rating.flavorNotes.length > 0 && (
+            <div>
+              <SectionLabel as="h3">{t('detail.flavors')}</SectionLabel>
+              <div class="mt-5"><FlavorChips notes={d.rating.flavorNotes} /></div>
+            </div>
+          )}
+        </aside>
+      )}
     </div>
-
-    {(subRatings.length > 0 || d.rating.flavorNotes.length > 0) && (
-      <section class="border-t border-[var(--color-line)] py-10 grid md:grid-cols-2 gap-10">
-        {subRatings.length > 0 && (
-          <div>
-            <h3 class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)] mb-4">{t('detail.palate')}</h3>
-            <dl class="space-y-3 font-sans text-sm">
-              {subRatings.map(([label, value]) => (
-                <div class="flex items-center gap-4">
-                  <dt class="w-24 text-[var(--color-ink-soft)]">{label}</dt>
-                  <dd class="flex-1 h-1 bg-[var(--color-line)] relative rounded-full">
-                    <span class="absolute inset-y-0 left-0 bg-[var(--color-accent)] rounded-full" style={`width:${value * 10}%`}></span>
-                  </dd>
-                  <span class="w-8 text-right tabular-nums">{value}</span>
-                </div>
-              ))}
-            </dl>
-          </div>
-        )}
-        {d.rating.flavorNotes.length > 0 && (
-          <div>
-            <h3 class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)] mb-4">{t('detail.flavors')}</h3>
-            <FlavorChips notes={d.rating.flavorNotes} />
-          </div>
-        )}
-      </section>
-    )}
   </article>
 
   <div class="mt-16 pt-8 border-t border-[var(--color-line)]">
-    <a href={localizePath(locale, '/tadimlar/')} class="font-sans text-sm uppercase tracking-[0.2em] text-[var(--color-ink-soft)] hover:text-[var(--color-accent)]">
+    <a href={localizePath(locale, '/tadimlar/')} class="font-sans text-sm uppercase tracking-[0.2em] text-[var(--color-ink-soft)] hover:text-[var(--color-ink)]">
       {t('detail.back')}
     </a>
   </div>
@@ -148,7 +170,7 @@ const subRatings = [
     font-size: 4em;
     font-weight: 500;
     float: left;
-    line-height: 0.9;
+    line-height: 0.82;
     padding: 0.1em 0.08em 0 0;
     color: var(--color-accent);
   }
@@ -163,5 +185,7 @@ const subRatings = [
   }
   .prose-editorial em { font-style: italic; }
   .prose-editorial strong { font-weight: 600; }
-  .prose-editorial a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+  /* Gövde içi bağlantı küçük metin sayılır → 4.5:1 gerekiyor.
+     accent (3.09:1) kalıyordu, accent-deep 4.51:1 ile geçiyor. */
+  .prose-editorial a { color: var(--color-accent-deep); text-decoration: underline; text-underline-offset: 3px; }
 </style>

@@ -2,7 +2,7 @@
 title: 'Weekend Cheer: Belayco from Munich'
 date: 2026-04-26
 coverImage: ../hafta-sonunun-nesesi-muenih-ten-belayco/coverImage.png
-summary: >
+summary: >-
   Some coffees just have a character — a single note that follows along like an underlay beneath the whole cup. Belayco is exactly that kind of coffee.
 coffee:
   roaster: Café Blá
@@ -16,7 +16,10 @@ brew:
   grindSize: 20 clicks
   ratio: '1:16.6'
   water: 12/200
-  time: 2.20-2.30
+  time: '2:20 - 2:30'
+  waterTemp: '94°C'
+  bloom: '30 seconds'
+  pour: '4 stages (4x50g)'
 rating:
   overall: 89
   aroma: 9
@@ -31,15 +34,9 @@ rating:
 ---
 The coffee bringing some cheer to our weekend comes all the way from Munich, Germany. I picked up beans from Cafe Bla, who roast in the Nordic style, back in June 2025, and this one impressed me so much that I tucked it straight into the freezer. Months later, it's finally time for a reunion!
 
-⚙️ **Brew Recipe & Process** I looked back at my notes to map out my brewing strategy. This is a bean I've brewed every which way before — Turkish coffee included — and it has made me happy every single time. Since I remembered it tends to hold onto water, I swapped the base of my **Orea V4** for the "Open" version to keep the flow moving.
+## Brew Recipe & Process
 
-🌡️ **Water Temperature:** 94°C
-
-💧 **Bloom:** 30 seconds
-
-🌊 **Pours:** 4 stages (4x50g)
-
-⏱️ **Total Time:** 2:20 - 2:30
+I looked back at my notes to map out my brewing strategy. This is a bean I've brewed every which way before — Turkish coffee included — and it has made me happy every single time. Since I remembered it tends to hold onto water, I swapped the base of my **Orea V4** for the "Open" version to keep the flow moving.
 
 **On the Nose (Aroma)** The time in the freezer didn't hurt the dry fragrance in any way. If anything, it's still as lively and powerful as day one.
 

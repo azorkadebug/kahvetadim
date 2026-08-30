@@ -1,0 +1,15 @@
+# Astro'nun ürettiği varlıklar içerik-hash'li dosya adları taşır (ör.
+# BaseLayout.B8KKPz1P.css) — içeriği değişirse adı da değişir. Bu yüzden
+# sonsuza kadar önbelleğe alınabilirler. Varsayılan Cloudflare davranışı
+# bunlara da HTML ile aynı "max-age=0, must-revalidate" veriyordu; her
+# tekrar ziyarette gereksiz doğrulama turu oluyordu.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fontlar ve OG görselleri de sürüm değişmeden içerikleri değişmez.
+/og/*
+  Cache-Control: public, max-age=604800
+
+# HTML her zaman taze doğrulansın (varsayılan davranış korunuyor).
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate

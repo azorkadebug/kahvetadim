@@ -1,8 +1,9 @@
 ---
-import { getEntry, render } from 'astro:content';
+import { getEntry, getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionLabel from '../SectionLabel.astro';
 import { useTranslations, type Lang } from '../../i18n/ui';
-import { localizePath } from '../../i18n/utils';
+import { formatDate, localizePath, tastingLang, tastingSlug, tastingUrl } from '../../i18n/utils';
 
 interface Props {
   locale: Lang;
@@ -16,6 +17,10 @@ const entry = await getEntry('sayfalar', entryId);
 if (!entry) throw new Error(`Hakkında sayfa içeriği bulunamadı: ${entryId}`);
 const { Content } = await render(entry);
 
+// Sağdaki sütun: denetimde burası ~380×400px boş "artık alan" olarak işaretlendi.
+const all = await getCollection('tadimlar', (e) => tastingLang(e.id) === locale);
+const latest = all.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 4);
+
 const otherLang: Lang = locale === 'tr' ? 'en' : 'tr';
 const altUrl = localizePath(otherLang, '/hakkinda/');
 ---
@@ -26,13 +31,40 @@ const altUrl = localizePath(otherLang, '/hakkinda/');
   locale={locale}
   altUrl={altUrl}
 >
-  <section class="py-8 md:py-16 max-w-2xl">
-    {entry.data.kicker && (
-      <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">{entry.data.kicker}</p>
-    )}
-    <h1 class="mt-4 font-serif text-4xl md:text-5xl leading-tight">{entry.data.title}</h1>
-    <div class="mt-8 font-serif text-lg leading-[1.75] text-[var(--color-ink)] [&>p]:mt-5 [&>p:first-child]:mt-0">
-      <Content />
+  <section class="py-8 md:py-16 grid lg:grid-cols-[minmax(0,42rem)_1fr] gap-x-12 xl:gap-x-16 gap-y-12 items-start">
+    <div>
+      {entry.data.kicker && (
+        <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">{entry.data.kicker}</p>
+      )}
+      <h1 class="mt-4 font-serif text-4xl sm:text-5xl leading-tight">{entry.data.title}</h1>
+      <div class="mt-5 font-serif text-lg leading-[1.75] text-[var(--color-ink)] [&>p]:mt-5 [&>p:first-child]:mt-0">
+        <Content />
+      </div>
     </div>
+
+    {latest.length > 0 && (
+      <aside class="lg:sticky lg:top-8">
+        <SectionLabel as="h2">{t('home.latest')}</SectionLabel>
+        <ul class="mt-5 space-y-4 list-none p-0 m-0">
+          {latest.map((e) => {
+            const d = e.data;
+            return (
+              <li class="flex items-baseline gap-3">
+                <span class="font-serif tnum text-lg text-[var(--color-accent)] w-8 shrink-0">{d.rating.overall}</span>
+                <span>
+                  <a
+                    href={tastingUrl(locale, tastingSlug(e.id))}
+                    class="font-serif leading-snug hover:text-[var(--color-ink-soft)]"
+                  >{d.title}</a>
+                  <span class="block font-sans text-xs text-[var(--color-ink-soft)]">
+                    {formatDate(locale, d.date, { day: 'numeric', month: 'short', year: 'numeric' })} · {d.coffee.roaster}
+                  </span>
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+      </aside>
+    )}
   </section>
 </BaseLayout>

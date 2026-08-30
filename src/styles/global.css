@@ -1,8 +1,8 @@
 @import "tailwindcss";
-@import "@fontsource/fraunces/400.css";
-@import "@fontsource/fraunces/500.css";
-@import "@fontsource/fraunces/600.css";
-@import "@fontsource/fraunces/400-italic.css";
+/* Fraunces variable: opsz ekseni sayesinde büyük başlıklar otomatik olarak
+   display kesimine geçer — statik 400/500/600 kesimlerinde bu mümkün değildi. */
+@import "@fontsource-variable/fraunces/opsz.css";
+@import "@fontsource-variable/fraunces/opsz-italic.css";
 @import "@fontsource-variable/inter";
 
 @theme {
@@ -10,10 +10,14 @@
   --color-bg-soft: #f3ece1;
   --color-ink: #2b1d16;
   --color-ink-soft: #6b5545;
+  /* Ölçüm katmanının rengi: puan, çubuk, demleme ikonu. Dekoratif/büyük
+     kullanım için — krem üzerinde 3.09:1 (AA büyük metin). */
   --color-accent: #c77b46;
+  /* Küçük metin ve bağlantılar için koyultulmuş ton — 4.51:1, AA normal metin. */
+  --color-accent-deep: #a56132;
   --color-line: #e5dccc;
 
-  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+  --font-serif: "Fraunces Variable", ui-serif, Georgia, serif;
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -22,6 +26,9 @@ html {
   color: var(--color-ink);
   font-family: var(--font-serif);
   font-feature-settings: "ss01", "ss02";
+  /* opsz'i punto boyutuna göre tarayıcı ayarlasın */
+  font-optical-sizing: auto;
+  /* Güvenlik ağı: taşmayı gizler ama asıl çözüm taşımamaktır. */
   overflow-x: clip;
 }
 
@@ -33,4 +40,9 @@ body {
 ::selection {
   background: var(--color-accent);
   color: var(--color-bg);
+}
+
+/* Ölçüm/veri katmanı: sayılar tek genişlikte hizalansın. */
+.tnum {
+  font-variant-numeric: tabular-nums;
 }
