@@ -36,7 +36,7 @@ export const ui = {
     'nav.archive': 'Arşiv',
     'nav.about': 'Hakkında',
 
-    'home.kicker': 'Kişisel kahve defterim',
+    'home.kicker': 'Kişisel kahve defteri',
     'home.titlePre': 'Demlediğim her fincanın ',
     'home.titleEm': 'hikâyesi',
     'home.titlePost': '.',
