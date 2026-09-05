@@ -23,7 +23,7 @@ const pageURL = new URL(Astro.url.pathname, Astro.site).toString();
 const productName = [d.coffee.roaster, d.coffee.origin, d.coffee.region].filter(Boolean).join(' — ');
 // Şemada ham kapak PNG'sine (2-6 MB) değil, build'in ürettiği hazır OG
 // görseline işaret et — crawler'lar bu alanı çekiyor.
-const coverURL = new URL(`/og/${entry.id}.png`, Astro.site).toString();
+const coverURL = new URL(`/og/${entry.id}.jpg`, Astro.site).toString();
 const authorUrl = new URL(localizePath(locale, '/hakkinda/'), Astro.site).toString();
 
 const reviewLd = {
@@ -47,7 +47,7 @@ const reviewLd = {
       : {}),
   },
   author: { '@type': 'Person', name: 'Sabri', url: authorUrl },
-  publisher: { '@type': 'Organization', name: 'Kahvetadim.com', url: 'https://kahvetadim.com/' },
+  publisher: { '@type': 'Organization', name: 'Kahvetadim', url: 'https://kahvetadim.com/' },
   datePublished: d.date.toISOString().slice(0, 10),
   reviewRating: {
     '@type': 'Rating',
@@ -72,7 +72,8 @@ const subRatings = [
 <BaseLayout
   title={`${d.title} — ${t('site.name')}`}
   description={d.seoDescription ?? d.summary}
-  ogImage={`/og/${entry.id}.png`}
+  ogImage={`/og/${entry.id}.jpg`}
+  ogType="article"
   locale={locale}
   altUrl={altUrl}
 >

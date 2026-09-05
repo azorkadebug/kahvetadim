@@ -67,11 +67,11 @@ if (coffee.roastDate) items.push({ label: t('data.roasted'), value: fmt(coffee.r
       </div>
     </div>
 
-    <dl class="flex-1 grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-5 px-1 lg:px-8 pb-6 lg:py-6 border-t lg:border-t-0 border-[var(--color-line)] pt-6 lg:pt-6">
+    <ul class="flex-1 grid list-none m-0 p-0 grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-5 px-1 lg:px-8 pb-6 lg:py-6 border-t lg:border-t-0 border-[var(--color-line)] pt-6 lg:pt-6">
       {items.map(({ label, value, num }) => (
-        <div>
-          <dt class="text-[10px] uppercase tracking-[0.18em] text-[var(--color-ink-soft)]">{label}</dt>
-          <dd class={`mt-1 text-xl leading-tight text-[var(--color-ink)] ${num ? 'tnum' : ''}`}>
+        <li>
+          <span class="block text-[10px] uppercase tracking-[0.18em] text-[var(--color-ink-soft)]">{label}</span>
+          <span class={`block mt-1 text-xl leading-tight text-[var(--color-ink)] ${num ? 'tnum' : ''}`}>
             {label === t('data.grind') ? (
               <span class="inline-flex items-center gap-2">
                 <GrinderIcon size={20} class="text-[var(--color-accent)] shrink-0" />
@@ -80,10 +80,10 @@ if (coffee.roastDate) items.push({ label: t('data.roasted'), value: fmt(coffee.r
             ) : (
               value
             )}
-          </dd>
-        </div>
+          </span>
+        </li>
       ))}
-    </dl>
+    </ul>
 
     {/* puan: sayfanın ikinci büyük ölçek anı */}
     <div class="flex items-baseline gap-4 lg:flex-col lg:items-end lg:justify-center lg:gap-0 px-1 lg:pl-8 py-6 border-t lg:border-t-0 lg:border-l border-[var(--color-line)] lg:min-w-[10rem]">

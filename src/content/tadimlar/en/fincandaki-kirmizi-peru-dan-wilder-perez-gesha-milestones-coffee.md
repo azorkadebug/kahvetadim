@@ -45,10 +45,16 @@ After a long break, we're back with another tasting. The reason for the pause wa
 
 For this brew I'm stepping a little outside my usual routine. Instead of my own grinder, the Comandante, this time I'm brewing with my dear friend Mertcan's **Kinu Titanium + Pour Over Burr**. On the dripper side, my much-loved duo of the **Origami Air** and **Abaca Plus** filter paper is on the job.
 
-**On the Nose (Aroma)** Hot, warm, or cold, this coffee fills the nose so pleasantly at every stage. The aroma has a sweet, powerful profile with clear notes reminiscent of mulberry and grape molasses (pekmez).
+### On the Nose (Aroma)
 
-**On the Palate** The palate is wonderfully lively and mouthwatering. On the hot sip we're first met with a strong, bright acidity, while the body sits just above medium.
+Hot, warm, or cold, this coffee fills the nose so pleasantly at every stage. The aroma has a sweet, powerful profile with clear notes reminiscent of mulberry and grape molasses (pekmez).
+
+### On the Palate
+
+The palate is wonderfully lively and mouthwatering. On the hot sip we're first met with a strong, bright acidity, while the body sits just above medium.
 
 The cup runs almost entirely "red" from start to finish; the red apple and red mulberry flavors are very pronounced. As it cools to warm and then cold, it loses none of its charm — we're dealing with a genuinely delicious cup here. This is no ordinary, flat coffee; on the contrary, it's layered, deep, and full of surprises. Producer Wilder Perez did a marvelous job in the field and Milestones did the same on the roast, leaving us with nothing to do but savor it. We don't always find coffee at this level in Turkey.
 
-💌 **A Small Note** The only thing I could possibly criticize about this lovely coffee is, sadly, its price. As of May 29, it's 995 lira per 100 g. And let me leave you with a brewing tip: Milestones coffees usually call for a long degassing period. To balance that out a bit, I let the coffee sit exposed to the air for 2 minutes after grinding before brewing.
+### A Small Note
+
+The only thing I could possibly criticize about this lovely coffee is, sadly, its price. As of May 29, it's 995 lira per 100 g. And let me leave you with a brewing tip: Milestones coffees usually call for a long degassing period. To balance that out a bit, I let the coffee sit exposed to the air for 2 minutes after grinding before brewing.

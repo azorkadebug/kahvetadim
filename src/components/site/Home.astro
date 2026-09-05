@@ -22,7 +22,7 @@ const otherLang: Lang = locale === 'tr' ? 'en' : 'tr';
 const altUrl = localizePath(otherLang, '/');
 ---
 
-<BaseLayout title={t('site.name')} locale={locale} altUrl={altUrl}>
+<BaseLayout title={t('site.title')} locale={locale} altUrl={altUrl}>
   <section class="py-8 md:py-16 border-b border-[var(--color-line)]">
     <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">{t('home.kicker')}</p>
     <h1 class="mt-4 font-serif text-4xl sm:text-5xl md:text-7xl leading-[1.05] max-w-3xl break-words">
@@ -54,6 +54,7 @@ const altUrl = localizePath(otherLang, '/');
                     widths={[640, 1024, 1440]}
                     sizes="(min-width: 768px) 1024px, 100vw"
                     loading="eager"
+                    fetchpriority="high"
                     class="w-full h-full object-cover"
                   />
                 )}
@@ -101,7 +102,7 @@ const altUrl = localizePath(otherLang, '/');
                       />
                     )}
                     <div class="absolute top-3 right-3 bg-[var(--color-bg)] px-2.5 py-1.5 text-center">
-                      <div class="font-serif tnum text-xl leading-none text-[var(--color-accent)]">{d.rating.overall}</div>
+                      <div class="font-serif tnum text-xl leading-none text-[var(--color-accent-deep)]">{d.rating.overall}</div>
                     </div>
                   </a>
                   <p class="mt-4 font-sans text-xs text-[var(--color-ink-soft)]">

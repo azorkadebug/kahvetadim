@@ -38,10 +38,16 @@ The coffee bringing some cheer to our weekend comes all the way from Munich, Ger
 
 I looked back at my notes to map out my brewing strategy. This is a bean I've brewed every which way before — Turkish coffee included — and it has made me happy every single time. Since I remembered it tends to hold onto water, I swapped the base of my **Orea V4** for the "Open" version to keep the flow moving.
 
-**On the Nose (Aroma)** The time in the freezer didn't hurt the dry fragrance in any way. If anything, it's still as lively and powerful as day one.
+### On the Nose (Aroma)
 
-**On the Palate (Flavor Profile)** Some coffees just have a character — a single note that follows along like an underlay beneath the whole cup. Belayco is exactly that kind of coffee. That signature underlying note reminds me of Bubblegum. And right behind it, a wonderful yellow plum and peach sweetness greets you.
+The time in the freezer didn't hurt the dry fragrance in any way. If anything, it's still as lively and powerful as day one.
+
+### On the Palate (Flavor Profile)
+
+Some coffees just have a character — a single note that follows along like an underlay beneath the whole cup. Belayco is exactly that kind of coffee. That signature underlying note reminds me of Bubblegum. And right behind it, a wonderful yellow plum and peach sweetness greets you.
 
 A genuinely complex and sweet cup. Its high body, paired with that complex structure on both the nose and the palate, makes this coffee more than worthy of a spot in our corner. And as it cools, that complexity opens up even more. My only criticism is that the acidity stays muted and low; a mid-level acidity could have made this profile flawless. The coffee lingers on the palate for a very long time and brightens up our day.
 
-💌 **A Small Note** The folks at Bla are genuinely lovely people. While we were emailing back and forth, they forgot to ship my order, so by way of apology they added three 100-gram bags of coffee to the package. I hope our paths cross one day, so I can meet them and drink their coffee poured by their own hands.
+### A Small Note
+
+The folks at Bla are genuinely lovely people. While we were emailing back and forth, they forgot to ship my order, so by way of apology they added three 100-gram bags of coffee to the package. I hope our paths cross one day, so I can meet them and drink their coffee poured by their own hands.

@@ -7,6 +7,8 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  /** Yazı sayfalarında "article", diğerlerinde "website". */
+  ogType?: 'website' | 'article';
   locale?: Lang;
   /** Diğer dildeki eş sayfanın yolu (yoksa o dilin ana sayfasına düşer). */
   altUrl?: string | null;
@@ -17,6 +19,7 @@ const {
   locale = defaultLang,
   description,
   ogImage = '/og.png',
+  ogType = 'website',
   altUrl = null,
 } = Astro.props;
 
@@ -53,11 +56,15 @@ const homeHref = localizePath(locale, '/');
     {enURL && <link rel="alternate" hreflang="en" href={enURL} />}
     {trURL && <link rel="alternate" hreflang="x-default" href={trURL} />}
 
+    {/* Gövde ve arayüz fontları: CSS çözülmeden indirilmeye başlasın (FCP). */}
+    <link rel="preload" href="/fonts/fraunces-opsz-tr-v1.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-tr-v1.woff2" as="font" type="font/woff2" crossorigin />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" sizes="any" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={t('site.name')} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={desc} />
@@ -102,7 +109,7 @@ const homeHref = localizePath(locale, '/');
 
     <footer class="mt-24 border-t border-[var(--color-line)]">
       <div class="mx-auto max-w-5xl px-5 sm:px-6 py-6 sm:py-8 font-sans text-xs sm:text-sm text-[var(--color-ink-soft)] flex justify-between items-center gap-4">
-        <span>© {new Date().getFullYear()} Kahvetadim.com</span>
+        <span>© {new Date().getFullYear()} Kahvetadim</span>
         <a
           href="https://instagram.com/kahve.tadim"
           target="_blank"

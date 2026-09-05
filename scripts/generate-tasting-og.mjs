@@ -130,14 +130,15 @@ for (const { path: filePath, slug, lang, dir } of entries) {
 
   const buf = await pipeline
     .composite([{ input: Buffer.from(svgOverlay) }])
-    .png({ compressionLevel: 9 })
+    // PNG 550-600 KB çıkıyordu; fotoğraf zeminli kart için JPEG 80-100 KB.
+    .jpeg({ quality: 82, mozjpeg: true })
     .toBuffer();
 
-  const outPath = join(outDir, `${slug}.png`);
+  const outPath = join(outDir, `${slug}.jpg`);
   mkdirSync(dirname(outPath), { recursive: true });
   writeFileSync(outPath, buf);
   const meta = await sharp(buf).metadata();
-  console.log(`Generated public/og/${slug}.png  ${meta.width}x${meta.height}  ${(meta.size / 1024).toFixed(1)} KB`);
+  console.log(`Generated public/og/${slug}.jpg  ${meta.width}x${meta.height}  ${(meta.size / 1024).toFixed(1)} KB`);
 }
 
 console.log(`\nTotal: ${entries.length} OG image(s) generated.`);

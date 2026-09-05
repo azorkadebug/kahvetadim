@@ -29,7 +29,8 @@ export const ui = {
     'site.author': 'Sabri',
     'site.brandLead': 'Kahve',
     'site.brandAccent': 'Tadımları',
-    'site.name': 'Kahve Tadımları',
+    'site.name': 'Kahvetadim',
+    'site.title': 'Kahvetadim — Kişisel kahve tadım defteri',
     'site.description':
       'Tattığım kahvelerin menşeini, prosesini ve damakta bıraktığı izi tek tek yazdığım kişisel tadım defteri.',
 
@@ -93,13 +94,14 @@ export const ui = {
     'about.description': 'Bu kahve tadım defterinin hikâyesi.',
 
     'a11y.instagram': "Instagram'da @kahve.tadim",
-    'a11y.switchLang': 'Dili değiştir',
+    'a11y.switchLang': 'English (EN)',
   },
   en: {
     'site.author': 'Sabri',
     'site.brandLead': 'Coffee',
     'site.brandAccent': 'Tastings',
-    'site.name': 'Coffee Tastings',
+    'site.name': 'Kahvetadim',
+    'site.title': 'Kahvetadim — A personal coffee tasting journal',
     'site.description':
       'A personal tasting journal where I write up the origin, process and cup of every coffee I taste, one by one.',
 
@@ -163,7 +165,7 @@ export const ui = {
     'about.description': 'The story behind this coffee tasting journal.',
 
     'a11y.instagram': '@kahve.tadim on Instagram',
-    'a11y.switchLang': 'Switch language',
+    'a11y.switchLang': 'Türkçe (TR)',
   },
 } as const;
 

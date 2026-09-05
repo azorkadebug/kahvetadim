@@ -6,7 +6,11 @@
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Fontlar ve OG görselleri de sürüm değişmeden içerikleri değişmez.
+# Fontlar sürümlü dosya adı taşır (-v1); içerik değişirse ad da değişir.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# OG görselleri sürüm değişmeden içerikleri değişmez.
 /og/*
   Cache-Control: public, max-age=604800
 

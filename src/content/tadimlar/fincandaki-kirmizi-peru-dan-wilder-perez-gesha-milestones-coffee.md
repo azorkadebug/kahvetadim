@@ -46,10 +46,16 @@ Uzun bir aradan sonra tekrar bir tadım ile karşınızdayız. Bu aranın sebebi
 
 Bu demlemede rutinimden biraz çıkıyorum. Kendi öğütücüm Comandante'nin yerine, bu kez sevgili dostum Mertcan'ın **Kinu Titanyum + Pour Over Burr**'ü ile demlememi gerçekleştiriyorum. Dripper tarafında ise çok sevdiğim **Origami Air** ve **Abaca Plus** filtre kağıdı ikilisi iş başında.
 
-**Burunda (Aroma)** Kahve sıcak, ılık ve soğuk tüm aşamalarda burnu çok keyifli dolduruyor. Kokuda belirgin olarak dut ve pekmez notalarını andıran tatlı, güçlü bir profili var.
+### Burunda (Aroma)
 
-**Damakta** Damak çok canlı ve ağız sulandıran bir yapıya sahip. Sıcak yudumda bizi ilk olarak güçlü, parlak bir asidite karşılıyor; gövdemiz ise orta seviyenin üzerinde.
+Kahve sıcak, ılık ve soğuk tüm aşamalarda burnu çok keyifli dolduruyor. Kokuda belirgin olarak dut ve pekmez notalarını andıran tatlı, güçlü bir profili var.
+
+### Damakta
+
+Damak çok canlı ve ağız sulandıran bir yapıya sahip. Sıcak yudumda bizi ilk olarak güçlü, parlak bir asidite karşılıyor; gövdemiz ise orta seviyenin üzerinde.
 
 Fincan baştan sona adeta "kırmızı" ilerliyor; kırmızı elma ve kırmızı dut tatları çok belirgin. Ilık ve soğuk aşamalarda da keyfinden hiçbir şey kaybetmeyen, oldukça lezzetli bir fincanla karşı karşıyayız. Düz ilerleyen sıradan kahvelerden değil; aksine katmanlı, derin ve sürprizli. Üretici Wilder Perez tarlada, Milestones ise kavrumda harika bir iş çıkarmış, bize de sadece bunun tadını çıkarmak kalıyor. Türkiye'de bu seviyede kahveyi her zaman bulamıyoruz.
 
-💌 **Küçük Bir Not** Bu nefis kahvenin tek eleştirebileceğim yanı maalesef fiyatı. 29 Mayıs itibarıyla 100 gramı 995 lira. Bir de demleme ipucu vereyim: Milestones kahveleri genellikle uzun bir degass (gaz salınımı) süresi istiyor. Ben bu süreci biraz dengelemek adına kahveyi öğüttükten sonra 2 dakika açık halde bekleterek demledim.
+### Küçük Bir Not
+
+Bu nefis kahvenin tek eleştirebileceğim yanı maalesef fiyatı. 29 Mayıs itibarıyla 100 gramı 995 lira. Bir de demleme ipucu vereyim: Milestones kahveleri genellikle uzun bir degass (gaz salınımı) süresi istiyor. Ben bu süreci biraz dengelemek adına kahveyi öğüttükten sonra 2 dakika açık halde bekleterek demledim.
