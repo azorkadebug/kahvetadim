@@ -125,25 +125,27 @@ const subRatings = [
           {subRatings.length > 0 && (
             <div>
               <SectionLabel as="h3">{t('detail.palate')}</SectionLabel>
-              <dl class="mt-5 space-y-4 font-sans text-sm">
+              {/* dl/dt/dd değil liste: cetvel dekoratif (aria-hidden) olduğu için
+                  dt'nin görünür dd'si kalmıyordu (axe definition-list). */}
+              <ul class="mt-5 space-y-4 font-sans text-sm list-none m-0 p-0">
                 {subRatings.map(([label, value]) => (
-                  <div>
+                  <li>
                     <div class="flex items-baseline justify-between gap-3">
-                      <dt class="text-[var(--color-ink-soft)]">{label}</dt>
+                      <span class="text-[var(--color-ink-soft)]">{label}</span>
                       <span class="tnum text-[var(--color-ink)]">{value}<span class="text-[var(--color-ink-soft)] text-xs">/10</span></span>
                     </div>
                     {/* cetvel: 10 çentikli ölçek, yükleme çubuğu değil */}
-                    <dd class="mt-1.5 relative h-2.5" aria-hidden="true">
+                    <div class="mt-1.5 relative h-2.5" aria-hidden="true">
                       <div class="absolute inset-x-0 bottom-0 h-px bg-[var(--color-line)]"></div>
                       <div class="absolute inset-x-0 bottom-0 flex justify-between">
                         {Array.from({ length: 10 }).map((_, i) => (
                           <span class={`w-px ${i < value ? 'h-2.5 bg-[var(--color-accent)]' : 'h-1 bg-[var(--color-line)]'}`}></span>
                         ))}
                       </div>
-                    </dd>
-                  </div>
+                    </div>
+                  </li>
                 ))}
-              </dl>
+              </ul>
             </div>
           )}
           {d.rating.flavorNotes.length > 0 && (
