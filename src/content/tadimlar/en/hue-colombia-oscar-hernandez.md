@@ -10,10 +10,12 @@ coffee:
   region: Huila
   farm: Farm Nogales
   variety: Gesha
-  process: natural
+  process:
+    discriminant: natural
   roastDate: 2026-04-14
 brew:
-  method: Orea
+  method:
+    discriminant: Orea
   grindSize: Comandante 25 clicks
   ratio: '1:15'
   water: 15/225

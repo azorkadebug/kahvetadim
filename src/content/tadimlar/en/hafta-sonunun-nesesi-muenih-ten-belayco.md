@@ -10,9 +10,11 @@ coffee:
   region: Bensa, Sidama
   farm: Bekele
   variety: '74158'
-  process: natural
+  process:
+    discriminant: natural
 brew:
-  method: Orea
+  method:
+    discriminant: Orea
   grindSize: 20 clicks
   ratio: '1:16.6'
   water: 12/200

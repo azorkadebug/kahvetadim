@@ -38,17 +38,30 @@ const tadimSchema = (imageDirectory: string) => ({
             region: fields.text({ label: 'Bölge', description: 'İsteğe bağlı' }),
             farm: fields.text({ label: 'Çiftlik', description: 'İsteğe bağlı' }),
             variety: fields.text({ label: 'Çeşit', description: 'İsteğe bağlı (SL28, Geisha vb.)' }),
-            process: fields.select({
-              label: 'İşlem',
-              options: [
-                { label: 'Washed', value: 'washed' },
-                { label: 'Natural', value: 'natural' },
-                { label: 'Honey', value: 'honey' },
-                { label: 'Anaerobic', value: 'anaerobic' },
-                { label: 'Diğer', value: 'other' },
-              ],
-              defaultValue: 'washed',
-            }),
+            // "Diğer" seçilince altında elle yazma kutusu açılır.
+            process: fields.conditional(
+              fields.select({
+                label: 'İşlem',
+                options: [
+                  { label: 'Washed', value: 'washed' },
+                  { label: 'Natural', value: 'natural' },
+                  { label: 'Honey', value: 'honey' },
+                  { label: 'Anaerobic', value: 'anaerobic' },
+                  { label: 'Diğer', value: 'other' },
+                ],
+                defaultValue: 'washed',
+              }),
+              {
+                washed: fields.empty(),
+                natural: fields.empty(),
+                honey: fields.empty(),
+                anaerobic: fields.empty(),
+                other: fields.text({
+                  label: 'İşlem (elle yazın)',
+                  description: 'Örn: Natural OX, Carbonic Maceration',
+                }),
+              }
+            ),
             roastDate: fields.date({
               label: 'Kavurma Tarihi',
               description: 'İsteğe bağlı',
@@ -62,21 +75,38 @@ const tadimSchema = (imageDirectory: string) => ({
         ),
         brew: fields.object(
           {
-            method: fields.select({
-              label: 'Demleme Yöntemi',
-              options: [
-                { label: 'V60', value: 'V60' },
-                { label: 'Chemex', value: 'Chemex' },
-                { label: 'AeroPress', value: 'AeroPress' },
-                { label: 'Orea', value: 'Orea' },
-                { label: 'Espresso', value: 'Espresso' },
-                { label: 'French Press', value: 'French Press' },
-                { label: 'Moka', value: 'Moka' },
-                { label: 'Cold Brew', value: 'Cold Brew' },
-                { label: 'Diğer', value: 'other' },
-              ],
-              defaultValue: 'V60',
-            }),
+            // "Diğer" seçilince altında elle yazma kutusu açılır.
+            method: fields.conditional(
+              fields.select({
+                label: 'Demleme Yöntemi',
+                options: [
+                  { label: 'V60', value: 'V60' },
+                  { label: 'Chemex', value: 'Chemex' },
+                  { label: 'AeroPress', value: 'AeroPress' },
+                  { label: 'Orea', value: 'Orea' },
+                  { label: 'Espresso', value: 'Espresso' },
+                  { label: 'French Press', value: 'French Press' },
+                  { label: 'Moka', value: 'Moka' },
+                  { label: 'Cold Brew', value: 'Cold Brew' },
+                  { label: 'Diğer', value: 'other' },
+                ],
+                defaultValue: 'V60',
+              }),
+              {
+                V60: fields.empty(),
+                Chemex: fields.empty(),
+                AeroPress: fields.empty(),
+                Orea: fields.empty(),
+                Espresso: fields.empty(),
+                'French Press': fields.empty(),
+                Moka: fields.empty(),
+                'Cold Brew': fields.empty(),
+                other: fields.text({
+                  label: 'Demleme Yöntemi (elle yazın)',
+                  description: 'Örn: Origami Air S, Kalita Wave',
+                }),
+              }
+            ),
             grindSize: fields.text({ label: 'Öğütüm', description: 'Örn: Comandante 23 Klik' }),
             ratio: fields.text({ label: 'Oran', description: 'Örn: 1:16' }),
             water: fields.text({ label: 'Su', description: 'Örn: 15g / 240g, 94°C' }),

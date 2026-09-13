@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BrewIcon from '../BrewIcon.astro';
 import { useTranslations, archiveCount, archiveDescription, type Lang } from '../../i18n/ui';
-import { formatDate, tastingLang, tastingSlug, tastingUrl, localizePath } from '../../i18n/utils';
+import { formatDate, tastingLang, tastingSlug, tastingUrl, localizePath, processLabel, methodLabel } from '../../i18n/utils';
 
 interface Props {
   locale: Lang;
@@ -56,11 +56,11 @@ const altUrl = localizePath(otherLang, '/tadimlar/');
                   <div class="text-xs text-[var(--color-ink-soft)]">{tdata.coffee.roaster}</div>
                 </td>
                 <td class="py-4 pr-4 hidden sm:table-cell">{tdata.coffee.origin}</td>
-                <td class="py-4 pr-4 hidden md:table-cell">{t(`process.${tdata.coffee.process}` as const)}</td>
+                <td class="py-4 pr-4 hidden md:table-cell">{processLabel(locale, tdata.coffee.process)}</td>
                 <td class="py-4 pr-4 hidden md:table-cell">
                   <span class="inline-flex items-center gap-2">
-                    <BrewIcon method={tdata.brew.method} size={18} class="text-[var(--color-accent)]" />
-                    {tdata.brew.method}
+                    <BrewIcon method={tdata.brew.method.kind} size={18} class="text-[var(--color-accent)]" />
+                    {methodLabel(locale, tdata.brew.method)}
                   </span>
                 </td>
                 <td class="py-4 text-right font-medium tnum text-[var(--color-accent-deep)]">{tdata.rating.overall}</td>

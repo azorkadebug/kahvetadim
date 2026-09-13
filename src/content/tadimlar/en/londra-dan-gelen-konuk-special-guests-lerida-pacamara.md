@@ -15,12 +15,16 @@ coffee:
   region: 'Lerida'
   farm: Finca Lérida
   variety: Pacamara
-  process: other
+  process:
+    discriminant: other
+    value: Natural OX
   roastDate: 2026-07-28
   altitude: '1600-1800m'
   roastLevel: 'Light'
 brew:
-  method: V60
+  method:
+    discriminant: other
+    value: Origami Air S
   grindSize: 'Comandante 23 clicks'
   ratio: '1:16'
   water: '15/240'

@@ -90,6 +90,7 @@ export const ui = {
     'process.honey': 'Honey',
     'process.anaerobic': 'Anaerobik',
     'process.other': 'Diğer',
+    'method.other': 'Diğer',
 
     'about.description': 'Bu kahve tadım defterinin hikâyesi.',
 
@@ -161,6 +162,7 @@ export const ui = {
     'process.honey': 'Honey',
     'process.anaerobic': 'Anaerobic',
     'process.other': 'Other',
+    'method.other': 'Other',
 
     'about.description': 'The story behind this coffee tasting journal.',
 

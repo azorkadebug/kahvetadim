@@ -12,10 +12,12 @@ coffee:
   region: Guji
   farm: Sasaba Yıkama İstasyonu
   variety: Heirloom
-  process: washed
+  process:
+    discriminant: washed
   altitude: '2,000–2,150 m'
 brew:
-  method: Orea
+  method:
+    discriminant: Orea
   grindSize: Comandante 18 klik
   ratio: '1:16.6'
   water: '12/200'

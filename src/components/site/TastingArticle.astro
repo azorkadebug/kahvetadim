@@ -6,7 +6,7 @@ import DataStrip from '../DataStrip.astro';
 import FlavorChips from '../FlavorChips.astro';
 import SectionLabel from '../SectionLabel.astro';
 import { useTranslations, type Lang } from '../../i18n/ui';
-import { formatDate, localizePath } from '../../i18n/utils';
+import { formatDate, localizePath, processLabel } from '../../i18n/utils';
 
 interface Props {
   entry: CollectionEntry<'tadimlar'>;
@@ -41,7 +41,7 @@ const reviewLd = {
           additionalProperty: [
             d.coffee.farm && { '@type': 'PropertyValue', name: t('data.farm'), value: d.coffee.farm },
             d.coffee.variety && { '@type': 'PropertyValue', name: t('data.variety'), value: d.coffee.variety },
-            d.coffee.process && { '@type': 'PropertyValue', name: t('data.process'), value: t(`process.${d.coffee.process}` as const) },
+            d.coffee.process && { '@type': 'PropertyValue', name: t('data.process'), value: processLabel(locale, d.coffee.process) },
           ].filter(Boolean),
         }
       : {}),

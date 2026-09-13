@@ -12,12 +12,14 @@ coffee:
   region: Arbegona, Sidama
   farm: Muntasha Family
   variety: JARC 74158
-  process: natural
+  process:
+    discriminant: natural
   altitude: '2400 m'
   roastLevel: 'Açık – Açık/Orta'
   roastMachine: 'Probat 12'
 brew:
-  method: V60
+  method:
+    discriminant: V60
   grindSize: Comandante 26 Klik
   ratio: '1:16.6'
   water: 15/250

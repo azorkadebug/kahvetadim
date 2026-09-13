@@ -21,6 +21,21 @@ const methodEnum = z.enum([
   'other',
 ]);
 
+/**
+ * Keystatic'te "Diğer" seçilince elle yazılan metin için koşullu alan.
+ * Diskte iki biçim olabilir: eski düz değer (`process: natural`) ya da
+ * Keystatic conditional biçimi (`process: { discriminant: other, value: Natural OX }`).
+ * İkisi de { kind, custom } yapısına normalize edilir.
+ */
+const choice = <T extends [string, ...string[]]>(e: z.ZodEnum<T>) =>
+  z
+    .union([e, z.object({ discriminant: e, value: z.string().nullish() })])
+    .transform((v) =>
+      typeof v === 'string'
+        ? { kind: v, custom: undefined as string | undefined }
+        : { kind: v.discriminant, custom: v.value?.trim() || undefined }
+    );
+
 const tadimlar = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/tadimlar' }),
   schema: ({ image }) =>
@@ -36,7 +51,7 @@ const tadimlar = defineCollection({
         region: z.string().optional(),
         farm: z.string().optional(),
         variety: z.string().optional(),
-        process: processEnum,
+        process: choice(processEnum),
         roastDate: z.coerce.date().optional(),
         // Gövde metnindeki "Kahve Künyesi" listesinden şeride taşındı.
         altitude: z.string().optional(),
@@ -44,7 +59,7 @@ const tadimlar = defineCollection({
         roastMachine: z.string().optional(),
       }),
       brew: z.object({
-        method: methodEnum,
+        method: choice(methodEnum),
         grindSize: z.string().optional(),
         ratio: z.string().optional(),
         water: z.string().optional(),

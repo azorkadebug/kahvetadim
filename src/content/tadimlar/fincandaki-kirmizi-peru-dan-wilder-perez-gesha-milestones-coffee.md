@@ -13,11 +13,13 @@ coffee:
   region: 'Amazonas, Luya'
   farm: Wilder Perez
   variety: Gesha
-  process: natural
+  process:
+    discriminant: natural
   roastDate: 2026-05-20
   altitude: '1700m'
 brew:
-  method: V60
+  method:
+    discriminant: V60
   grindSize: Kinu 3.7.2
   ratio: '1:16.6'
   water: '15/250'

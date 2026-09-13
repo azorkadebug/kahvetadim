@@ -1,4 +1,19 @@
-import { dateLocale, defaultLang, type Lang } from './ui';
+import { dateLocale, defaultLang, useTranslations, type Lang } from './ui';
+
+/** Şemada normalize edilmiş seçim alanı: seçilen değer + "Diğer" ise elle yazılan metin. */
+export type Choice<K extends string = string> = { kind: K; custom?: string };
+
+/** Proses etiketi: "Diğer" seçilip metin yazıldıysa o metin, yoksa sözlükteki karşılığı. */
+export function processLabel(lang: Lang, process: Choice): string {
+  if (process.kind === 'other' && process.custom) return process.custom;
+  return useTranslations(lang)(`process.${process.kind}` as never);
+}
+
+/** Demleme yöntemi etiketi: "Diğer" + metin → metin; "Diğer" boşsa sözlükteki "Diğer"; diğerleri adıyla. */
+export function methodLabel(lang: Lang, method: Choice): string {
+  if (method.kind !== 'other') return method.kind;
+  return method.custom || useTranslations(lang)('method.other' as never);
+}
 
 /** URL yolundan aktif dili çıkarır. /en/... → 'en', diğer her şey → 'tr'. */
 export function getLangFromUrl(url: URL): Lang {
