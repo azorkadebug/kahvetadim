@@ -4,8 +4,8 @@ date: 2026-09-11
 coverImage: ./londra-dan-gelen-konuk-special-guests-lerida-pacamara/coverImage.jpg
 summary: >-
   Reddit'te adını çokça duyduğum Special Guests'in 066 numaralı kahvesi,
-  Panama'nın tarihi Finca Lérida'sından bir Pacamara. Burunda kapalı, ama
-  damakta sulu, yağlı ve Anadolu'nun sütlü tatlıları gibi uzayan bir fincan.
+  Panama'nın tarihi Finca Lérida'sından bir Pacamara. Burunda çekingen, damakta
+  cömert: sulu, yağlı ve sütlü bir tatlı gibi uzun süren bir bitiş.
 seoDescription: >-
   Special Guests Release 066 tadımı: Panama Finca Lérida Pacamara, Origami Air S
   demleme reçetesi, damak ve bitiş notları, 89 puan.

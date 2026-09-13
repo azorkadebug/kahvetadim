@@ -4,8 +4,8 @@ date: 2026-09-11
 coverImage: ../londra-dan-gelen-konuk-special-guests-lerida-pacamara/coverImage.jpg
 summary: >-
   Release 066 from Special Guests, a roaster I kept hearing about on Reddit: a
-  Pacamara from Panama's historic Finca Lérida. Closed on the nose, but juicy,
-  oily and long on the palate, like one of Anatolia's milk desserts.
+  Pacamara from Panama's historic Finca Lérida. Shy on the nose, generous on the
+  palate: juicy, oily, with a finish that lingers like a milk dessert.
 seoDescription: >-
   Special Guests Release 066 tasting: Panama Finca Lérida Pacamara, Origami Air S
   brew recipe, palate and finish notes, scored 89.
