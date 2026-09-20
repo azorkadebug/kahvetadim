@@ -27,8 +27,6 @@ export const dateLocale: Record<Lang, string> = {
 export const ui = {
   tr: {
     'site.author': 'Sabri',
-    'site.brandLead': 'cuppin',
-    'site.brandAccent': 'dog',
     'site.name': 'Cuppindog',
     'site.title': 'Cuppindog — Kişisel kahve tadım defteri',
     'site.description':
@@ -37,13 +35,8 @@ export const ui = {
     'nav.archive': 'Arşiv',
     'nav.about': 'Hakkında',
 
-    'home.kicker': 'Kişisel kahve defteri',
     // Açılış: Çakıl konuşuyor. Puanları veren Sabri ama son sözü köpek söylüyor.
-    'home.bark': 'Sabri demler, ben onaylarım.',
-    'home.barkNote': 'Çakıl, baş tadımcı',
-    'home.intro':
-      'Menşeinden prosesine, demleme oranından damakta bıraktığı ize — tattığım kahveleri burada tek tek yazıyorum.',
-    'home.latest': 'Son Tadımlar',
+    'home.latest': 'Önceki Tadımlar',
     'home.empty': 'Henüz yazılmış tadım yok.',
     'home.all': 'Tüm tadımlar →',
 
@@ -99,8 +92,6 @@ export const ui = {
   },
   en: {
     'site.author': 'Sabri',
-    'site.brandLead': 'Coffee',
-    'site.brandAccent': 'Tastings',
     'site.name': 'Cuppindog',
     'site.title': 'Cuppindog — A personal coffee tasting journal',
     'site.description':
@@ -109,12 +100,7 @@ export const ui = {
     'nav.archive': 'Archive',
     'nav.about': 'About',
 
-    'home.kicker': 'My personal coffee journal',
-    'home.bark': 'Sabri brews. I approve.',
-    'home.barkNote': 'Çakıl, head taster',
-    'home.intro':
-      'From origin and process to brew ratio and the trace it leaves on the palate — I write up every coffee I taste, right here.',
-    'home.latest': 'Latest Tastings',
+    'home.latest': 'Earlier Tastings',
     'home.empty': 'No tastings written yet.',
     'home.all': 'All tastings →',
 
@@ -150,7 +136,7 @@ export const ui = {
     'data.roasted': 'Roasted',
     'data.altitude': 'Altitude',
     'data.roastLevel': 'Roast',
-    'data.roastMachine': 'Roaster Machine',
+    'data.roastMachine': 'Roasting Machine',
     'data.waterTemp': 'Water Temp',
     'data.bloom': 'Bloom',
     'data.pour': 'Pour',

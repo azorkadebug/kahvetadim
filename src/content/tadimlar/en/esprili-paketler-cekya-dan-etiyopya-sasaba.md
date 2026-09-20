@@ -44,18 +44,18 @@ They live up to the claim in their name, too: instead of letting coffee settle i
 
 ## Brew Recipe & Equipment
 
-This isn't one of those coffees that gives you a great result every single brew — it took some effort, but it was worth it.
+This isn't a coffee that rewards you on every brew — it took some work, but it was worth it.
 
-Since it turned out to be a far lighter-roasted washed Ethiopia than I expected, we dialed the grind finer and bumped up the temperature. For my Orea V4 dripper, which I normally run with the open base, we switched to our classic base instead.
+Since it turned out to be a far lighter-roasted washed Ethiopia than I expected, I dialed the grind finer and bumped up the temperature. For my Orea V4 dripper, which I normally run with the open base, I switched to the classic base instead.
 
 ### On the Nose (Aroma)
 
-On the nose there's a fruity scent reminiscent of peach iced tea. The lemongrass and jasmine underneath are what make this coffee worth writing up on our site. Hot or cold, it doesn't matter — the aroma carries on in this same vein.
+On the nose there's a fruity scent reminiscent of peach iced tea. The lemongrass and jasmine underneath are what make this coffee worth writing up here. Hot or cold, it doesn't matter — the aroma carries on in this same vein.
 
 ### On the Palate
 
-On the palate the coffee has a mouthwatering structure. Because it's a tough one to coax open, the astringency in those first brews gets resolved with the higher temperature and finer grind. As the tannins fade, the coffee's cheerfulness comes back into place, and our adjustments don't push it toward bitterness. The one thing I don't love about this coffee is that the acidity is a bit lackluster. Our body holds up well, which is why we still get enjoyable results even when we brew it at 12/200. Sasaba isn't an especially complex or balanced coffee, but its cheerful nose is enough to win us over.
+On the palate the coffee has a mouthwatering structure. Because it's a tough one to coax open, the astringency in those first brews gets resolved with the higher temperature and finer grind. As the tannins fade, the coffee's cheerfulness comes back into place, and the adjustments don't push it toward bitterness. The one thing I don't love about this coffee is that the acidity is a bit lackluster. The body holds up well, which is why it still gives enjoyable results even at 12/200. Sasaba isn't an especially complex or balanced coffee, but its cheerful nose is enough to win me over.
 
 ### Final Word
 
-NABR will stick in our memory as a quality roaster who does light roasts well, and we hope our future orders land us on coffees of theirs worth writing about.
+NABR will stay in my mind as a roaster who does light roasts well, and I hope my future orders land on more of their coffees worth writing about.

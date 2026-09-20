@@ -48,7 +48,7 @@ Assembly is a London roaster founded in 2015. They launched at the London Coffee
 
 This coffee comes from Assembly's Linarco Rodriguez collection. Linarco Rodriguez and his family have run three farms for three generations near the town of Palestina, in southwest Huila. Their coffees have been recognised again and again in Colombia's national Cup of Excellence competitions. The collection brings together three of his coffees, each with a different variety and process; the Castillo in my cup today is one of them.
 
-## Brew Recipe and Equipment
+## Brew Recipe & Equipment
 
 I know Assembly's coffees like heat, and their own recommendation confirms it: 98°C water for flat-bottom brewers. Since I have brewed this coffee before, I bring the temperature down to 96°C.
 

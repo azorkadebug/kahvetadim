@@ -5,7 +5,7 @@ coverImage: ../fincandaki-kirmizi-peru-dan-wilder-perez-gesha-milestones-coffee/
 summary: >-
   A bright acidity that lingers on the palate and sweet grape molasses (pekmez)
   aromas... Roasted by Milestones, this Wilder Perez Gesha from Amazonas, Peru is
-  a multi-layered, thrilling coffee with a depth we rarely come across in Turkey.
+  a multi-layered, thrilling coffee with a depth I rarely come across in Turkey.
 coffee:
   roaster: Milestones Coffee
   origin: Peru
@@ -41,7 +41,7 @@ rating:
 ---
 ## After a Long Break: Wilder Perez Gesha from Peru
 
-After a long break, we're back with another tasting. The reason for the pause wasn't that we'd fallen out of love with coffee — it was simply that we couldn't find any beans special and exciting enough to bring to the page and write about. But once you find a coffee this good, and then brew it well on top of that, there's no way you keep it to yourself! Let's get into the brewing process.
+After a long break, I'm back with another tasting. The pause wasn't for lack of love for coffee — I simply couldn't find beans special and exciting enough to bring to the page and write about. But once you find a coffee this good, and then brew it well on top of that, there's no way you keep it to yourself! Let's get into the brewing process.
 
 ## Brew Recipe & Equipment
 
@@ -53,9 +53,9 @@ Hot, warm, or cold, this coffee fills the nose so pleasantly at every stage. The
 
 ### On the Palate
 
-The palate is wonderfully lively and mouthwatering. On the hot sip we're first met with a strong, bright acidity, while the body sits just above medium.
+The palate is wonderfully lively and mouthwatering. The first hot sip brings a strong, bright acidity, while the body sits just above medium.
 
-The cup runs almost entirely "red" from start to finish; the red apple and red mulberry flavors are very pronounced. As it cools to warm and then cold, it loses none of its charm — we're dealing with a genuinely delicious cup here. This is no ordinary, flat coffee; on the contrary, it's layered, deep, and full of surprises. Producer Wilder Perez did a marvelous job in the field and Milestones did the same on the roast, leaving us with nothing to do but savor it. We don't always find coffee at this level in Turkey.
+The cup runs almost entirely "red" from start to finish; the red apple and red mulberry flavors are very pronounced. As it cools to warm and then cold, it loses none of its charm — this is a genuinely delicious cup. This is no ordinary, flat coffee; on the contrary, it's layered, deep, and full of surprises. Producer Wilder Perez did a marvelous job in the field and Milestones did the same on the roast, leaving me with nothing to do but savor it. Coffee at this level doesn't turn up in Turkey every day.
 
 ### A Small Note
 

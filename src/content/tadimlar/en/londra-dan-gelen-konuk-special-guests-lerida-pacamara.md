@@ -53,7 +53,7 @@ Special Guests is a roaster founded in London in 2022 by Paul Ross, a two-time U
 
 Today's guest is Release 066: a Pacamara from Finca Lérida in Panama's Boquete region. Founded in 1924, Lérida played an important part in introducing Panamanian coffee to the world with its first shipment to Germany in 1929.
 
-## Brew Recipe and Equipment
+## Brew Recipe & Equipment
 
 The coffee's name scared me a little. These days I steer clear of labels like "ext", "OX" or "extended natural", but I had decided to buy this one anyway. The result in the cup is outstanding.
 
@@ -65,7 +65,7 @@ Unfortunately, the coffee is weak and closed on the nose.
 
 ### On the Palate
 
-A lively, juicy cup with medium acidity. The body is medium and very soft, and I fell for it. Its fruity character is decorated with red forest berries. It also has an oily texture, something we don't come across often, and it makes me feel I'm drinking a top-tier coffee.
+A lively, juicy cup with medium acidity. The body is medium and very soft, and I fell for it. Its fruity character is decorated with red forest berries. It also has an oily texture, something I don't come across often, and it makes me feel I'm drinking a top-tier coffee.
 
 The finish lingers on the palate like a juicier version of Anatolia's milk desserts. The bag's label lists crème brûlée, strawberry yoghurt and cashew, and the milky-dessert finish and red fruit line up with those notes.
 

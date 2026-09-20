@@ -3,7 +3,9 @@ title: 'Weekend Cheer: Belayco from Munich'
 date: 2026-04-26
 coverImage: ../hafta-sonunun-nesesi-muenih-ten-belayco/coverImage.png
 summary: >-
-  Some coffees just have a character — a single note that follows along like an underlay beneath the whole cup. Belayco is exactly that kind of coffee.
+  Some coffees carry a single note underneath the whole cup like an underlay.
+  Belayco is one of them: bubblegum below, yellow plum and peach sweetness above,
+  and months in the freezer did nothing to dull it.
 coffee:
   roaster: Café Blá
   origin: Ethiopia
@@ -34,9 +36,9 @@ rating:
     - Peach
     - Complex
 ---
-The coffee bringing some cheer to our weekend comes all the way from Munich, Germany. I picked up beans from Cafe Bla, who roast in the Nordic style, back in June 2025, and this one impressed me so much that I tucked it straight into the freezer. Months later, it's finally time for a reunion!
+The coffee brightening my weekend comes all the way from Munich, Germany. I picked up beans from Cafe Bla, who roast in the Nordic style, back in June 2025, and this one impressed me so much that I tucked it straight into the freezer. Months later, it's finally time for a reunion!
 
-## Brew Recipe & Process
+## Brew Recipe & Equipment
 
 I looked back at my notes to map out my brewing strategy. This is a bean I've brewed every which way before — Turkish coffee included — and it has made me happy every single time. Since I remembered it tends to hold onto water, I swapped the base of my **Orea V4** for the "Open" version to keep the flow moving.
 
@@ -44,11 +46,11 @@ I looked back at my notes to map out my brewing strategy. This is a bean I've br
 
 The time in the freezer didn't hurt the dry fragrance in any way. If anything, it's still as lively and powerful as day one.
 
-### On the Palate (Flavor Profile)
+### On the Palate
 
-Some coffees just have a character — a single note that follows along like an underlay beneath the whole cup. Belayco is exactly that kind of coffee. That signature underlying note reminds me of Bubblegum. And right behind it, a wonderful yellow plum and peach sweetness greets you.
+Some coffees just have a character — a single note that follows along like an underlay beneath the whole cup. Belayco is exactly that kind of coffee. That underlying note reminds me of bubblegum. And right behind it, a wonderful yellow plum and peach sweetness greets you.
 
-A genuinely complex and sweet cup. Its high body, paired with that complex structure on both the nose and the palate, makes this coffee more than worthy of a spot in our corner. And as it cools, that complexity opens up even more. My only criticism is that the acidity stays muted and low; a mid-level acidity could have made this profile flawless. The coffee lingers on the palate for a very long time and brightens up our day.
+A genuinely complex and sweet cup. Its high body, paired with that complex structure on both the nose and the palate, makes this coffee more than worthy of a spot here. And as it cools, that complexity opens up even more. My only criticism is that the acidity stays muted and low; a mid-level acidity could have made this profile flawless. The coffee lingers on the palate for a very long time and brightens up the day.
 
 ### A Small Note
 
