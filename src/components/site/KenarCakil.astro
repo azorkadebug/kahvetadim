@@ -3,6 +3,9 @@
    - Dikey konumu okuma ilerlemesini gösterir: başta yukarıda, sonda aşağıda.
    - Kaydırırken iki karelik koşu döngüsü işler (tek sprite sayfası,
      background-position ile; iki ayrı <img> yerine tek istek).
+   - Sprite yana bakıyor; kaydırma yönüne göre 90° döndürülüyor, böylece
+     aşağı inerken aşağı, yukarı çıkarken yukarı koşuyor. Piksel sanatı
+     tam 90°'de bozulmaz (ara piksel hesaplanmaz).
    - Kaydırma 300 ms durunca koşu solar, cupping çizimi belirir: mola.
    - Yalnız 1280px üstünde (altında sol boşluk yok) ve hareket azaltma
      kapalıyken görünür. */
@@ -34,9 +37,13 @@
     .kenar-cakil-kosu,
     .kenar-cakil-mola {
       grid-area: 1 / 1;
-      align-self: end;
       transition: opacity 220ms ease-out;
     }
+
+    /* Koşu karesi döndüğü için kutunun ortasında durmalı; alta
+       hizalanırsa 90°'de üstten taşıyor. */
+    .kenar-cakil-kosu { align-self: center; justify-self: center; }
+    .kenar-cakil-mola { align-self: end; }
 
     /* Sprite sayfası: 186x64, iki kare yan yana. */
     .kenar-cakil-kosu {
@@ -47,6 +54,8 @@
       background-repeat: no-repeat;
       image-rendering: pixelated;
       animation: kenar-kosu 300ms steps(1) infinite;
+      transform: rotate(var(--yon, 90deg));
+      transform-origin: 50% 50%;
       opacity: 0;
     }
 
@@ -83,7 +92,15 @@
       kutu.style.setProperty('--y', `${16 + oran * 54}vh`);
     };
 
+    let sonY = window.scrollY;
+
     const kaydiriliyor = () => {
+      const simdi = window.scrollY;
+      if (simdi !== sonY) {
+        // Aşağı inerken burun aşağı, yukarı çıkarken burun yukarı.
+        kutu.style.setProperty('--yon', simdi > sonY ? '90deg' : '-90deg');
+        sonY = simdi;
+      }
       kutu.dataset.durum = 'kosuyor';
       yerlestir();
       clearTimeout(zamanlayici);
