@@ -38,11 +38,9 @@ export const ui = {
     'nav.about': 'Hakkında',
 
     'home.kicker': 'Kişisel kahve defteri',
-    // Açılış artık slogan değil, uydurma kelimenin sözlük maddesi.
-    'home.wordType': 'isim',
-    'home.pronounce': 'kap-in-dog',
-    'home.defOne': 'Kahveyi önce koklayan, sonra yazan kişi.',
-    'home.defTwo': 'Sabri\'nin tadım defteri; menşe, proses ve damakta kalan iz.',
+    'home.titlePre': 'Demlediğim her fincanın ',
+    'home.titleEm': 'hikâyesi',
+    'home.titlePost': '.',
     'home.intro':
       'Menşeinden prosesine, demleme oranından damakta bıraktığı ize — tattığım kahveleri burada tek tek yazıyorum.',
     'home.latest': 'Son Tadımlar',
@@ -112,10 +110,9 @@ export const ui = {
     'nav.about': 'About',
 
     'home.kicker': 'My personal coffee journal',
-    'home.wordType': 'noun',
-    'home.pronounce': 'kuh-pin-dog',
-    'home.defOne': 'One who smells the coffee first and writes it down after.',
-    'home.defTwo': 'Sabri\'s tasting journal: origin, process and what the cup leaves behind.',
+    'home.titlePre': 'The story behind every ',
+    'home.titleEm': 'cup',
+    'home.titlePost': ' I brew.',
     'home.intro':
       'From origin and process to brew ratio and the trace it leaves on the palate — I write up every coffee I taste, right here.',
     'home.latest': 'Latest Tastings',
