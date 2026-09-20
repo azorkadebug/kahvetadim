@@ -38,9 +38,9 @@ export const ui = {
     'nav.about': 'Hakkında',
 
     'home.kicker': 'Kişisel kahve defteri',
-    'home.titlePre': 'Demlediğim her fincanın ',
-    'home.titleEm': 'hikâyesi',
-    'home.titlePost': '.',
+    // Açılış: Çakıl konuşuyor. Puanları veren Sabri ama son sözü köpek söylüyor.
+    'home.bark': 'Sabri demler, ben onaylarım.',
+    'home.barkNote': 'Çakıl, baş tadımcı',
     'home.intro':
       'Menşeinden prosesine, demleme oranından damakta bıraktığı ize — tattığım kahveleri burada tek tek yazıyorum.',
     'home.latest': 'Son Tadımlar',
@@ -110,9 +110,8 @@ export const ui = {
     'nav.about': 'About',
 
     'home.kicker': 'My personal coffee journal',
-    'home.titlePre': 'The story behind every ',
-    'home.titleEm': 'cup',
-    'home.titlePost': ' I brew.',
+    'home.bark': 'Sabri brews. I approve.',
+    'home.barkNote': 'Çakıl, head taster',
     'home.intro':
       'From origin and process to brew ratio and the trace it leaves on the palate — I write up every coffee I taste, right here.',
     'home.latest': 'Latest Tastings',
