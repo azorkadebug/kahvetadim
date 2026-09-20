@@ -59,7 +59,8 @@ const homeHref = localizePath(locale, '/');
     {/* Font preload YOK: denendi (2026-09-06), 138 KB font render-blocking
         CSS ile bant genişliği paylaşınca detay sayfasında FCP 0,8 → 1,8 s'ye
         çıktı. font-display: swap ile metin önce sistem fontunda çiziliyor. */}
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="icon" type="image/x-icon" sizes="any" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
@@ -84,8 +85,17 @@ const homeHref = localizePath(locale, '/');
   <body class="bg-[var(--color-bg)] text-[var(--color-ink)]">
     <header class="border-b border-[var(--color-line)]">
       <div class="mx-auto max-w-5xl px-5 sm:px-6 py-5 sm:py-6 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
-        <a href={homeHref} class="font-serif text-xl sm:text-2xl tracking-tight">
-          {t('site.brandLead')} <span class="italic">{t('site.brandAccent')}</span>
+        <a href={homeHref} class="flex items-center gap-2.5 font-serif text-xl sm:text-2xl tracking-tight">
+          {/* Çakıl: 88px kaynak, 36px çiziliyor — pixelated olmazsa tarayıcı
+              yumuşatıp piksel kimliğini bozuyor. */}
+          <img
+            src="/marka-cakil.png"
+            alt=""
+            width="36"
+            height="36"
+            class="w-8 h-8 sm:w-9 sm:h-9 shrink-0 [image-rendering:pixelated]"
+          />
+          <span>{t('site.brandLead')}<span class="text-[var(--color-accent-deep)]">{t('site.brandAccent')}</span></span>
         </a>
         <nav class="font-sans text-xs sm:text-sm uppercase tracking-[0.14em] sm:tracking-widest text-[var(--color-ink-soft)] flex items-center gap-4 sm:gap-6">
           <a href={navArchive} class="py-2 -my-2 hover:text-[var(--color-ink)]">{t('nav.archive')}</a>
@@ -108,7 +118,7 @@ const homeHref = localizePath(locale, '/');
 
     <footer class="mt-24 border-t border-[var(--color-line)]">
       <div class="mx-auto max-w-5xl px-5 sm:px-6 py-6 sm:py-8 font-sans text-xs sm:text-sm text-[var(--color-ink-soft)] flex justify-between items-center gap-4">
-        <span>© {new Date().getFullYear()} Kahvetadim</span>
+        <span>© {new Date().getFullYear()} Cuppindog</span>
         <a
           href="https://instagram.com/kahve.tadim"
           target="_blank"

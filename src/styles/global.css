@@ -34,16 +34,18 @@
 }
 
 @theme {
-  --color-bg: #faf7f2;
-  --color-bg-soft: #f3ece1;
-  --color-ink: #2b1d16;
-  --color-ink-soft: #6b5545;
+  --color-bg: #faf4e7;
+  --color-bg-soft: #f2e7cf;
+  /* Mürekkep artık sıcak kahve değil, Çakıl'ın kulak kömürüne yakın soğuk
+     antrasit — marka işaretiyle aynı ailede (krem üzerinde 13.8:1). */
+  --color-ink: #23262c;
+  --color-ink-soft: #5a5f68;
   /* Ölçüm katmanının rengi: puan, çubuk, demleme ikonu. Dekoratif/büyük
-     kullanım için — krem üzerinde 3.09:1 (AA büyük metin). */
-  --color-accent: #c77b46;
-  /* Küçük metin ve bağlantılar için koyultulmuş ton — 4.51:1, AA normal metin. */
-  --color-accent-deep: #a56132;
-  --color-line: #e5dccc;
+     kullanım için — krem üzerinde 3.02:1 (AA büyük metin). */
+  --color-accent: #c97b1e;
+  /* Küçük metin ve bağlantılar için koyultulmuş ton — 5.81:1, AA normal metin. */
+  --color-accent-deep: #8a5214;
+  --color-line: #e4d8be;
 
   --font-serif: "Fraunces Variable", ui-serif, Georgia, serif;
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;

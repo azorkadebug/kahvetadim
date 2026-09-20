@@ -1,30 +1,29 @@
 import sharp from 'sharp';
-import { writeFileSync } from 'node:fs';
+import { writeFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const outPath = resolve(__dirname, '..', 'public', 'og.png');
+// Marka işareti (Çakıl) SVG'ye gömülüyor: sharp harici dosya yolunu
+// <image href> ile çözmüyor, data URI şart.
+const marka = readFileSync(resolve(__dirname, '..', 'public', 'marka-cakil.png')).toString('base64');
 
 const svg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#faf7f2"/>
+  <rect width="1200" height="630" fill="#faf4e7"/>
 
-  <rect x="0" y="0" width="1200" height="6" fill="#c77b46"/>
-  <rect x="0" y="624" width="1200" height="6" fill="#c77b46"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#c97b1e"/>
+  <rect x="0" y="624" width="1200" height="6" fill="#c97b1e"/>
 
-  <g transform="translate(960, 120) rotate(-18 80 110)">
-    <ellipse cx="80" cy="110" rx="58" ry="96" fill="none" stroke="#c77b46" stroke-width="8" opacity="0.9"/>
-    <path d="M 40 30 Q 80 110 120 190" fill="none" stroke="#c77b46" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
-  </g>
+  <image href="data:image/png;base64,${marka}" x="880" y="150" width="240" height="240" image-rendering="pixelated"/>
 
-  <text x="100" y="290" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="150" font-weight="500" fill="#2b1d16" letter-spacing="-3">Kahve</text>
-  <text x="100" y="430" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-style="italic" font-size="150" font-weight="500" fill="#c77b46" letter-spacing="-3">Tadımları</text>
+  <text x="100" y="330" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="150" font-weight="500" fill="#23262c" letter-spacing="-3">cuppin<tspan fill="#8a5214">dog</tspan></text>
 
-  <line x1="100" y1="490" x2="220" y2="490" stroke="#2b1d16" stroke-width="2"/>
-  <text x="100" y="540" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-style="italic" font-size="32" fill="#6b5545">demlemek, tatmak, yazmak.</text>
+  <line x1="100" y1="400" x2="220" y2="400" stroke="#23262c" stroke-width="2"/>
+  <text x="100" y="452" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-style="italic" font-size="32" fill="#5a5f68">demlemek, tatmak, yazmak.</text>
 
-  <text x="1100" y="540" text-anchor="end" font-family="Inter, -apple-system, sans-serif" font-size="22" fill="#6b5545" letter-spacing="4">KAHVETADIM.COM</text>
+  <text x="100" y="540" font-family="Inter, -apple-system, sans-serif" font-size="22" fill="#5a5f68" letter-spacing="4">CUPPINDOG.COM</text>
 </svg>`;
 
 const buffer = await sharp(Buffer.from(svg))

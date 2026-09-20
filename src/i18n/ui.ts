@@ -27,10 +27,10 @@ export const dateLocale: Record<Lang, string> = {
 export const ui = {
   tr: {
     'site.author': 'Sabri',
-    'site.brandLead': 'Kahve',
-    'site.brandAccent': 'Tadımları',
-    'site.name': 'Kahvetadim',
-    'site.title': 'Kahvetadim — Kişisel kahve tadım defteri',
+    'site.brandLead': 'cuppin',
+    'site.brandAccent': 'dog',
+    'site.name': 'Cuppindog',
+    'site.title': 'Cuppindog — Kişisel kahve tadım defteri',
     'site.description':
       'Tattığım kahvelerin menşeini, prosesini ve damakta bıraktığı izi tek tek yazdığım kişisel tadım defteri.',
 
@@ -101,8 +101,8 @@ export const ui = {
     'site.author': 'Sabri',
     'site.brandLead': 'Coffee',
     'site.brandAccent': 'Tastings',
-    'site.name': 'Kahvetadim',
-    'site.title': 'Kahvetadim — A personal coffee tasting journal',
+    'site.name': 'Cuppindog',
+    'site.title': 'Cuppindog — A personal coffee tasting journal',
     'site.description':
       'A personal tasting journal where I write up the origin, process and cup of every coffee I taste, one by one.',
 
