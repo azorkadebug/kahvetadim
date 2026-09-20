@@ -17,6 +17,13 @@
      kapalıyken görünür. */
 ---
 
+{/* Dar ekran: üstte ilerleme çizgisi, Çakıl çizginin üstünde koşuyor.
+    Geniş ekrandaki sol kenar sürümü ayrı; ikisi aynı JS durumunu paylaşır. */}
+<div id="ustCakil" class="ust-cakil" aria-hidden="true">
+  <span class="ust-cakil-cizgi"></span>
+  <span class="ust-cakil-kopek"></span>
+</div>
+
 <div id="kenarCakil" class="kenar-cakil" aria-hidden="true">
   <div class="kenar-cakil-kosu"></div>
   <div class="kenar-cakil-mola"></div>
@@ -24,6 +31,66 @@
 </div>
 
 <style>
+  .ust-cakil { display: none; }
+
+  @media (max-width: 1279px) and (prefers-reduced-motion: no-preference) {
+    .ust-cakil {
+      display: block;
+      position: fixed;
+      top: env(safe-area-inset-top, 0px);
+      left: 0;
+      right: 0;
+      /* Çizgi şeridin dibinde; üstteki boşluk köpeğe yer açıyor, yoksa
+         ekranın dışında kalıyor. */
+      height: 34px;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .ust-cakil-cizgi {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: block;
+      height: 2px;
+      width: var(--x, 0%);
+      background: var(--color-accent);
+      transition: width 120ms linear;
+    }
+
+    /* Köpek çizginin üstünde durur; sola yarı genişlik kaydırılır ki
+       ucu tam ilerleme noktasına denk gelsin. */
+    .ust-cakil-kopek {
+      position: absolute;
+      bottom: 2px;
+      left: var(--x, 0%);
+      width: 34px;
+      height: 23px;
+      margin-left: -30px;
+      background-image: url('/cakil-kosu.png');
+      background-size: 200% 100%;
+      background-repeat: no-repeat;
+      image-rendering: pixelated;
+      transition: left 120ms linear;
+    }
+
+    #ustCakil[data-durum='kosuyor'] .ust-cakil-kopek {
+      animation: kenar-kosu 300ms steps(1) infinite;
+    }
+
+    /* Durunca fincanın içindeki kare (sprite'ın ikinci karesi). */
+    #ustCakil[data-durum='mola'] .ust-cakil-kopek,
+    #ustCakil[data-durum='cikis'] .ust-cakil-kopek {
+      width: 16px;
+      height: 31px;
+      margin-left: -16px;
+      background-image: url('/cakil-atlama.png');
+      background-position: 100% 0%;
+    }
+
+    #ustCakil[data-durum='yok'] .ust-cakil-kopek { opacity: 0; }
+  }
+
   .kenar-cakil { display: none; }
 
   @media (min-width: 1280px) and (prefers-reduced-motion: no-preference) {
@@ -158,6 +225,7 @@
 
 <script>
   const kutu = document.getElementById('kenarCakil');
+  const ust = document.getElementById('ustCakil');
   if (kutu) {
     let zamanlayici = 0;
 
@@ -168,6 +236,7 @@
       // Ekranın %16'sı ile %70'i arasında gezinir: üstte başlığa,
       // altta altbilgiye çarpmaz.
       kutu.style.setProperty('--y', `${16 + oran * 54}vh`);
+      if (ust) ust.style.setProperty('--x', `${(oran * 100).toFixed(1)}%`);
     };
 
     const mola = kutu.querySelector('.kenar-cakil-mola');
@@ -193,12 +262,17 @@
         // Fincandan çıkmadan koşamaz: önce fırlama oynar.
         animasyonuSifirla(cikis);
         kutu.dataset.durum = 'cikis';
+        if (ust) ust.dataset.durum = 'cikis';
         clearTimeout(cikisZamani);
         cikisZamani = window.setTimeout(() => {
-          if (kutu.dataset.durum === 'cikis') kutu.dataset.durum = 'kosuyor';
+          if (kutu.dataset.durum === 'cikis') {
+            kutu.dataset.durum = 'kosuyor';
+            if (ust) ust.dataset.durum = 'kosuyor';
+          }
         }, 340);
       } else if (kutu.dataset.durum !== 'cikis') {
         kutu.dataset.durum = 'kosuyor';
+        if (ust) ust.dataset.durum = 'kosuyor';
       }
       yerlestir();
       clearTimeout(zamanlayici);
@@ -206,11 +280,13 @@
         // Atlayış her duruşta baştan oynasın.
         animasyonuSifirla(mola);
         kutu.dataset.durum = 'mola';
+        if (ust) ust.dataset.durum = 'mola';
       }, 340);
     };
 
     // Açılışta görünmez: ilk kaydırmada koşarak giriyor.
     kutu.dataset.durum = 'yok';
+    if (ust) ust.dataset.durum = 'yok';
     yerlestir();
     window.addEventListener('scroll', kaydiriliyor, { passive: true });
     window.addEventListener('resize', yerlestir);
