@@ -24,10 +24,22 @@ const altUrl = localizePath(otherLang, '/tadimlar/');
   locale={locale}
   altUrl={altUrl}
 >
-  <section class="py-8 md:py-16 border-b border-[var(--color-line)]">
-    <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">{t('archive.kicker')}</p>
-    <h1 class="mt-3 font-serif text-4xl sm:text-5xl">{t('archive.title')}</h1>
-    <p class="mt-5 text-[var(--color-ink-soft)] font-serif">{archiveCount(locale, sorted.length)}.</p>
+  <section class="py-8 md:py-16 border-b border-[var(--color-line)] flex items-end justify-between gap-6">
+    <div>
+      <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">{t('archive.kicker')}</p>
+      <h1 class="mt-3 font-serif text-4xl sm:text-5xl">{t('archive.title')}</h1>
+      <p class="mt-5 text-[var(--color-ink-soft)] font-serif">{archiveCount(locale, sorted.length)}.</p>
+    </div>
+
+    {/* Çakıl demlerken: başlığın yanında, tabloya girmeden.
+        Dar ekranda gizli — orada başlık tek başına daha iyi duruyor. */}
+    <img
+      src="/cakil-demleme.png"
+      alt={t('archive.illustrationAlt')}
+      width="84"
+      height="86"
+      class="hidden sm:block w-32 md:w-44 h-auto shrink-0 [image-rendering:pixelated]"
+    />
   </section>
 
   <section class="py-12">
