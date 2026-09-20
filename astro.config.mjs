@@ -11,7 +11,7 @@ const isDev = process.argv.slice(2).includes('dev');
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://kahvetadim.com',
+  site: 'https://cuppindog.com',
   trailingSlash: isDev ? 'ignore' : 'always',
   i18n: {
     defaultLocale: 'en',
