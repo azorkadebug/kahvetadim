@@ -23,6 +23,18 @@ const altUrl = localizePath(otherLang, '/');
 ---
 
 <BaseLayout title={t('site.title')} locale={locale} altUrl={altUrl}>
+  {/* Kapağın üstünde küçük bir imza: Çakıl cupping yaparken. Zemini
+      sitenin krem tonuna eşitlendiği için çerçevesiz oturuyor. */}
+  <div class="flex justify-end pt-2">
+    <img
+      src="/cakil-cupping.png"
+      alt={t('home.illustrationAlt')}
+      width="100"
+      height="100"
+      class="w-28 sm:w-36 md:w-44 h-auto [image-rendering:pixelated]"
+    />
+  </div>
+
   {/* KAPAK DÜZENİ: sayfa doğrudan son tadımla açılıyor; başlık bloğu yok,
       bölüm etiketi ikincil kartların üstüne indi. */}
   <section class="pt-2 pb-12">

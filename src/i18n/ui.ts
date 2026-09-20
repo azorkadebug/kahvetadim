@@ -36,6 +36,7 @@ export const ui = {
     'nav.about': 'Hakkında',
 
     // Açılış: Çakıl konuşuyor. Puanları veren Sabri ama son sözü köpek söylüyor.
+    'home.illustrationAlt': 'Çakıl, kupa kaşığıyla cupping yaparken; yanında not defteri',
     'home.latest': 'Önceki Tadımlar',
     'home.empty': 'Henüz yazılmış tadım yok.',
     'home.all': 'Tüm tadımlar →',
@@ -102,6 +103,7 @@ export const ui = {
     'nav.archive': 'Archive',
     'nav.about': 'About',
 
+    'home.illustrationAlt': 'Çakıl cupping with a spoon, a notebook beside the bowl',
     'home.latest': 'Earlier Tastings',
     'home.empty': 'No tastings written yet.',
     'home.all': 'All tastings →',
