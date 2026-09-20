@@ -1,0 +1,106 @@
+---
+/* Sol kenardaki Çakıl.
+   - Dikey konumu okuma ilerlemesini gösterir: sayfanın başında yukarıda,
+     sonunda aşağıda. Yani hem süs hem ilerleme çubuğu.
+   - Kaydırırken koşu karesi değişir ve hafifçe zıplar.
+   - Kaydırma durunca (300 ms) fincana eğilip içer, sonra doğrulur.
+   - Yalnız geniş ekranda: 1280px altında zaten sol boşluk yok.
+   - `prefers-reduced-motion` açıksa hiç görünmez.
+   Koşu kareleri henüz geçici (logo kafası); sprite gelince yalnızca
+   KARELER dizisi değişecek. */
+---
+
+<div id="kenarCakil" class="kenar-cakil" aria-hidden="true">
+  <img id="kenarCakilKare" src="/marka-cakil.png" alt="" width="44" height="44" class="kenar-cakil-kopek" />
+  <img src="/fincan.png" alt="" width="16" height="12" class="kenar-cakil-fincan" />
+</div>
+
+<style>
+  .kenar-cakil {
+    display: none;
+  }
+
+  @media (min-width: 1280px) and (prefers-reduced-motion: no-preference) {
+    .kenar-cakil {
+      display: block;
+      position: fixed;
+      /* Sol boşluğun ortası: içerik 64rem ve ortalanmış. */
+      left: calc((100vw - 64rem) / 2 - 4.5rem);
+      top: 0;
+      width: 3.5rem;
+      /* Dikey yeri JS veriyor; geçiş yumuşak olsun diye transform. */
+      transform: translateY(var(--y, 25vh));
+      transition: transform 260ms ease-out;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .kenar-cakil-kopek {
+      display: block;
+      width: 2.75rem;
+      height: 2.75rem;
+      image-rendering: pixelated;
+      transform-origin: 50% 100%;
+      transition: transform 180ms ease-out;
+    }
+
+    /* Koşarken: kısa zıplama. */
+    .kenar-cakil[data-durum='kosuyor'] .kenar-cakil-kopek {
+      animation: kenar-zipla 260ms steps(2, end) infinite;
+    }
+
+    /* Durunca: fincana eğilir. */
+    .kenar-cakil[data-durum='iciyor'] .kenar-cakil-kopek {
+      transform: translateY(0.45rem) scaleY(0.92);
+    }
+
+    .kenar-cakil-fincan {
+      display: block;
+      width: 1.25rem;
+      height: auto;
+      margin: -0.15rem 0 0 1.5rem;
+      image-rendering: pixelated;
+      opacity: 0;
+      transition: opacity 200ms ease-out;
+    }
+
+    .kenar-cakil[data-durum='iciyor'] .kenar-cakil-fincan {
+      opacity: 1;
+    }
+
+    @keyframes kenar-zipla {
+      from { transform: translateY(0); }
+      to { transform: translateY(-0.22rem); }
+    }
+  }
+</style>
+
+<script>
+  const kutu = document.getElementById('kenarCakil');
+  if (kutu) {
+    let zamanlayici = 0;
+
+    const yerlestir = () => {
+      const belge = document.documentElement;
+      const kaydirilabilir = belge.scrollHeight - window.innerHeight;
+      const oran = kaydirilabilir > 0 ? Math.min(1, Math.max(0, window.scrollY / kaydirilabilir)) : 0;
+      // Ekranın %18'i ile %72'si arasında gezinir; üstte başlığa,
+      // altta altbilgiye çarpmasın.
+      kutu.style.setProperty('--y', `${18 + oran * 54}vh`);
+    };
+
+    const kaydiriliyor = () => {
+      kutu.dataset.durum = 'kosuyor';
+      yerlestir();
+      clearTimeout(zamanlayici);
+      zamanlayici = window.setTimeout(() => {
+        kutu.dataset.durum = 'iciyor';
+      }, 300);
+    };
+
+    kutu.dataset.durum = 'iciyor';
+    yerlestir();
+    window.addEventListener('scroll', kaydiriliyor, { passive: true });
+    window.addEventListener('resize', yerlestir);
+  }
+</script>
