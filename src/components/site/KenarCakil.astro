@@ -6,14 +6,16 @@
    - Sprite yana bakıyor; kaydırma yönüne göre 90° döndürülüyor, böylece
      aşağı inerken aşağı, yukarı çıkarken yukarı koşuyor. Piksel sanatı
      tam 90°'de bozulmaz (ara piksel hesaplanmaz).
-   - Kaydırma 300 ms durunca koşu solar, cupping çizimi belirir: mola.
+   - Kaydırma 300 ms durunca koşu solar, Çakıl fincana atlar: iki karelik
+     atlayış (havada → fincanın içinde, kuyruk dışarıda) bir kez oynar
+     ve son karede kalır.
    - Yalnız 1280px üstünde (altında sol boşluk yok) ve hareket azaltma
      kapalıyken görünür. */
 ---
 
 <div id="kenarCakil" class="kenar-cakil" aria-hidden="true">
   <div class="kenar-cakil-kosu"></div>
-  <img src="/cakil-cupping.png" alt="" width="100" height="100" class="kenar-cakil-mola" />
+  <div class="kenar-cakil-mola"></div>
 </div>
 
 <style>
@@ -59,16 +61,30 @@
       opacity: 0;
     }
 
+    /* Atlayış sayfası: 90x86, iki kare yan yana. */
     .kenar-cakil-mola {
-      width: 5rem;
-      height: auto;
+      width: 2.9rem;
+      height: 5.5rem;
       justify-self: center;
+      background-image: url('/cakil-atlama.png');
+      background-size: 200% 100%;
+      background-repeat: no-repeat;
       image-rendering: pixelated;
       opacity: 0;
     }
 
+    .kenar-cakil[data-durum='mola'] .kenar-cakil-mola {
+      animation: kenar-atla 460ms linear forwards;
+    }
+
     .kenar-cakil[data-durum='kosuyor'] .kenar-cakil-kosu { opacity: 1; }
     .kenar-cakil[data-durum='mola'] .kenar-cakil-mola { opacity: 1; }
+
+    /* Havada → fincanın içinde. Ara kare yok: yüzdeler keskin kesiyor. */
+    @keyframes kenar-atla {
+      0%, 55% { background-position: 0% 0%; }
+      56%, 100% { background-position: 100% 0%; }
+    }
 
     @keyframes kenar-kosu {
       0%   { background-position: 0% 0%; }
@@ -92,6 +108,7 @@
       kutu.style.setProperty('--y', `${16 + oran * 54}vh`);
     };
 
+    const mola = kutu.querySelector('.kenar-cakil-mola');
     let sonY = window.scrollY;
 
     const kaydiriliyor = () => {
@@ -105,6 +122,12 @@
       yerlestir();
       clearTimeout(zamanlayici);
       zamanlayici = window.setTimeout(() => {
+        // Atlayış her duruşta baştan oynasın: animasyonu sıfırla.
+        if (mola) {
+          mola.style.animation = 'none';
+          void mola.offsetWidth;
+          mola.style.animation = '';
+        }
         kutu.dataset.durum = 'mola';
       }, 300);
     };
