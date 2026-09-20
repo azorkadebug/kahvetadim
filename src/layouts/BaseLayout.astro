@@ -33,7 +33,7 @@ const ogImageURL = new URL(ogImage, Astro.site).toString();
 const otherLang: Lang = locale === 'tr' ? 'en' : 'tr';
 const otherPath = altUrl ?? localizePath(otherLang, '/');
 
-// hreflang alternates: mevcut dil + (varsa) diğer dil + x-default (TR)
+// hreflang alternates: mevcut dil + (varsa) diğer dil + x-default (EN, artık ana dil)
 const trURL = locale === 'tr' ? canonicalURL : altUrl ? new URL(altUrl, Astro.site).toString() : null;
 const enURL = locale === 'en' ? canonicalURL : altUrl ? new URL(altUrl, Astro.site).toString() : null;
 
@@ -55,7 +55,7 @@ const homeHref = localizePath(locale, '/');
 
     {trURL && <link rel="alternate" hreflang="tr" href={trURL} />}
     {enURL && <link rel="alternate" hreflang="en" href={enURL} />}
-    {trURL && <link rel="alternate" hreflang="x-default" href={trURL} />}
+    {enURL && <link rel="alternate" hreflang="x-default" href={enURL} />}
 
     {/* Font preload YOK: denendi (2026-09-06), 138 KB font render-blocking
         CSS ile bant genişliği paylaşınca detay sayfasında FCP 0,8 → 1,8 s'ye

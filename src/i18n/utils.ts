@@ -15,22 +15,22 @@ export function methodLabel(lang: Lang, method: Choice): string {
   return method.custom || useTranslations(lang)('method.other' as never);
 }
 
-/** URL yolundan aktif dili çıkarır. /en/... → 'en', diğer her şey → 'tr'. */
+/** URL yolundan aktif dili çıkarır. /tr/... → 'tr', diğer her şey → 'en'. */
 export function getLangFromUrl(url: URL): Lang {
   const [, seg] = url.pathname.split('/');
-  return seg === 'en' ? 'en' : 'tr';
+  return seg === 'tr' ? 'tr' : 'en';
 }
 
 /**
- * Bir kök yolu (TR yolu) aktif dile göre önekler.
- * tr: '/tadimlar/' → '/tadimlar/'
- * en: '/tadimlar/' → '/en/tadimlar/'
- * en: '/' → '/en/'
+ * Bir kök yolu (İngilizce yol) aktif dile göre önekler.
+ * en: '/tadimlar/' → '/tadimlar/'
+ * tr: '/tadimlar/' → '/tr/tadimlar/'
+ * tr: '/' → '/tr/'
  */
 export function localizePath(lang: Lang, path: string): string {
   if (lang === defaultLang) return path;
-  if (path === '/') return '/en/';
-  return `/en${path}`;
+  if (path === '/') return '/tr/';
+  return `/tr${path}`;
 }
 
 /** Tadım girdisinin diline bak (id 'en/...' ile başlıyorsa İngilizce). */
@@ -43,9 +43,10 @@ export function tastingSlug(id: string): string {
   return id.replace(/^en\//, '');
 }
 
-/** Tadım detay sayfasının dile göre URL'i. */
+/** Tadım detay sayfasının dile göre URL'i. İçerik dosyaları yerinde durur
+    (kök = Türkçe dosya, en/ = İngilizce dosya); değişen yalnızca adres. */
 export function tastingUrl(lang: Lang, slug: string): string {
-  return lang === 'en' ? `/en/tadim/${slug}/` : `/tadim/${slug}/`;
+  return lang === 'tr' ? `/tr/tadim/${slug}/` : `/tadim/${slug}/`;
 }
 
 /** Dile göre tarih biçimlendirme. */

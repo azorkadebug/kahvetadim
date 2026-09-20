@@ -2,14 +2,14 @@
 // Yeni dil eklemek istenirse buraya bir anahtar daha eklenir.
 
 export const languages = {
-  tr: 'Türkçe',
   en: 'English',
+  tr: 'Türkçe',
 } as const;
 
 export type Lang = keyof typeof languages;
 
-export const defaultLang: Lang = 'tr';
-export const locales: Lang[] = ['tr', 'en'];
+export const defaultLang: Lang = 'en';
+export const locales: Lang[] = ['en', 'tr'];
 
 // og:locale ve hreflang için tam yerel kodlar
 export const ogLocale: Record<Lang, string> = {

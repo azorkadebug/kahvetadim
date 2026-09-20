@@ -14,10 +14,10 @@ export default defineConfig({
   site: 'https://kahvetadim.com',
   trailingSlash: isDev ? 'ignore' : 'always',
   i18n: {
-    defaultLocale: 'tr',
-    locales: ['tr', 'en'],
+    defaultLocale: 'en',
+    locales: ['en', 'tr'],
     routing: {
-      // TR kökte (/...), EN /en/... altında. Varsayılan dil öneksiz kalır.
+      // EN kökte (/...), TR /tr/... altında. Varsayılan dil öneksiz kalır.
       prefixDefaultLocale: false,
     },
   },
