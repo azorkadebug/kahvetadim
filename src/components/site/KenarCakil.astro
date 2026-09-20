@@ -9,6 +9,8 @@
    - Kaydırma 300 ms durunca koşu solar, Çakıl fincana atlar: havadaki
      kare yukarıdan düşer (ease-in), fincana değince ikinci kareye geçer
      ve küçük bir sıçrama ile oturur.
+   - Fincandayken kaydırma yeniden başlarsa önce fırlama karesi oynar
+     (fincandan çıkış → havada), sonra koşuya döner.
    - Sayfa açıldığında hiç görünmez: ilk kaydırmayla koşarak girer.
      Önceden fincanın içinde başlıyordu, oradan koşuya geçmesi tuhaftı.
    - Yalnız 1280px üstünde (altında sol boşluk yok) ve hareket azaltma
@@ -18,6 +20,7 @@
 <div id="kenarCakil" class="kenar-cakil" aria-hidden="true">
   <div class="kenar-cakil-kosu"></div>
   <div class="kenar-cakil-mola"></div>
+  <div class="kenar-cakil-cikis"></div>
 </div>
 
 <style>
@@ -39,7 +42,8 @@
     }
 
     .kenar-cakil-kosu,
-    .kenar-cakil-mola {
+    .kenar-cakil-mola,
+    .kenar-cakil-cikis {
       grid-area: 1 / 1;
       transition: opacity 120ms ease-out;
     }
@@ -77,6 +81,24 @@
 
     .kenar-cakil[data-durum='kosuyor'] .kenar-cakil-kosu { opacity: 1; }
 
+    /* Fırlama sayfası: 100x79, iki kare yan yana. */
+    .kenar-cakil-cikis {
+      width: 3.2rem;
+      height: 5.1rem;
+      align-self: end;
+      justify-self: center;
+      background-image: url('/cakil-cikis.png');
+      background-size: 200% 100%;
+      background-repeat: no-repeat;
+      image-rendering: pixelated;
+      opacity: 0;
+    }
+
+    .kenar-cakil[data-durum='cikis'] .kenar-cakil-cikis {
+      opacity: 1;
+      animation: kenar-firla 380ms cubic-bezier(0.2, 0.7, 0.4, 1) forwards;
+    }
+
     .kenar-cakil[data-durum='mola'] .kenar-cakil-mola {
       opacity: 1;
       animation: kenar-atla 520ms cubic-bezier(0.34, 0, 0.62, 1) forwards;
@@ -109,6 +131,23 @@
       }
     }
 
+    /* Fincandan fırlayış: ilk kare sıçrama anı, ikincisi havada; hareket
+       yukarı doğru yavaşlayarak (ease-out). */
+    @keyframes kenar-firla {
+      0% {
+        background-position: 0% 0%;
+        transform: translateY(0.2rem) scaleY(0.95);
+      }
+      45% {
+        background-position: 0% 0%;
+        transform: translateY(-0.5rem) scaleY(1.03);
+      }
+      46%, 100% {
+        background-position: 100% 0%;
+        transform: translateY(-1.5rem) scaleY(1);
+      }
+    }
+
     @keyframes kenar-kosu {
       0%   { background-position: 0% 0%; }
       50%  { background-position: 100% 0%; }
@@ -132,7 +171,16 @@
     };
 
     const mola = kutu.querySelector('.kenar-cakil-mola');
+    const cikis = kutu.querySelector('.kenar-cakil-cikis');
+    let cikisZamani = 0;
     let sonY = window.scrollY;
+
+    const animasyonuSifirla = (el) => {
+      if (!el) return;
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.animation = '';
+    };
 
     const kaydiriliyor = () => {
       const simdi = window.scrollY;
@@ -141,18 +189,24 @@
         kutu.style.setProperty('--yon', simdi > sonY ? '90deg' : '-90deg');
         sonY = simdi;
       }
-      kutu.dataset.durum = 'kosuyor';
+      if (kutu.dataset.durum === 'mola') {
+        // Fincandan çıkmadan koşamaz: önce fırlama oynar.
+        animasyonuSifirla(cikis);
+        kutu.dataset.durum = 'cikis';
+        clearTimeout(cikisZamani);
+        cikisZamani = window.setTimeout(() => {
+          if (kutu.dataset.durum === 'cikis') kutu.dataset.durum = 'kosuyor';
+        }, 340);
+      } else if (kutu.dataset.durum !== 'cikis') {
+        kutu.dataset.durum = 'kosuyor';
+      }
       yerlestir();
       clearTimeout(zamanlayici);
       zamanlayici = window.setTimeout(() => {
-        // Atlayış her duruşta baştan oynasın: animasyonu sıfırla.
-        if (mola) {
-          mola.style.animation = 'none';
-          void mola.offsetWidth;
-          mola.style.animation = '';
-        }
+        // Atlayış her duruşta baştan oynasın.
+        animasyonuSifirla(mola);
         kutu.dataset.durum = 'mola';
-      }, 300);
+      }, 340);
     };
 
     // Açılışta görünmez: ilk kaydırmada koşarak giriyor.
