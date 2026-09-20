@@ -32,7 +32,17 @@ const altUrl = localizePath(otherLang, '/hakkinda/');
   altUrl={altUrl}
 >
   <section class="py-8 md:py-16 grid lg:grid-cols-[minmax(0,42rem)_1fr] gap-x-12 xl:gap-x-16 gap-y-12 items-start">
-    <div>
+    {/* Dar ekran: çizim en üstte, metnin hemen üstünde. Geniş ekranda
+        sağ sütundaki kopya görünür, bu gizlenir. */}
+    <img
+      src="/cakil-degirmen.png"
+      alt={t('about.illustrationAlt')}
+      width="56"
+      height="80"
+      class="order-1 lg:hidden w-24 h-auto [image-rendering:pixelated]"
+    />
+
+    <div class="order-2 lg:order-1">
       {entry.data.kicker && (
         <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">{entry.data.kicker}</p>
       )}
@@ -42,15 +52,16 @@ const altUrl = localizePath(otherLang, '/hakkinda/');
       </div>
     </div>
 
-    <aside class="lg:sticky lg:top-8">
+    <aside class="order-3 lg:order-2 lg:sticky lg:top-8">
       {/* Çakıl değirmeni çeviriyor: sağ sütunun başında, listenin üstünde.
-          Kaynak 56x80 piksel; tarayıcı yumuşatmasın diye pixelated. */}
+          Dar ekranda yukarıdaki kopya görünüyor, bu gizli. */}
       <img
         src="/cakil-degirmen.png"
-        alt={t('about.illustrationAlt')}
+        alt=""
+        aria-hidden="true"
         width="56"
         height="80"
-        class="w-32 sm:w-40 h-auto [image-rendering:pixelated]"
+        class="hidden lg:block w-40 h-auto [image-rendering:pixelated]"
       />
 
       {latest.length > 0 && (

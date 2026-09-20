@@ -31,14 +31,14 @@ const altUrl = localizePath(otherLang, '/tadimlar/');
       <p class="mt-5 text-[var(--color-ink-soft)] font-serif">{archiveCount(locale, sorted.length)}.</p>
     </div>
 
-    {/* Çakıl demlerken: başlığın yanında, tabloya girmeden.
-        Dar ekranda gizli — orada başlık tek başına daha iyi duruyor. */}
+    {/* Çakıl demlerken: başlığın yanında, tabloya girmeden. Dar ekranda
+        da duruyor ama küçülüyor. */}
     <img
       src="/cakil-demleme.png"
       alt={t('archive.illustrationAlt')}
       width="84"
       height="86"
-      class="hidden sm:block w-32 md:w-44 h-auto shrink-0 [image-rendering:pixelated]"
+      class="w-20 sm:w-32 md:w-44 h-auto shrink-0 [image-rendering:pixelated]"
     />
   </section>
 
