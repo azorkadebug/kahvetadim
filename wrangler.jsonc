@@ -3,6 +3,9 @@
   "name": "kahvetadim",
   "compatibility_date": "2026-06-27",
   "assets": {
-    "directory": "./dist"
+    "directory": "./dist",
+    // Bulunamayan adreslerde Astro'nun ürettiği 404.html gösterilsin;
+    // varsayılan davranış düz "Not Found" metni döndürüyor.
+    "not_found_handling": "404-page"
   }
 }

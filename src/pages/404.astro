@@ -1,0 +1,47 @@
+---
+// Tek 404 sayfası, iki dilde birden. Hangi dilde gezildiğini statik
+// sayfada bilemiyoruz: İngilizce üstte (ana dil), Türkçe altında.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { useTranslations } from '../i18n/ui';
+
+const t = useTranslations('en');
+---
+
+<BaseLayout title={`404 — ${t('site.name')}`} description="Page not found." locale="en">
+  <section class="py-12 md:py-20 grid md:grid-cols-[minmax(0,1fr)_auto] gap-10 md:gap-16 items-center">
+    <div>
+      <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-accent-deep)]">404</p>
+
+      <h1 class="mt-4 font-serif text-4xl sm:text-5xl leading-tight">
+        This cup isn't on the shelf.
+      </h1>
+      <p class="mt-5 max-w-prose text-lg text-[var(--color-ink-soft)] font-serif">
+        The page you were looking for has been moved or never existed. The tastings are all
+        in the archive — Çakıl is still taking notes.
+      </p>
+      <p class="mt-6 flex flex-wrap gap-x-8 gap-y-3 font-sans text-sm uppercase tracking-[0.18em]">
+        <a href="/tadimlar/" class="text-[var(--color-accent-deep)] hover:text-[var(--color-ink)]">Archive</a>
+        <a href="/" class="text-[var(--color-accent-deep)] hover:text-[var(--color-ink)]">Home</a>
+      </p>
+
+      <div class="mt-10 pt-8 border-t border-[var(--color-line)]">
+        <h2 class="font-serif text-2xl">Bu fincan rafta yok.</h2>
+        <p class="mt-3 max-w-prose text-[var(--color-ink-soft)] font-serif">
+          Aradığın sayfa taşınmış ya da hiç var olmamış. Tadımların hepsi arşivde duruyor.
+        </p>
+        <p class="mt-4 flex flex-wrap gap-x-8 gap-y-3 font-sans text-sm uppercase tracking-[0.18em]">
+          <a href="/tr/tadimlar/" class="text-[var(--color-accent-deep)] hover:text-[var(--color-ink)]">Arşiv</a>
+          <a href="/tr/" class="text-[var(--color-accent-deep)] hover:text-[var(--color-ink)]">Ana sayfa</a>
+        </p>
+      </div>
+    </div>
+
+    <img
+      src="/cakil-cupping.png"
+      alt={t('home.illustrationAlt')}
+      width="100"
+      height="100"
+      class="w-48 sm:w-64 md:w-72 h-auto justify-self-center md:justify-self-end [image-rendering:pixelated]"
+    />
+  </section>
+</BaseLayout>
