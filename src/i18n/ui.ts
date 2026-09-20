@@ -86,6 +86,7 @@ export const ui = {
     'method.other': 'Diğer',
 
     'about.description': 'Bu kahve tadım defterinin hikâyesi.',
+    'about.illustrationAlt': 'Çakıl, el değirmeniyle kahve öğütürken',
 
     'a11y.instagram': "Instagram'da @kahve.tadim",
     'a11y.switchLang': 'English (EN)',
@@ -150,6 +151,7 @@ export const ui = {
     'method.other': 'Other',
 
     'about.description': 'The story behind this coffee tasting journal.',
+    'about.illustrationAlt': 'Çakıl grinding coffee with a hand grinder',
 
     'a11y.instagram': '@kahve.tadim on Instagram',
     'a11y.switchLang': 'Türkçe (TR)',

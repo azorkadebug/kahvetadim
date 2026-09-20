@@ -42,8 +42,19 @@ const altUrl = localizePath(otherLang, '/hakkinda/');
       </div>
     </div>
 
-    {latest.length > 0 && (
-      <aside class="lg:sticky lg:top-8">
+    <aside class="lg:sticky lg:top-8">
+      {/* Çakıl değirmeni çeviriyor: sağ sütunun başında, listenin üstünde.
+          Kaynak 56x80 piksel; tarayıcı yumuşatmasın diye pixelated. */}
+      <img
+        src="/cakil-degirmen.png"
+        alt={t('about.illustrationAlt')}
+        width="56"
+        height="80"
+        class="w-32 sm:w-40 h-auto [image-rendering:pixelated]"
+      />
+
+      {latest.length > 0 && (
+        <div class="mt-10">
         <SectionLabel as="h2">{t('home.latest')}</SectionLabel>
         <ul class="mt-5 space-y-4 list-none p-0 m-0">
           {latest.map((e) => {
@@ -64,7 +75,8 @@ const altUrl = localizePath(otherLang, '/hakkinda/');
             );
           })}
         </ul>
-      </aside>
-    )}
+        </div>
+      )}
+    </aside>
   </section>
 </BaseLayout>
