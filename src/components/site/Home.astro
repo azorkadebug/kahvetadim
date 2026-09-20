@@ -25,12 +25,28 @@ const altUrl = localizePath(otherLang, '/');
 <BaseLayout title={t('site.title')} locale={locale} altUrl={altUrl}>
   <section class="py-8 md:py-16 border-b border-[var(--color-line)]">
     <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">{t('home.kicker')}</p>
-    <h1 class="mt-4 font-serif text-4xl sm:text-5xl md:text-7xl leading-[1.05] max-w-3xl break-words">
-      {t('home.titlePre')}<span class="italic">{t('home.titleEm')}</span>{t('home.titlePost')}
+
+    {/* Açılış bir slogan değil, uydurma kelimenin sözlük maddesi:
+        marka adını açıklıyor ve defterin ne olduğunu tek yerde söylüyor. */}
+    <h1 class="mt-5 font-serif text-4xl sm:text-5xl md:text-6xl leading-[1.05] max-w-3xl break-words">
+      cuppin<span class="text-[var(--color-accent-deep)]">dog</span>
     </h1>
-    <p class="mt-5 max-w-2xl text-lg text-[var(--color-ink-soft)] font-serif">
-      {t('home.intro')}
+    <p class="mt-3 font-sans text-sm text-[var(--color-ink-soft)]">
+      <span class="italic font-serif text-base">{t('home.wordType')}</span>
+      <span class="mx-2 text-[var(--color-line)]">·</span>
+      <span class="tracking-wide">/{t('home.pronounce')}/</span>
     </p>
+
+    <ol class="mt-6 max-w-2xl space-y-3 font-serif text-lg sm:text-xl text-[var(--color-ink)]">
+      <li class="flex gap-3">
+        <span class="tnum font-sans text-sm text-[var(--color-accent-deep)] pt-1.5">1.</span>
+        <span>{t('home.defOne')}</span>
+      </li>
+      <li class="flex gap-3">
+        <span class="tnum font-sans text-sm text-[var(--color-accent-deep)] pt-1.5">2.</span>
+        <span class="text-[var(--color-ink-soft)]">{t('home.defTwo')}</span>
+      </li>
+    </ol>
   </section>
 
   <section class="py-12">
