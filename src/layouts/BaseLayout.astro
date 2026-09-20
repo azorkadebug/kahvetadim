@@ -3,7 +3,6 @@ import '../styles/global.css';
 import { useTranslations, ogLocale, defaultLang, type Lang } from '../i18n/ui';
 import { localizePath } from '../i18n/utils';
 import Wordmark from '../components/site/Wordmark.astro';
-import KenarCakil from '../components/site/KenarCakil.astro';
 
 interface Props {
   title: string;
@@ -85,7 +84,6 @@ const homeHref = localizePath(locale, '/');
     <slot name="head" />
   </head>
   <body class="bg-[var(--color-bg)] text-[var(--color-ink)]">
-    <KenarCakil />
     {/* Künye ortada: marka üstte, gezinme altında — dergi başlığı düzeni. */}
     <header class="border-b border-[var(--color-line)]">
       <div class="mx-auto max-w-5xl px-5 sm:px-6 py-6 sm:py-8 flex flex-col items-center gap-4">
