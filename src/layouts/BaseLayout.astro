@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { useTranslations, ogLocale, defaultLang, type Lang } from '../i18n/ui';
 import { localizePath } from '../i18n/utils';
+import Wordmark from '../components/site/Wordmark.astro';
 
 interface Props {
   title: string;
@@ -95,7 +96,8 @@ const homeHref = localizePath(locale, '/');
             height="36"
             class="w-8 h-8 sm:w-9 sm:h-9 shrink-0 [image-rendering:pixelated]"
           />
-          <span>{t('site.brandLead')}<span class="text-[var(--color-accent-deep)]">{t('site.brandAccent')}</span></span>
+          <Wordmark />
+          <span class="sr-only">{t('site.name')}</span>
         </a>
         <nav class="font-sans text-xs sm:text-sm uppercase tracking-[0.14em] sm:tracking-widest text-[var(--color-ink-soft)] flex items-center gap-4 sm:gap-6">
           <a href={navArchive} class="py-2 -my-2 hover:text-[var(--color-ink)]">{t('nav.archive')}</a>
