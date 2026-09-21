@@ -53,16 +53,20 @@ const altUrl = localizePath(otherLang, '/');
                   <div class="mt-1 font-sans text-[9px] uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">{t('data.score')}</div>
                 </div>
               </a>
-              <div class="mt-6 grid md:grid-cols-5 gap-x-10 gap-y-4">
-                <div class="md:col-span-3">
+              <div class="mt-6 grid md:grid-cols-2 lg:grid-cols-5 gap-x-10 gap-y-4">
+                <div class="lg:col-span-3 min-w-0">
                   <p class="font-sans text-xs text-[var(--color-ink-soft)]">
                     {formatDate(locale, d.date)} · {d.coffee.roaster}
                   </p>
-                  <h3 class="mt-2 font-serif text-3xl sm:text-4xl md:text-5xl leading-[1.1] break-words">
+                  <h3 class="mt-2 font-serif text-3xl sm:text-4xl md:text-5xl leading-[1.1] [overflow-wrap:anywhere]">
                     <a href={href} class="hover:text-[var(--color-ink-soft)]">{d.title}</a>
                   </h3>
                 </div>
-                <div class="md:col-span-2">
+                {/* Künye satırı (16px) + h3'ün mt-2'si (8px) kadar aşağı kaydırılıyor ki
+                    özetin ilk taban çizgisi başlığınkiyle buluşsun; önceden ikisi
+                    aynı üst kenardan başlıyor ama farklı puntoda oldukları için
+                    hiçbir yerde hizalanmıyordu. */}
+                <div class="lg:col-span-2 min-w-0 md:mt-6">
                   <p class="text-[var(--color-ink-soft)] leading-relaxed">{d.summary}</p>
                   <p class="mt-4 font-sans text-xs uppercase tracking-[0.14em] text-[var(--color-ink-soft)]">
                     {[d.coffee.origin, processLabel(locale, d.coffee.process), d.coffee.variety].filter(Boolean).join(' · ')}
@@ -80,13 +84,13 @@ const altUrl = localizePath(otherLang, '/');
           </div>
         )}
         {rest.length > 0 && (
-          <div class="grid sm:grid-cols-2 gap-x-10 gap-y-12 pt-8">
+          <div class="grid min-[560px]:grid-cols-2 gap-x-10 gap-y-12 pt-5">
             {rest.map((entry) => {
               const href = tastingUrl(locale, tastingSlug(entry.id));
               const d = entry.data;
               return (
                 <article>
-                  <a href={href} class="relative block aspect-square bg-[var(--color-bg-soft)] overflow-hidden">
+                  <a href={href} class="relative block aspect-[16/10] min-[560px]:aspect-square bg-[var(--color-bg-soft)] overflow-hidden">
                     {d.coverImage && (
                       <Image
                         src={d.coverImage}
@@ -96,14 +100,14 @@ const altUrl = localizePath(otherLang, '/');
                         class="w-full h-full object-cover"
                       />
                     )}
-                    <div class="absolute top-3 right-3 bg-[var(--color-bg)] px-2.5 py-1.5 text-center">
+                    <div class="absolute top-4 right-4 bg-[var(--color-bg)] px-2.5 py-1.5 text-center">
                       <div class="font-serif tnum text-xl leading-none text-[var(--color-accent-deep)]">{d.rating.overall}</div>
                     </div>
                   </a>
                   <p class="mt-4 font-sans text-xs text-[var(--color-ink-soft)]">
                     {formatDate(locale, d.date)} · {d.coffee.roaster}
                   </p>
-                  <h3 class="mt-1.5 font-serif text-xl sm:text-2xl leading-snug break-words">
+                  <h3 class="mt-1.5 font-serif text-xl sm:text-2xl leading-snug [overflow-wrap:anywhere]">
                     <a href={href} class="hover:text-[var(--color-ink-soft)]">{d.title}</a>
                   </h3>
                   <p class="mt-3 font-sans text-xs uppercase tracking-[0.14em] text-[var(--color-ink-soft)]">

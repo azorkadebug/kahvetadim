@@ -83,13 +83,13 @@ const subRatings = [
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(reviewLd)} is:inline />
 
   <article>
-    <header class="py-6 sm:py-8 md:py-12">
+    <header class="py-8 md:py-16">
       {/* künye satırı: bölüm başlıklarından farklı rol → harf aralığı yok */}
       <p class="font-sans text-xs text-[var(--color-ink-soft)]">
         <span class="text-[var(--color-ink)]">{t('site.author')}</span>
         {' · '}{formatDate(locale, d.date)} · {d.coffee.roaster}
       </p>
-      <h1 class="mt-4 font-serif text-3xl sm:text-4xl md:text-6xl leading-[1.1] max-w-3xl break-words">
+      <h1 class="mt-4 font-serif text-3xl sm:text-4xl md:text-6xl leading-[1.1] max-w-2xl [overflow-wrap:anywhere]">
         {d.title}
       </h1>
       <p class="mt-5 font-serif text-base sm:text-lg md:text-xl text-[var(--color-ink-soft)] max-w-2xl leading-relaxed italic">
@@ -102,12 +102,18 @@ const subRatings = [
 
     {d.coverImage && (
       <figure class="mt-10">
+        {/* Tek oran: kapak yüksekliği önceden yazıdan yazıya 996-1329px
+            arasında değişiyor, okuyucu gövde metnine her seferinde farklı
+            derinlikte iniyordu. Oran 1:1 seçildi çünkü kapakların çoğu zaten
+            1024x1024; 16:10 denendi ve fazla agresifti (Peru kapağında poşet
+            etiketi, Çekya kapağında poşetin altı kesiliyordu). Kare, dikey
+            olan azınlığı da standart 4:5 -> 1:1 kırpımıyla bırakıyor. */}
         <Image
           src={d.coverImage}
           alt={d.title}
           widths={[480, 768, 1200, 1600]}
           sizes="(min-width: 1024px) 1024px, 100vw"
-          class="w-full h-auto"
+          class="w-full aspect-square object-cover"
         />
         <figcaption class="mt-3 font-sans text-xs text-[var(--color-ink-soft)]">
           {[d.coffee.roaster, d.coffee.origin].filter(Boolean).join(' · ')}
@@ -118,13 +124,13 @@ const subRatings = [
     {/* Gövde sola dayalı; sağdaki sütun ikinci okuma katmanı (ölçüm/nota).
         Önceden gövde ortalanmış, başlık sola dayalıydı — göz her seferinde
         108px zıplıyordu ve sağdaki alan boş kalıyordu. */}
-    <div class="py-12 grid lg:grid-cols-[minmax(0,42rem)_1fr] gap-x-12 xl:gap-x-16 gap-y-12 items-start">
+    <div class="py-12 grid lg:grid-cols-[minmax(0,42rem)_1fr] gap-x-12 gap-y-12 items-start">
       <div class="prose-editorial font-serif text-lg leading-[1.75] text-[var(--color-ink)]">
         <Content />
       </div>
 
       {(subRatings.length > 0 || d.rating.flavorNotes.length > 0) && (
-        <aside class="lg:sticky lg:top-8 space-y-10">
+        <aside class="lg:sticky lg:top-[3.25rem] xl:top-8 space-y-10 max-w-sm lg:max-w-none">
           {subRatings.length > 0 && (
             <div>
               <SectionLabel as="h3">{t('detail.palate')}</SectionLabel>

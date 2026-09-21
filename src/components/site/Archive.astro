@@ -24,8 +24,13 @@ const altUrl = localizePath(otherLang, '/tadimlar/');
   locale={locale}
   altUrl={altUrl}
 >
-  <section class="py-8 md:py-16 border-b border-[var(--color-line)] flex items-end justify-between gap-6">
-    <div>
+  {/* Önceden `items-end justify-between` idi: 1440'ta başlık bloğu ile çizim
+      arasında 489px boş alan kalıyor, blok kısa olduğu için alta yapışıp
+      kickerı 60px aşağı itiyordu — sayfalar arası ritim buradan kayıyordu.
+      `items-start` + `flex-1` ile kicker 257'ye, yani diğer sayfalarla aynı
+      yüksekliğe geliyor; çizim `self-end` ile alt hizasını koruyor. */}
+  <section class="py-8 md:py-16 border-b border-[var(--color-line)] flex items-start justify-between gap-6">
+    <div class="flex-1 min-w-0">
       <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">{t('archive.kicker')}</p>
       <h1 class="mt-3 font-serif text-4xl sm:text-5xl">{t('archive.title')}</h1>
       <p class="mt-5 text-[var(--color-ink-soft)] font-serif">{archiveCount(locale, sorted.length)}.</p>
@@ -38,7 +43,7 @@ const altUrl = localizePath(otherLang, '/tadimlar/');
       alt={t('archive.illustrationAlt')}
       width="84"
       height="86"
-      class="w-20 sm:w-32 md:w-44 h-auto shrink-0 [image-rendering:pixelated]"
+      class="w-24 sm:w-32 md:w-40 h-auto shrink-0 self-end [image-rendering:pixelated]"
     />
   </section>
 
@@ -61,9 +66,9 @@ const altUrl = localizePath(otherLang, '/tadimlar/');
           {sorted.map((entry) => {
             const tdata = entry.data;
             return (
-              <tr class="border-b border-[var(--color-line)] hover:bg-[var(--color-bg-soft)]/50">
+              <tr class="align-baseline border-b border-[var(--color-line)] hover:bg-[var(--color-bg-soft)]/50">
                 <td class="py-4 pr-4 text-[var(--color-ink-soft)] whitespace-nowrap">{formatDate(locale, tdata.date, { day: 'numeric', month: 'short', year: 'numeric' })}</td>
-                <td class="py-4 pr-4">
+                <td class="py-4 pr-4 [overflow-wrap:anywhere]">
                   <a href={tastingUrl(locale, tastingSlug(entry.id))} class="font-serif text-lg hover:text-[var(--color-ink-soft)]">{tdata.title}</a>
                   <div class="text-xs text-[var(--color-ink-soft)]">{tdata.coffee.roaster}</div>
                 </td>

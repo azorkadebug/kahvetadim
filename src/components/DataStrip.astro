@@ -59,7 +59,7 @@ if (coffee.roastDate) items.push({ label: t('data.roasted'), value: fmt(coffee.r
 <section class="font-sans border-y border-[var(--color-line)] bg-[var(--color-bg)]">
   <div class="flex flex-col lg:flex-row lg:items-stretch">
     {/* demleme yöntemi — el çizimi ikon, sitenin en özgün grafik varlığı */}
-    <div class="flex items-center gap-4 px-1 py-6 lg:pr-8 lg:border-r border-[var(--color-line)] lg:min-w-[15rem]">
+    <div class="flex items-center gap-4 py-6 lg:pr-8 lg:border-r border-[var(--color-line)] lg:min-w-[15rem]">
       <BrewIcon method={brew.method.kind} size={56} class="text-[var(--color-accent)] shrink-0" />
       <div>
         <div class="text-[10px] uppercase tracking-[0.18em] text-[var(--color-ink-soft)]">{t('data.brew')}</div>
@@ -67,7 +67,7 @@ if (coffee.roastDate) items.push({ label: t('data.roasted'), value: fmt(coffee.r
       </div>
     </div>
 
-    <ul class="flex-1 grid list-none m-0 p-0 grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-5 px-1 lg:px-8 pb-6 lg:py-6 border-t lg:border-t-0 border-[var(--color-line)] pt-6 lg:pt-6">
+    <ul class="flex-1 grid list-none m-0 p-0 grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-5 lg:px-8 pb-6 lg:py-6 border-t lg:border-t-0 border-[var(--color-line)] pt-6 lg:pt-6">
       {items.map(({ label, value, num }) => (
         <li>
           <span class="block text-[10px] uppercase tracking-[0.18em] text-[var(--color-ink-soft)]">{label}</span>
@@ -86,7 +86,7 @@ if (coffee.roastDate) items.push({ label: t('data.roasted'), value: fmt(coffee.r
     </ul>
 
     {/* puan: sayfanın ikinci büyük ölçek anı */}
-    <div class="flex items-baseline gap-4 lg:flex-col lg:items-end lg:justify-center lg:gap-0 px-1 lg:pl-8 py-6 border-t lg:border-t-0 lg:border-l border-[var(--color-line)] lg:min-w-[10rem]">
+    <div class="flex items-baseline gap-4 lg:flex-col lg:items-end lg:justify-center lg:gap-0 lg:pl-8 py-6 border-t lg:border-t-0 lg:border-l border-[var(--color-line)] lg:min-w-[10rem]">
       <div class="text-[10px] uppercase tracking-[0.18em] text-[var(--color-ink-soft)] lg:order-2 lg:mt-1">
         {t('data.score')}
       </div>

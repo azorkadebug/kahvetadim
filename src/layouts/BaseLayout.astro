@@ -37,6 +37,36 @@ const otherPath = altUrl ?? localizePath(otherLang, '/');
 const trURL = locale === 'tr' ? canonicalURL : altUrl ? new URL(altUrl, Astro.site).toString() : null;
 const enURL = locale === 'en' ? canonicalURL : altUrl ? new URL(altUrl, Astro.site).toString() : null;
 
+// Yalnız geliştirmede: html/body'deki `overflow-x: clip` taşmayı gerçek
+// ama GÖRÜNMEZ yapıyor — denetimde tek uzun kelimenin arşiv tablosunu 226px
+// taşırdığı, puan sütununu tümden yok ettiği ancak kural geçici kaldırılınca
+// görülebildi. Bu bekçi aynı ölçümü her yüklemede ve yeniden boyutlandırmada
+// yapıp konsola yazar. Üretim çıktısına hiç girmez.
+const tasmaBekcisi = `
+(() => {
+  const bak = () => {
+    const d = document.documentElement, b = document.body;
+    const eski = [d.style.overflowX, b.style.overflowX];
+    d.style.overflowX = b.style.overflowX = 'visible';
+    const iw = window.innerWidth, suclu = [];
+    document.querySelectorAll('body *').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.width > 0 && (r.right > iw + 0.5 || r.left < -0.5)) suclu.push(el);
+    });
+    const dw = d.scrollWidth;
+    d.style.overflowX = eski[0];
+    b.style.overflowX = eski[1];
+    if (suclu.length) {
+      console.warn('[taşma] ' + iw + 'px genişlikte ' + (dw - iw) + 'px yatay taşma · ' + suclu.length + ' öğe', suclu.slice(0, 8));
+    }
+  };
+  if (document.readyState === 'complete') bak();
+  else window.addEventListener('load', bak);
+  let z;
+  window.addEventListener('resize', () => { clearTimeout(z); z = setTimeout(bak, 250); });
+})();
+`;
+
 const navArchive = localizePath(locale, '/tadimlar/');
 const navAbout = localizePath(locale, '/hakkinda/');
 const homeHref = localizePath(locale, '/');
@@ -85,7 +115,7 @@ const homeHref = localizePath(locale, '/');
   </head>
   <body class="bg-[var(--color-bg)] text-[var(--color-ink)]">
     {/* Künye ortada: marka üstte, gezinme altında — dergi başlığı düzeni. */}
-    <header class="border-b border-[var(--color-line)]">
+    <header class="relative z-30 bg-[var(--color-bg)] border-b border-[var(--color-line)]">
       <div class="mx-auto max-w-5xl px-5 sm:px-6 py-6 sm:py-8 flex flex-col items-center gap-4">
         <a href={homeHref} class="flex items-center gap-3 font-serif tracking-tight">
           {/* Çakıl: 88px kaynak, 44px çiziliyor — pixelated olmazsa tarayıcı
@@ -119,7 +149,7 @@ const homeHref = localizePath(locale, '/');
       <slot />
     </main>
 
-    <footer class="mt-24 border-t border-[var(--color-line)]">
+    <footer class="mt-16 md:mt-24 border-t border-[var(--color-line)]">
       <div class="mx-auto max-w-5xl px-5 sm:px-6 py-6 sm:py-8 font-sans text-xs sm:text-sm text-[var(--color-ink-soft)] flex justify-between items-center gap-4">
         <span>© {new Date().getFullYear()} Cuppindog</span>
         <a
@@ -137,6 +167,8 @@ const homeHref = localizePath(locale, '/');
         </a>
       </div>
     </footer>
+
+    {import.meta.env.DEV && <script is:inline set:html={tasmaBekcisi} />}
   </body>
 </html>
 
