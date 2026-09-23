@@ -28,7 +28,7 @@ export const ui = {
   tr: {
     'site.author': 'Sabri',
     'site.name': 'cuppindog',
-    'site.title': 'cuppindog — Kişisel kahve tadım defteri',
+    'site.title': 'cuppindog · lezzetli kahvenin peşinde',
     'site.description':
       'Tattığım kahvelerin menşeini, prosesini ve damakta bıraktığı izi tek tek yazdığım kişisel tadım defteri.',
 
@@ -101,7 +101,7 @@ export const ui = {
   en: {
     'site.author': 'Sabri',
     'site.name': 'cuppindog',
-    'site.title': 'cuppindog — A personal coffee tasting journal',
+    'site.title': 'cuppindog · a nose for coffee',
     'site.description':
       'A personal tasting journal where I write up the origin, process and cup of every coffee I taste, one by one.',
 
