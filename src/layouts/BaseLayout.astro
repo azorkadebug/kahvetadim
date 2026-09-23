@@ -133,37 +133,34 @@ const homeHref = localizePath(locale, '/');
   <body class="bg-[var(--color-bg)] text-[var(--color-ink)]">
     <a href="#icerik" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-2 focus:left-2 focus:bg-[var(--color-bg)] focus:px-3 focus:py-2 font-sans text-sm">{t('a11y.skip')}</a>
 
-    {/* Künye: kelime markası ve gezinme tek satırda; Çakıl başlığın alt
-        çizgisine oturup onu kırıyor (sayfanın kenarından bakıyor).
-        Çakıl 24px'lik kesimden mobilde 48px (2×), masaüstünde 72px (3×);
-        kelime markası 9 satır → 18px (2×) / 27px (3×): ikisi aynı piksel ızgarasında. */}
+    {/* Künye ortada: marka üstte, gezinme altında — dergi başlığı düzeni.
+        (C düzeni — çizgiye oturan Çakıl — 2026-09-23 denendi, geri alındı.) */}
     <header class="relative z-30 bg-[var(--color-bg)] border-b border-[var(--color-line)] print:hidden">
-      <div class="relative mx-auto max-w-5xl px-5 sm:px-6 h-14 sm:h-[76px] flex items-center justify-between gap-4">
-        <a href={homeHref} class="group flex items-center h-full pl-[68px] sm:pl-[104px]">
-          <span class="absolute left-3 sm:left-4 -bottom-[25px] sm:-bottom-[37px] bg-[var(--color-bg)] px-1 sm:px-1.5">
-            <img
-              src="/marka-cakil-24.png"
-              alt=""
-              width="72"
-              height="72"
-              class="block w-12 h-12 sm:w-[72px] sm:h-[72px] [image-rendering:pixelated]"
-            />
-          </span>
-          {/* 440px altında kelime markası ile menü yan yana sığmıyor (TR "Fincanlar ·
-              Çakıl" ile 320px'te 70px taşıyordu): dar telefonda logo yalnız Çakıl. */}
-          <span class="hidden min-[440px]:contents"><Wordmark /></span>
+      <div class="mx-auto max-w-5xl px-5 sm:px-6 py-6 sm:py-8 flex flex-col items-center gap-4">
+        <a href={homeHref} class="flex items-center gap-3 font-serif tracking-tight">
+          {/* Çakıl: 88px kaynak, 44px çiziliyor — pixelated olmazsa tarayıcı
+              yumuşatıp piksel kimliğini bozuyor. */}
+          <img
+            src="/marka-cakil.png"
+            alt=""
+            width="44"
+            height="44"
+            class="w-10 h-10 sm:w-11 sm:h-11 shrink-0 [image-rendering:pixelated]"
+          />
+          <Wordmark />
           <span class="sr-only">{t('site.name')}</span>
         </a>
-        <nav class="font-sans text-[11px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.14em] text-[var(--color-ink-soft)] flex items-center gap-1 sm:gap-3">
-          <a href={navArchive} class="nav-link">{t('nav.archive')}</a>
-          <a href={navAbout} class="nav-link">{t('nav.about')}</a>
-          {/* Etkin dil de görünsün: önceden yalnız diğer dilin kodu vardı ve
-              dil değiştirici olduğu anlaşılmıyordu. */}
-          <span class="flex items-center pl-1 sm:pl-2">
-            <span class="hidden min-[420px]:inline text-[var(--color-ink)] font-semibold" aria-current="true">{locale.toUpperCase()}</span>
-            <span class="hidden min-[420px]:inline px-1 opacity-50" aria-hidden="true">/</span>
-            <a href={otherPath} hreflang={otherLang} lang={otherLang} aria-label={t('a11y.switchLang')} class="nav-link !px-1">{otherLang.toUpperCase()}</a>
-          </span>
+        <nav class="font-sans text-xs sm:text-sm uppercase tracking-[0.14em] sm:tracking-widest text-[var(--color-ink-soft)] flex items-center gap-4 sm:gap-6">
+          <a href={navArchive} class="py-2 -my-2 hover:text-[var(--color-ink)] transition-colors">{t('nav.archive')}</a>
+          <a href={navAbout} class="py-2 -my-2 hover:text-[var(--color-ink)] transition-colors">{t('nav.about')}</a>
+          <a
+            href={otherPath}
+            hreflang={otherLang}
+            aria-label={t('a11y.switchLang')}
+            class="py-2 -my-2 pl-3 sm:pl-6 border-l border-[var(--color-line)] hover:text-[var(--color-ink)] transition-colors"
+          >
+            {otherLang.toUpperCase()}
+          </a>
         </nav>
       </div>
     </header>
