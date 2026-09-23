@@ -1,9 +1,9 @@
 ---
-title: 'Kahvelerin Hikayesi: Serüvenin İlk Konuğu "Hue"'
+title: 'Kahvelerin Hikayesi: Serüvenin İlk Konuğu “Hue”'
 date: 2026-04-24
 coverImage: ./hue-colombia-oscar-hernandez/coverImage.png
 summary: >-
-  Çok sevdiğim bir dostumun Selanik'e gittiğini duyunca, bir süredir radarımda
+  Çok sevdiğim bir dostumun Selanik’e gittiğini duyunca, bir süredir radarımda
   olan Hue seçkisini denemek için harika bir fırsat yakaladığımı düşündüm.
 coffee:
   roaster: Hue

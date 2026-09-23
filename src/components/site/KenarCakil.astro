@@ -14,7 +14,14 @@
    - Sayfa açıldığında hiç görünmez: ilk kaydırmayla koşarak girer.
      Önceden fincanın içinde başlıyordu, oradan koşuya geçmesi tuhaftı.
    - Yalnız 1280px üstünde (altında sol boşluk yok) ve hareket azaltma
-     kapalıyken görünür. */
+     kapalıyken görünür. Baskıda ikisi de gizli.
+   - Piksel ölçüleri: sprite'lar 1 görsel pikseli = 1 çizim pikseli
+     ızgarasında; CSS boyutları hep tam sayı kat (px ile, rem değil —
+     kök yazı boyutu değişince kat bozulmasın).
+       cakil-kosu.png    92x32  (2 kare × 46x32)  geniş: 2x, dar: 1x
+       cakil-atlama.png  90x86  (2 kare × 45x86)  1x
+       cakil-cikis.png   100x79 (2 kare × 50x79)  1x
+       marka-cakil-24.png 24x24                   dar şeritte mola: 1x */
 ---
 
 {/* Dar ekran: üstte ilerleme çizgisi, Çakıl çizginin üstünde koşuyor.
@@ -33,7 +40,7 @@
 <style>
   .ust-cakil { display: none; }
 
-  @media (max-width: 1279px) and (prefers-reduced-motion: no-preference) {
+  @media screen and (max-width: 1279px) and (prefers-reduced-motion: no-preference) {
     .ust-cakil {
       display: block;
       position: fixed;
@@ -41,7 +48,7 @@
       left: 0;
       right: 0;
       /* Çizgi şeridin dibinde; üstteki boşluk köpeğe yer açıyor, yoksa
-         ekranın dışında kalıyor. */
+         ekranın dışında kalıyor. 34 = 2 px çizgi + 32 px köpek (1x). */
       height: 34px;
       /* Şerit saydamdı: gövde metni altından geçerken turuncu çizgi
          satırların üstünü çiziyordu (390px'te <h2> tam ortasından). Opak
@@ -73,10 +80,13 @@
       /* Düz `left: var(--x)` + margin-left:-30px, ilerleme %0'a yakınken
          köpeği ekranın soluna taşırıyordu (L-30 / R4 → 34px'in 30'u dışarıda).
          clamp iki uçta da çerçeve içinde tutuyor. */
-      left: clamp(30px, var(--x, 0%), calc(100% - 4px));
-      width: 34px;
-      height: 23px;
-      margin-left: -30px;
+      /* Koşu karesi 46x32, 1x. Burun sağ kenardan 4 px içeride. */
+      left: clamp(42px, var(--x, 0%), calc(100% - 4px));
+      /* Tam piksele yuvarla: kesirli konumda piksel sanatı sütun çiftler. */
+      left: round(clamp(42px, var(--x, 0%), calc(100% - 4px)), 1px);
+      width: 46px;
+      height: 32px;
+      margin-left: -42px;
       background-image: url('/cakil-kosu.png');
       background-size: 200% 100%;
       background-repeat: no-repeat;
@@ -88,14 +98,16 @@
       animation: kenar-kosu 300ms steps(1) infinite;
     }
 
-    /* Durunca fincanın içindeki kare (sprite'ın ikinci karesi). */
+    /* Durunca marka başı (24x24, 1x). Fincandaki kare 45x86; şeride
+       ancak 0,35x küçültülerek sığıyordu, tam sayı katta sığmıyor. */
     #ustCakil[data-durum='mola'] .ust-cakil-kopek,
     #ustCakil[data-durum='cikis'] .ust-cakil-kopek {
-      width: 16px;
-      height: 31px;
-      margin-left: -16px;
-      background-image: url('/cakil-atlama.png');
-      background-position: 100% 0%;
+      width: 24px;
+      height: 24px;
+      margin-left: -24px;
+      background-image: url('/marka-cakil-24.png');
+      background-size: 24px 24px;
+      background-position: 0 0;
     }
 
     #ustCakil[data-durum='yok'] .ust-cakil-kopek { opacity: 0; }
@@ -103,25 +115,33 @@
 
   .kenar-cakil { display: none; }
 
-  @media (min-width: 1280px) and (prefers-reduced-motion: no-preference) {
+  @media screen and (min-width: 1280px) and (prefers-reduced-motion: no-preference) {
     .kenar-cakil {
       display: grid;
       position: fixed;
       /* İçerik 64rem ve ortalanmış; sprite sol boşluğa oturuyor. */
       left: calc((100vw - 64rem) / 2 - 6.5rem);
+      left: round(calc((100vw - 64rem) / 2 - 6.5rem), 1px);
       top: 0;
       width: 5.5rem;
       height: 5.5rem;
       transform: translateY(var(--y, 25vh));
+      transform: translateY(round(var(--y, 25vh), 1px));
       transition: transform 280ms ease-out;
       pointer-events: none;
       z-index: 5;
     }
 
+    /* Kare değişimleri anlık: eskiden hepsinde 120 ms opaklık geçişi
+       vardı; biri sönerken öteki belirince aynı karede iki yarı saydam
+       köpek görünüyordu. Solma yalnız ilk girişte (yok → koşu), orada
+       sönen başka kare yok. */
     .kenar-cakil-kosu,
     .kenar-cakil-mola,
     .kenar-cakil-cikis {
       grid-area: 1 / 1;
+    }
+    .kenar-cakil[data-giris] .kenar-cakil-kosu {
       transition: opacity 120ms ease-out;
     }
 
@@ -130,10 +150,11 @@
     .kenar-cakil-kosu { align-self: center; justify-self: center; }
     .kenar-cakil-mola { align-self: end; }
 
-    /* Sprite sayfası: 186x64, iki kare yan yana. */
+    /* Sprite sayfası: 92x32, iki kare yan yana; 2x → 92x64. Kutudan
+       (88px) 2'şer px taşıyor, pointer-events yok, zararsız. */
     .kenar-cakil-kosu {
-      width: 5.5rem;
-      height: 3.8rem;
+      width: 92px;
+      height: 64px;
       background-image: url('/cakil-kosu.png');
       background-size: 200% 100%;
       background-repeat: no-repeat;
@@ -144,10 +165,10 @@
       opacity: 0;
     }
 
-    /* Atlayış sayfası: 90x86, iki kare yan yana. */
+    /* Atlayış sayfası: 90x86, iki kare yan yana; 1x. */
     .kenar-cakil-mola {
-      width: 2.9rem;
-      height: 5.5rem;
+      width: 45px;
+      height: 86px;
       justify-self: center;
       background-image: url('/cakil-atlama.png');
       background-size: 200% 100%;
@@ -158,10 +179,10 @@
 
     .kenar-cakil[data-durum='kosuyor'] .kenar-cakil-kosu { opacity: 1; }
 
-    /* Fırlama sayfası: 100x79, iki kare yan yana. */
+    /* Fırlama sayfası: 100x79, iki kare yan yana; 1x. */
     .kenar-cakil-cikis {
-      width: 3.2rem;
-      height: 5.1rem;
+      width: 50px;
+      height: 79px;
       align-self: end;
       justify-self: center;
       background-image: url('/cakil-cikis.png');
@@ -181,6 +202,14 @@
       animation: kenar-atla 520ms cubic-bezier(0.34, 0, 0.62, 1) forwards;
     }
     /* 'yok': sayfa henüz kaydırılmadı, ikisi de gizli. */
+  }
+
+  /* Baskıda sabit şerit her sayfanın ilk satırının üstüne basılıyordu. */
+  @media print {
+    .ust-cakil,
+    .kenar-cakil {
+      display: none !important;
+    }
   }
 
   /* Kare değişimleri medya sorgularının DIŞINDA tanımlı olmalı: bir
@@ -284,6 +313,11 @@
           }
         }, 340);
       } else if (kutu.dataset.durum !== 'cikis') {
+        if (kutu.dataset.durum === 'yok') {
+          // İlk giriş: yalnız burada solarak belirsin (bkz. data-giris).
+          kutu.dataset.giris = '';
+          window.setTimeout(() => delete kutu.dataset.giris, 200);
+        }
         kutu.dataset.durum = 'kosuyor';
         if (ust) ust.dataset.durum = 'kosuyor';
       }

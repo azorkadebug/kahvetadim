@@ -27,13 +27,13 @@ export const dateLocale: Record<Lang, string> = {
 export const ui = {
   tr: {
     'site.author': 'Sabri',
-    'site.name': 'Cuppindog',
-    'site.title': 'Cuppindog — Kişisel kahve tadım defteri',
+    'site.name': 'cuppindog',
+    'site.title': 'cuppindog — Kişisel kahve tadım defteri',
     'site.description':
       'Tattığım kahvelerin menşeini, prosesini ve damakta bıraktığı izi tek tek yazdığım kişisel tadım defteri.',
 
-    'nav.archive': 'Arşiv',
-    'nav.about': 'Hakkında',
+    'nav.archive': 'Fincanlar',
+    'nav.about': 'Çakıl',
 
     // Açılış: Çakıl konuşuyor. Puanları veren Sabri ama son sözü köpek söylüyor.
     'home.illustrationAlt': 'Çakıl, kupa kaşığıyla cupping yaparken; yanında not defteri',
@@ -55,6 +55,10 @@ export const ui = {
     'detail.palate': 'Damak profili',
     'detail.flavors': 'Lezzet notları',
     'detail.back': '← Arşive dön',
+    'detail.coverAlt': '{roaster} kahve paketi, {origin}',
+    'nf.title': 'Bu fincan rafta yok.',
+    'nf.body': 'Aradığın sayfa taşınmış ya da hiç var olmamış. Tadımların hepsi arşivde duruyor; Çakıl hâlâ not alıyor.',
+    'nf.home': 'Ana sayfa',
 
     'rating.aroma': 'Aroma',
     'rating.acidity': 'Asidite',
@@ -92,16 +96,17 @@ export const ui = {
 
     'a11y.instagram': "Instagram'da @cuppindog",
     'a11y.switchLang': 'English (EN)',
+    'a11y.skip': 'İçeriğe geç',
   },
   en: {
     'site.author': 'Sabri',
-    'site.name': 'Cuppindog',
-    'site.title': 'Cuppindog — A personal coffee tasting journal',
+    'site.name': 'cuppindog',
+    'site.title': 'cuppindog — A personal coffee tasting journal',
     'site.description':
       'A personal tasting journal where I write up the origin, process and cup of every coffee I taste, one by one.',
 
-    'nav.archive': 'Archive',
-    'nav.about': 'About',
+    'nav.archive': 'Cups',
+    'nav.about': 'Nose',
 
     'home.illustrationAlt': 'Çakıl cupping with a spoon, a notebook beside the bowl',
     'home.latest': 'Earlier Tastings',
@@ -122,6 +127,10 @@ export const ui = {
     'detail.palate': 'Palate profile',
     'detail.flavors': 'Flavor notes',
     'detail.back': '← Back to archive',
+    'detail.coverAlt': '{roaster} coffee bag, {origin}',
+    'nf.title': "This cup isn't on the shelf.",
+    'nf.body': 'The page you were looking for has been moved or never existed. The tastings are all in the archive — Çakıl is still taking notes.',
+    'nf.home': 'Home',
 
     'rating.aroma': 'Aroma',
     'rating.acidity': 'Acidity',
@@ -159,6 +168,7 @@ export const ui = {
 
     'a11y.instagram': '@cuppindog on Instagram',
     'a11y.switchLang': 'Türkçe (TR)',
+    'a11y.skip': 'Skip to content',
   },
 } as const;
 

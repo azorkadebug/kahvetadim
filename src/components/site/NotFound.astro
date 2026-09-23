@@ -1,0 +1,38 @@
+---
+// 404 her dil için ayrı: kök İngilizce, /tr/404.html Türkçe. Cloudflare
+// (not_found_handling: 404-page) adrese en yakın 404.html'i sunuyor; önceden
+// tek sayfa iki dili taşıyordu ve /tr/ altında İngilizce çerçeveyle açılıyordu.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations, type Lang } from '../../i18n/ui';
+import { localizePath } from '../../i18n/utils';
+
+interface Props {
+  locale: Lang;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const otherLang: Lang = locale === 'tr' ? 'en' : 'tr';
+const link = 'border-b border-[var(--color-ink)] pb-1 hover:text-[var(--color-accent-deep)] hover:border-[var(--color-accent-deep)] transition-colors';
+---
+
+<BaseLayout title={`404 — ${t('site.name')}`} description={t('nf.title')} locale={locale} altUrl={localizePath(otherLang, '/')}>
+  <section class="py-8 md:py-16 grid md:grid-cols-[minmax(0,1fr)_auto] gap-10 md:gap-16 items-center">
+    <div>
+      <p class="etiket">404</p>
+      <h1 class="mt-4 font-serif text-4xl sm:text-5xl leading-tight [text-wrap:balance]">{t('nf.title')}</h1>
+      <p class="mt-5 max-w-[38rem] text-lg text-[var(--color-ink-soft)] font-serif [text-wrap:pretty]">{t('nf.body')}</p>
+      <p class="mt-8 flex flex-wrap gap-x-8 gap-y-3 font-sans text-sm uppercase tracking-[0.18em]">
+        <a href={localizePath(locale, '/tadimlar/')} class={link}>{t('nav.archive')}</a>
+        <a href={localizePath(locale, '/')} class={link}>{t('nf.home')}</a>
+      </p>
+    </div>
+
+    <img
+      src="/cakil-cupping.png"
+      alt={t('home.illustrationAlt')}
+      width="100"
+      height="100"
+      class="w-[200px] lg:w-[300px] h-auto justify-self-start md:justify-self-end [image-rendering:pixelated]"
+    />
+  </section>
+</BaseLayout>

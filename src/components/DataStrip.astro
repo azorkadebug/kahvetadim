@@ -52,30 +52,40 @@ if (brew.waterTemp) items.push({ label: t('data.waterTemp'), value: brew.waterTe
 if (brew.bloom) items.push({ label: t('data.bloom'), value: brew.bloom, num: true });
 if (brew.pour) items.push({ label: t('data.pour'), value: brew.pour, num: true });
 if (coffee.roastDate) items.push({ label: t('data.roasted'), value: fmt(coffee.roastDate)!, num: true });
+
+/* Sütun sayısı alan sayısına göre: son satırda tek hücre kalmasın
+   (7 alan 3/3/1, 10 alan 3/3/3/1 diziliyordu). Mobilde 2 sütun; tek sayıda
+   alan varsa son hücre iki sütuna yayılır. */
+const n = items.length;
+const wideCols = n % 3 === 1 ? 'sm:grid-cols-4' : 'sm:grid-cols-3';
+const lastSpan = n % 2 === 1 ? 'max-sm:col-span-2' : '';
 ---
 
 {/* Ölçüm paneli: sitenin kendine ait tek dili. Değerler gövde metniyle
-    yarışacak boyutta, etiketler geride; vurgu rengi yalnızca burada. */}
-<section class="font-sans border-y border-[var(--color-line)] bg-[var(--color-bg)]">
-  <div class="flex flex-col lg:flex-row lg:items-stretch">
+    yarışacak boyutta, etiketler geride.
+    Düzen: mobilde demleme ve puan üstte tek satırda iki uçta, ızgara altta
+    (önceden üç ayrı tam genişlik bant, şerit bir ekran boyu tutuyordu);
+    lg'de demleme | ızgara | puan, üçü de üste hizalı. */}
+<section class="font-sans border-y border-[var(--color-line)] bg-[var(--color-bg)] break-inside-avoid">
+  <div class="grid grid-cols-[minmax(0,1fr)_auto] lg:grid-cols-[auto_minmax(0,1fr)_auto] items-start">
     {/* demleme yöntemi — el çizimi ikon, sitenin en özgün grafik varlığı */}
-    <div class="flex items-center gap-4 py-6 lg:pr-8 lg:border-r border-[var(--color-line)] lg:min-w-[15rem]">
+    <div class="flex items-center lg:items-start gap-4 py-5 lg:py-6 lg:pr-8 lg:border-r border-[var(--color-line)] lg:self-stretch">
       <BrewIcon method={brew.method.kind} size={56} class="text-[var(--color-accent)] shrink-0" />
       <div>
-        <div class="text-[10px] uppercase tracking-[0.18em] text-[var(--color-ink-soft)]">{t('data.brew')}</div>
+        <div class="etiket">{t('data.brew')}</div>
         <div class="mt-1 text-xl leading-tight text-[var(--color-ink)]">{methodLabel(locale, brew.method)}</div>
       </div>
     </div>
 
-    <ul class="flex-1 grid list-none m-0 p-0 grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-5 lg:px-8 pb-6 lg:py-6 border-t lg:border-t-0 border-[var(--color-line)] pt-6 lg:pt-6">
-      {items.map(({ label, value, num }) => (
-        <li>
-          <span class="block text-[10px] uppercase tracking-[0.18em] text-[var(--color-ink-soft)]">{label}</span>
-          <span class={`block mt-1 text-xl leading-tight text-[var(--color-ink)] ${num ? 'tnum' : ''}`}>
+    <ul class={`col-span-2 lg:col-span-1 lg:order-none order-last grid list-none m-0 p-0 grid-cols-2 ${wideCols} gap-x-6 lg:gap-x-8 gap-y-5 lg:px-8 py-6 border-t lg:border-t-0 border-[var(--color-line)]`}>
+      {items.map(({ label, value, num }, i) => (
+        <li class={`min-w-0 ${i === n - 1 ? lastSpan : ''}`}>
+          <span class="etiket block">{label}</span>
+          <span class={`block mt-1 text-xl leading-tight text-[var(--color-ink)] [overflow-wrap:anywhere] ${num ? 'tnum' : ''}`}>
             {label === t('data.grind') ? (
-              <span class="inline-flex items-center gap-2">
-                <GrinderIcon size={20} class="text-[var(--color-accent)] shrink-0" />
-                {value}
+              <span class="flex items-start gap-2">
+                <GrinderIcon size={20} class="text-[var(--color-accent)] shrink-0 mt-0.5" />
+                <span class="min-w-0">{value}</span>
               </span>
             ) : (
               value
@@ -86,13 +96,11 @@ if (coffee.roastDate) items.push({ label: t('data.roasted'), value: fmt(coffee.r
     </ul>
 
     {/* puan: sayfanın ikinci büyük ölçek anı */}
-    <div class="flex items-baseline gap-4 lg:flex-col lg:items-end lg:justify-center lg:gap-0 lg:pl-8 py-6 border-t lg:border-t-0 lg:border-l border-[var(--color-line)] lg:min-w-[10rem]">
-      <div class="text-[10px] uppercase tracking-[0.18em] text-[var(--color-ink-soft)] lg:order-2 lg:mt-1">
-        {t('data.score')}
-      </div>
-      <div class="font-serif tnum text-6xl lg:text-7xl leading-[0.85] text-[var(--color-accent)] lg:order-1">
+    <div class="flex flex-col items-end justify-center lg:justify-start py-5 lg:py-6 lg:pl-8 lg:border-l border-[var(--color-line)] lg:self-stretch">
+      <div class="font-serif text-6xl lg:text-7xl leading-[0.85] text-[var(--color-accent)]">
         {overall}<span class="font-sans text-xs tracking-wide text-[var(--color-ink-soft)] align-super">/100</span>
       </div>
+      <div class="etiket mt-1.5">{t('data.score')}</div>
     </div>
   </div>
 </section>

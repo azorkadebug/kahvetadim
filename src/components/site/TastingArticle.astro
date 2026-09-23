@@ -24,7 +24,7 @@ const pageURL = new URL(Astro.url.pathname, Astro.site).toString();
 const productName = [d.coffee.roaster, d.coffee.origin, d.coffee.region].filter(Boolean).join(' — ');
 // Şemada ham kapak PNG'sine (2-6 MB) değil, build'in ürettiği hazır OG
 // görseline işaret et — crawler'lar bu alanı çekiyor.
-const coverURL = new URL(`/og/${entry.id}.jpg`, Astro.site).toString();
+const coverURL = new URL(`/og/v2/${entry.id}.jpg`, Astro.site).toString();
 const authorUrl = new URL(localizePath(locale, '/hakkinda/'), Astro.site).toString();
 
 const reviewLd = {
@@ -48,7 +48,7 @@ const reviewLd = {
       : {}),
   },
   author: { '@type': 'Person', name: 'Sabri', url: authorUrl },
-  publisher: { '@type': 'Organization', name: 'Cuppindog', url: 'https://cuppindog.com/' },
+  publisher: { '@type': 'Organization', name: 'cuppindog', url: 'https://cuppindog.com/', logo: { '@type': 'ImageObject', url: 'https://cuppindog.com/icon-512.png' } },
   datePublished: d.date.toISOString().slice(0, 10),
   reviewRating: {
     '@type': 'Rating',
@@ -73,7 +73,7 @@ const subRatings = [
 <BaseLayout
   title={`${d.title} — ${t('site.name')}`}
   description={d.seoDescription ?? d.summary}
-  ogImage={`/og/${entry.id}.jpg`}
+  ogImage={`/og/v2/${entry.id}.jpg`}
   ogType="article"
   locale={locale}
   altUrl={altUrl}
@@ -89,10 +89,10 @@ const subRatings = [
         <span class="text-[var(--color-ink)]">{t('site.author')}</span>
         {' · '}{formatDate(locale, d.date)} · {d.coffee.roaster}
       </p>
-      <h1 class="mt-4 font-serif text-3xl sm:text-4xl md:text-6xl leading-[1.1] max-w-2xl [overflow-wrap:anywhere]">
+      <h1 class="mt-4 font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1] max-w-2xl [overflow-wrap:anywhere] [text-wrap:balance]">
         {d.title}
       </h1>
-      <p class="mt-5 font-serif text-base sm:text-lg md:text-xl text-[var(--color-ink-soft)] max-w-2xl leading-relaxed italic">
+      <p class="mt-5 font-serif text-lg md:text-xl text-[var(--color-ink-soft)] max-w-[38rem] leading-relaxed italic [text-wrap:pretty]">
         {d.summary}
       </p>
     </header>
@@ -101,7 +101,7 @@ const subRatings = [
     <DataStrip coffee={d.coffee} brew={d.brew} overall={d.rating.overall} locale={locale} />
 
     {d.coverImage && (
-      <figure class="mt-10">
+      <figure class="mt-10 lg:max-w-[min(100%,85vh)]">
         {/* Tek oran: kapak yüksekliği önceden yazıdan yazıya 996-1329px
             arasında değişiyor, okuyucu gövde metnine her seferinde farklı
             derinlikte iniyordu. Oran 1:1 seçildi çünkü kapakların çoğu zaten
@@ -110,10 +110,10 @@ const subRatings = [
             olan azınlığı da standart 4:5 -> 1:1 kırpımıyla bırakıyor. */}
         <Image
           src={d.coverImage}
-          alt={d.title}
-          widths={[480, 768, 1200, 1600]}
-          sizes="(min-width: 1024px) 1024px, 100vw"
-          class="w-full aspect-square object-cover"
+          alt={t('detail.coverAlt').replace('{roaster}', d.coffee.roaster).replace('{origin}', d.coffee.origin)}
+          widths={[480, 768, 1200, 1600, 2000]}
+          sizes="(min-width: 1024px) min(976px, 85vh), calc(100vw - 2.5rem)"
+          class="w-full aspect-square object-cover bg-[var(--color-bg-soft)]"
         />
         <figcaption class="mt-3 font-sans text-xs text-[var(--color-ink-soft)]">
           {[d.coffee.roaster, d.coffee.origin].filter(Boolean).join(' · ')}
@@ -124,8 +124,10 @@ const subRatings = [
     {/* Gövde sola dayalı; sağdaki sütun ikinci okuma katmanı (ölçüm/nota).
         Önceden gövde ortalanmış, başlık sola dayalıydı — göz her seferinde
         108px zıplıyordu ve sağdaki alan boş kalıyordu. */}
-    <div class="py-12 grid lg:grid-cols-[minmax(0,42rem)_1fr] gap-x-12 gap-y-12 items-start">
-      <div class="prose-editorial font-serif text-lg leading-[1.75] text-[var(--color-ink)]">
+    {/* Gövde 38rem: satır başına ~65-75 karakter. Sınır yalnız lg'de olunca
+        768-1023 arasında satır 90+ karaktere çıkıyordu. */}
+    <div class="py-12 grid lg:grid-cols-[minmax(0,38rem)_1fr] gap-x-16 gap-y-12 items-start">
+      <div class="prose-editorial font-serif text-lg leading-[1.75] text-[var(--color-ink)] max-w-[38rem]">
         <Content />
       </div>
 
@@ -145,10 +147,10 @@ const subRatings = [
                     </div>
                     {/* cetvel: 10 çentikli ölçek, yükleme çubuğu değil */}
                     <div class="mt-1.5 relative h-2.5" aria-hidden="true">
-                      <div class="absolute inset-x-0 bottom-0 h-px bg-[var(--color-line)]"></div>
+                      <div class="absolute inset-x-0 bottom-0 h-px bg-[var(--color-rule)] cetvel-bos"></div>
                       <div class="absolute inset-x-0 bottom-0 flex justify-between">
                         {Array.from({ length: 10 }).map((_, i) => (
-                          <span class={`w-px ${i < value ? 'h-2.5 bg-[var(--color-accent)]' : 'h-1 bg-[var(--color-line)]'}`}></span>
+                          <span class={`w-px ${i < value ? 'h-2.5 bg-[var(--color-accent)] cetvel-dolu' : 'h-1 bg-[var(--color-rule)] cetvel-bos'}`}></span>
                         ))}
                       </div>
                     </div>
@@ -168,26 +170,45 @@ const subRatings = [
     </div>
   </article>
 
-  <div class="mt-16 pt-8 border-t border-[var(--color-line)]">
-    <a href={localizePath(locale, '/tadimlar/')} class="font-sans text-sm uppercase tracking-[0.2em] text-[var(--color-ink-soft)] hover:text-[var(--color-ink)]">
+  <div class="mt-16 pt-8 border-t border-[var(--color-line)] print:hidden">
+    <a href={localizePath(locale, '/tadimlar/')} class="font-sans text-sm uppercase tracking-[0.2em] text-[var(--color-ink-soft)] hover:text-[var(--color-ink)] transition-colors">
       {t('detail.back')}
     </a>
   </div>
 </BaseLayout>
 
 <style is:global>
-  .prose-editorial p { margin: 0 0 1.25em; }
+  .prose-editorial p { margin: 0 0 1.25em; text-wrap: pretty; }
+  /* Büyük harf tam iki satır: kutu 4em × 0.72 + 0.08em = 2 × 31.5px'in altında.
+     0.82 + 0.1em'de kutu 66px oluyor, iki satırlık harf üçüncü satırı içeri itiyordu. */
   .prose-editorial p:first-of-type::first-letter {
     font-family: var(--font-serif);
     font-size: 4em;
     font-weight: 500;
     float: left;
-    line-height: 0.82;
-    padding: 0.1em 0.08em 0 0;
+    line-height: 0.72;
+    padding: 0.08em 0.08em 0 0;
     color: var(--color-accent);
   }
-  .prose-editorial h2 { font-size: 1.75rem; margin: 2em 0 0.5em; font-weight: 500; }
-  .prose-editorial h3 { font-size: 1.3rem; margin: 1.6em 0 0.4em; font-weight: 500; }
+  /* Başlıklar gövdenin 1.75 satır aralığını miras almasın; mobilde h1 (30px)
+     ile yarışmasın diye h2 küçük başlıyor. Çapa ile gelinince üstteki
+     Çakıl şeridinin altında kalmasın: scroll-margin. */
+  .prose-editorial :is(h2, h3) { line-height: 1.2; text-wrap: balance; scroll-margin-top: 3.5rem; }
+  .prose-editorial h2 { font-size: 1.375rem; margin: 2em 0 0.5em; font-weight: 500; }
+  .prose-editorial h3 { font-size: 1.15rem; margin: 1.6em 0 0.4em; font-weight: 500; }
+  @media (min-width: 640px) {
+    .prose-editorial h2 { font-size: 1.75rem; }
+    .prose-editorial h3 { font-size: 1.3rem; }
+  }
+  /* Gövde başlıkla açılıyorsa ilk başlığın üst boşluğu kapak altyazısına eklenmesin. */
+  .prose-editorial > :first-child { margin-top: 0; }
+  @media (forced-colors: active) {
+    .cetvel-dolu { background: CanvasText !important; forced-color-adjust: none; }
+    .cetvel-bos { background: GrayText !important; forced-color-adjust: none; }
+  }
+  @media print {
+    .cetvel-dolu, .cetvel-bos { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  }
   .prose-editorial blockquote {
     border-left: 3px solid var(--color-accent);
     padding-left: 1.25rem;

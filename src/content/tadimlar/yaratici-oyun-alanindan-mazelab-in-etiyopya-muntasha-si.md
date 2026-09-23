@@ -1,5 +1,5 @@
 ---
-title: 'Yaratıcı Oyun Alanından: Mazelab''in Etiyopya Muntasha''sı'
+title: 'Yaratıcı Oyun Alanından: Mazelab’in Etiyopya Muntasha’sı'
 date: 2026-06-18
 coverImage: ./yaratici-oyun-alanindan-mazelab-in-etiyopya-muntasha-si/coverImage.png
 summary: >-
@@ -23,7 +23,7 @@ brew:
   grindSize: Comandante 26 Klik
   ratio: '1:16.6'
   water: 15/250
-  time: '2:25-2:30'
+  time: '2:25–2:30'
   waterTemp: '92°C'
   bloom: '30 saniye'
   pour: '4 aşamalı (50/100/50/50)'

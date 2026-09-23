@@ -4,7 +4,7 @@ date: 2026-09-11
 coverImage: ../londra-dan-gelen-konuk-special-guests-lerida-pacamara/coverImage.jpg
 summary: >-
   Release 066 from Special Guests, a roaster I kept hearing about on Reddit: a
-  Pacamara from Panama's historic Finca Lérida. Shy on the nose, generous on the
+  Pacamara from Panama’s historic Finca Lérida. Shy on the nose, generous on the
   palate: juicy, oily, with a finish that lingers like a milk dessert.
 seoDescription: >-
   Special Guests Release 066 tasting: Panama Finca Lérida Pacamara, Origami Air S
@@ -19,7 +19,7 @@ coffee:
     discriminant: other
     value: Natural OX
   roastDate: 2026-07-28
-  altitude: '1600-1800m'
+  altitude: '1600–1800 m'
   roastLevel: 'Light'
 brew:
   method:
@@ -28,7 +28,7 @@ brew:
   grindSize: 'Comandante 23 clicks'
   ratio: '1:16'
   water: '15/240'
-  time: '3:00 - 3:10'
+  time: '3:00–3:10'
   waterTemp: '95°C'
   bloom: '30 seconds'
   pour: '4 pours (50/90/50/50)'

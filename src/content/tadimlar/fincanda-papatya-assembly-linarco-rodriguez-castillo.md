@@ -1,9 +1,9 @@
 ---
-title: 'Fincanda Papatya: Assembly''den Linarco Rodriguez Castillo'
+title: 'Fincanda Papatya: Assembly’den Linarco Rodriguez Castillo'
 date: 2026-09-19
 coverImage: ./fincanda-papatya-assembly-linarco-rodriguez-castillo/coverImage.jpg
 summary: >-
-  Londra'dan Assembly'nin kavurduğu, Huila'dan bir Kolombiya. Ilındıkça gövdesi
+  Londra’dan Assembly’nin kavurduğu, Huila’dan bir Kolombiya. Ilındıkça gövdesi
   harekete geçiyor ve fincana papatya hâkim oluyor; alttaki kekremsi yapıyla
   birlikte bir papatya çayı hissi bırakıyor.
 seoDescription: >-
@@ -17,7 +17,7 @@ coffee:
   process:
     discriminant: other
     value: Semi Washed
-  altitude: '2000m'
+  altitude: '2000 m'
   roastLevel: Açık
 brew:
   method:

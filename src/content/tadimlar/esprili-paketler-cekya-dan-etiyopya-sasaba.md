@@ -1,9 +1,9 @@
 ---
-title: 'Esprili Paketler: Çekya''dan Etiyopya Sasaba'
+title: 'Esprili Paketler: Çekya’dan Etiyopya Sasaba'
 date: 2026-06-15
 coverImage: ./esprili-paketler-cekya-dan-etiyopya-sasaba/coverImage.png
 summary: >-
-  Prag'lı NABR'ın esprili paketlerinden çıkan yıkanmış bir Etiyopya Guji.
+  Prag’lı NABR’ın esprili paketlerinden çıkan yıkanmış bir Etiyopya Guji.
   Yasemin ve şeftalili soğuk çayı andıran neşeli bir burun; çözülmesi biraz
   uğraştıran ama doğru dokunuşlarla ağız sulandıran, dengeli bir fincan.
 coffee:
@@ -21,7 +21,7 @@ brew:
   grindSize: Comandante 18 klik
   ratio: '1:16.6'
   water: '12/200'
-  time: '2:45 - 3:00'
+  time: '2:45–3:00'
   waterTemp: '96°C'
   bloom: '30 saniye'
   pour: '3 aşamalı (50/75/75)'

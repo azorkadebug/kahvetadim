@@ -1,11 +1,11 @@
 ---
-title: 'Fincandaki Kırmızı: Peru''dan Wilder Perez Gesha Milestones Coffee'
+title: 'Fincandaki Kırmızı: Peru’dan Wilder Perez Gesha Milestones Coffee'
 date: 2026-05-29
 coverImage: >-
   ./fincandaki-kirmizi-peru-dan-wilder-perez-gesha-milestones-coffee/coverImage.png
 summary: >-
   Damakta iz bırakan parlak bir asidite ve tatlı pekmez aromaları... Milestones
-  kavrumuyla Peru Amazonas'tan gelen Wilder Perez Gesha, Türkiye'de nadir
+  kavrumuyla Peru Amazonas’tan gelen Wilder Perez Gesha, Türkiye’de nadir
   rastladığımız derinlikte, çok katmanlı ve heyecan verici bir kahve.
 coffee:
   roaster: Milestones Coffee
@@ -16,14 +16,14 @@ coffee:
   process:
     discriminant: natural
   roastDate: 2026-05-20
-  altitude: '1700m'
+  altitude: '1700 m'
 brew:
   method:
     discriminant: V60
   grindSize: Kinu 3.7.2
   ratio: '1:16.6'
   water: '15/250'
-  time: '2:25 - 2:30'
+  time: '2:25–2:30'
   waterTemp: '94°C'
   bloom: '30 saniye'
   pour: '5 aşamalı (5x50g)'

@@ -46,6 +46,11 @@
   /* Küçük metin ve bağlantılar için koyultulmuş ton — 5.81:1, AA normal metin. */
   --color-accent-deep: #8a5214;
   --color-line: #e4d8be;
+  /* Cetvelin boş çentikleri ve taban çizgisi: line (1.29:1) neredeyse
+     görünmüyordu; 3.2:1 ile grafik öğe eşiğini geçiyor. */
+  --color-rule: #938770;
+  /* Metin seçimi: mürekkep açık amber üstünde (11:1). */
+  --color-selection: #f0d9b0;
 
   --font-serif: "Fraunces Variable", ui-serif, Georgia, serif;
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
@@ -55,7 +60,9 @@ html {
   background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-serif);
-  font-feature-settings: "ss01", "ss02";
+  /* ss01 Fraunces içindir (ss02 ve tnum Fraunces'te yok); Inter'e miras kalınca sıfırlar eğik çizgili,
+     3/4/6/9 açık formlu çıkıyor ve veri kod gibi görünüyordu (.font-sans'ta sıfırlanır). */
+  font-feature-settings: "ss01";
   /* opsz'i punto boyutuna göre tarayıcı ayarlasın */
   font-optical-sizing: auto;
   /* Güvenlik ağı: taşmayı gizler ama asıl çözüm taşımamaktır. */
@@ -67,12 +74,59 @@ body {
   overflow-x: clip;
 }
 
+.font-sans {
+  font-feature-settings: normal;
+}
+
 ::selection {
-  background: var(--color-accent);
-  color: var(--color-bg);
+  background: var(--color-selection);
+  color: var(--color-ink);
+}
+
+/* Tek odak dili: tarayıcının mavi halkası yerine marka tonu. */
+:focus-visible {
+  outline: 2px solid var(--color-accent-deep);
+  outline-offset: 3px;
+}
+
+/* Büyük harfli küçük etiketler için tek sistem (önceden 5 boy, 4 aralık). */
+.etiket {
+  font-family: var(--font-sans);
+  font-feature-settings: normal;
+  font-size: 11px;
+  line-height: 1.3;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+@media print {
+  @page { margin: 16mm 14mm; }
+  html, body { background: #fff; }
+  body > header, body > footer, .print\:hidden { display: none !important; }
+  main { padding: 0 !important; max-width: none !important; }
+  h1, h2, h3 { break-after: avoid; }
+  section, li, figure, aside > div { break-inside: avoid; }
+  figure img { max-height: 110mm; width: auto !important; }
+  a { color: inherit !important; text-decoration: none !important; }
 }
 
 /* Ölçüm/veri katmanı: sayılar tek genişlikte hizalansın. */
 .tnum {
   font-variant-numeric: tabular-nums;
+}
+
+/* Tek hover dili: metin bağlantıları hover'da açılmaz, koyulaşır ya da
+   amber alt çizgi alır. Başlık bağlantısı kartın görseli üzerine gelince de
+   çizilir (.group). */
+.baslik-link {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition: text-decoration-color 150ms;
+}
+.baslik-link:hover,
+.group:hover .baslik-link {
+  text-decoration-color: var(--color-accent);
 }

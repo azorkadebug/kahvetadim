@@ -23,6 +23,7 @@ const altUrl = localizePath(otherLang, '/');
 ---
 
 <BaseLayout title={t('site.title')} locale={locale} altUrl={altUrl}>
+  <h1 class="sr-only">{t('site.title')}</h1>
   {/* KAPAK DÜZENİ: sayfa doğrudan son tadımla açılıyor; başlık bloğu yok,
       bölüm etiketi ikincil kartların üstüne indi. */}
   <section class="pt-2 pb-12">
@@ -35,38 +36,43 @@ const altUrl = localizePath(otherLang, '/');
           const href = tastingUrl(locale, tastingSlug(lead.id));
           const d = lead.data;
           return (
-            <article class="pb-12 md:pb-16 border-b border-[var(--color-line)]">
-              <a href={href} class="relative block aspect-[16/10] bg-[var(--color-bg-soft)] overflow-hidden">
+            <article class="group pb-12 md:pb-16 border-b border-[var(--color-line)]">
+              {/* Görsel bağlantısı başlığınkinin kopyası: sekme sırasından ve ekran
+                  okuyucudan çıkarıldı (kart başına iki durak, başlık üç kez okunuyordu).
+                  Oran 4:3 — kapakların çoğu dikey; 16:10 yarısını kesiyordu. */}
+              <a href={href} tabindex="-1" aria-hidden="true" class="relative block aspect-square md:aspect-[4/3] bg-[var(--color-bg-soft)] overflow-hidden">
                 {d.coverImage && (
                   <Image
                     src={d.coverImage}
-                    alt={d.title}
-                    widths={[640, 1024, 1440]}
-                    sizes="(min-width: 768px) 1024px, 100vw"
+                    alt=""
+                    widths={[640, 1024, 1440, 1952]}
+                    sizes="(min-width: 1024px) 976px, 100vw"
                     loading="eager"
                     fetchpriority="high"
-                    class="w-full h-full object-cover"
+                    class="w-full h-full object-cover transition-opacity duration-200 group-hover:opacity-90"
                   />
                 )}
                 <div class="absolute top-4 right-4 bg-[var(--color-bg)] px-3 py-2 text-center min-w-[3.5rem]">
-                  <div class="font-serif tnum text-3xl leading-none text-[var(--color-accent)]">{d.rating.overall}</div>
-                  <div class="mt-1 font-sans text-[9px] uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">{t('data.score')}</div>
+                  <div class="font-serif text-3xl leading-none text-[var(--color-accent-deep)]">{d.rating.overall}</div>
+                  <div class="etiket mt-1">{t('data.score')}</div>
                 </div>
               </a>
-              <div class="mt-6 grid md:grid-cols-2 lg:grid-cols-5 gap-x-10 gap-y-4">
+              {/* İki sütun yalnız lg'de: md'de başlık sütunu 340px'e daralıp 48px
+                  puntoyla 6 satıra kırılıyordu. */}
+              <div class="mt-6 grid lg:grid-cols-5 gap-x-10 gap-y-4">
                 <div class="lg:col-span-3 min-w-0">
                   <p class="font-sans text-xs text-[var(--color-ink-soft)]">
                     {formatDate(locale, d.date)} · {d.coffee.roaster}
                   </p>
-                  <h3 class="mt-2 font-serif text-3xl sm:text-4xl md:text-5xl leading-[1.1] [overflow-wrap:anywhere]">
-                    <a href={href} class="hover:text-[var(--color-ink-soft)]">{d.title}</a>
-                  </h3>
+                  <h2 class="mt-2 font-serif text-3xl sm:text-4xl md:text-5xl leading-[1.1] [overflow-wrap:anywhere] [text-wrap:balance]">
+                    <a href={href} class="baslik-link">{d.title}</a>
+                  </h2>
                 </div>
                 {/* Künye satırı (16px) + h3'ün mt-2'si (8px) kadar aşağı kaydırılıyor ki
                     özetin ilk taban çizgisi başlığınkiyle buluşsun; önceden ikisi
                     aynı üst kenardan başlıyor ama farklı puntoda oldukları için
                     hiçbir yerde hizalanmıyordu. */}
-                <div class="lg:col-span-2 min-w-0 md:mt-6">
+                <div class="lg:col-span-2 min-w-0 lg:mt-6">
                   <p class="text-[var(--color-ink-soft)] leading-relaxed">{d.summary}</p>
                   <p class="mt-4 font-sans text-xs uppercase tracking-[0.14em] text-[var(--color-ink-soft)]">
                     {[d.coffee.origin, processLabel(locale, d.coffee.process), d.coffee.variety].filter(Boolean).join(' · ')}
@@ -89,26 +95,26 @@ const altUrl = localizePath(otherLang, '/');
               const href = tastingUrl(locale, tastingSlug(entry.id));
               const d = entry.data;
               return (
-                <article>
-                  <a href={href} class="relative block aspect-[16/10] min-[560px]:aspect-square bg-[var(--color-bg-soft)] overflow-hidden">
+                <article class="group">
+                  <a href={href} tabindex="-1" aria-hidden="true" class="relative block aspect-square bg-[var(--color-bg-soft)] overflow-hidden">
                     {d.coverImage && (
                       <Image
                         src={d.coverImage}
-                        alt={d.title}
-                        widths={[320, 480, 640]}
-                        sizes="(min-width: 640px) 45vw, 100vw"
-                        class="w-full h-full object-cover"
+                        alt=""
+                        widths={[320, 480, 640, 960, 1280]}
+                        sizes="(min-width: 1024px) 468px, (min-width: 560px) calc(50vw - 3rem), calc(100vw - 2.5rem)"
+                        class="w-full h-full object-cover transition-opacity duration-200 group-hover:opacity-90"
                       />
                     )}
                     <div class="absolute top-4 right-4 bg-[var(--color-bg)] px-2.5 py-1.5 text-center">
-                      <div class="font-serif tnum text-xl leading-none text-[var(--color-accent-deep)]">{d.rating.overall}</div>
+                      <div class="font-serif text-xl leading-none text-[var(--color-accent-deep)]">{d.rating.overall}</div>
                     </div>
                   </a>
                   <p class="mt-4 font-sans text-xs text-[var(--color-ink-soft)]">
                     {formatDate(locale, d.date)} · {d.coffee.roaster}
                   </p>
                   <h3 class="mt-1.5 font-serif text-xl sm:text-2xl leading-snug [overflow-wrap:anywhere]">
-                    <a href={href} class="hover:text-[var(--color-ink-soft)]">{d.title}</a>
+                    <a href={href} class="baslik-link">{d.title}</a>
                   </h3>
                   <p class="mt-3 font-sans text-xs uppercase tracking-[0.14em] text-[var(--color-ink-soft)]">
                     {[d.coffee.origin, processLabel(locale, d.coffee.process)].filter(Boolean).join(' · ')}
@@ -123,7 +129,7 @@ const altUrl = localizePath(otherLang, '/');
 
     {sorted.length > 3 && (
       <div class="mt-16">
-        <a href={localizePath(locale, '/tadimlar/')} class="font-sans text-sm uppercase tracking-[0.2em] border-b border-[var(--color-ink)] pb-1 hover:text-[var(--color-ink-soft)] hover:border-[var(--color-ink-soft)]">
+        <a href={localizePath(locale, '/tadimlar/')} class="font-sans text-sm uppercase tracking-[0.2em] border-b border-[var(--color-ink)] pb-1 hover:text-[var(--color-accent-deep)] hover:border-[var(--color-accent-deep)] transition-colors">
           {t('home.all')}
         </a>
       </div>

@@ -9,7 +9,7 @@
     "dev": "astro dev",
     "og:tasting": "node scripts/generate-tasting-og.mjs",
     "favicon": "node scripts/generate-favicon.mjs",
-    "build": "node scripts/generate-favicon.mjs && node scripts/generate-tasting-og.mjs && astro build",
+    "build": "node scripts/generate-favicon.mjs && node scripts/generate-og.mjs && node scripts/generate-tasting-og.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -28,6 +28,8 @@
   "devDependencies": {
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "fontkitten": "^1.0.3",
+    "js-yaml": "^4.3.2",
     "sharp": "^0.34.5"
   }
 }

@@ -1,10 +1,10 @@
 ---
-title: 'Londra''dan Gelen Konuk: Special Guests Lérida Pacamara'
+title: 'Londra’dan Gelen Konuk: Special Guests Lérida Pacamara'
 date: 2026-09-11
 coverImage: ./londra-dan-gelen-konuk-special-guests-lerida-pacamara/coverImage.jpg
 summary: >-
-  Reddit'te adını çokça duyduğum Special Guests'in 066 numaralı kahvesi,
-  Panama'nın tarihi Finca Lérida'sından bir Pacamara. Burunda çekingen, damakta
+  Reddit’te adını çokça duyduğum Special Guests’in 066 numaralı kahvesi,
+  Panama’nın tarihi Finca Lérida’sından bir Pacamara. Burunda çekingen, damakta
   cömert: sulu, yağlı ve sütlü bir tatlı gibi uzun süren bir bitiş.
 seoDescription: >-
   Special Guests Release 066 tadımı: Panama Finca Lérida Pacamara, Origami Air S
@@ -19,7 +19,7 @@ coffee:
     discriminant: other
     value: Natural OX
   roastDate: 2026-07-28
-  altitude: '1600-1800m'
+  altitude: '1600–1800 m'
   roastLevel: 'Açık'
 brew:
   method:
@@ -28,7 +28,7 @@ brew:
   grindSize: 'Comandante 23 klik'
   ratio: '1:16'
   water: '15/240'
-  time: '3:00 - 3:10'
+  time: '3:00–3:10'
   waterTemp: '95°C'
   bloom: '30 saniye'
   pour: '4 aşamalı (50/90/50/50)'

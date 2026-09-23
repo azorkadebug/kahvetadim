@@ -1,43 +1,22 @@
 import sharp from 'sharp';
 import yaml from 'js-yaml';
-import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
+import { OG_SURUM, renk, font, yazi, olc, satirla, wordmark, WORDMARK_W, WORDMARK_H, kopekIsareti } from './og-ortak.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
 const contentDir = join(root, 'src/content/tadimlar');
-const outDir = join(root, 'public/og');
+// Çıktı sürümlü klasöre: /og/* 7 gün önbellekte, tasarım değişince
+// OG_SURUM artar ve adres değişir. Eski sürüm klasörleri silinir.
+const ogKok = join(root, 'public/og');
+const outDir = join(ogKok, OG_SURUM);
+for (const ad of existsSync(ogKok) ? readdirSync(ogKok) : []) {
+  if (ad !== OG_SURUM && !ad.startsWith('.')) rmSync(join(ogKok, ad), { recursive: true, force: true });
+}
 
 if (!existsSync(outDir)) mkdirSync(outDir, { recursive: true });
-
-const escape = (s) =>
-  String(s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;');
-
-const wrapLines = (text, max, maxLines = 3) => {
-  const words = text.split(/\s+/);
-  const lines = [];
-  let cur = '';
-  for (const w of words) {
-    if ((cur + ' ' + w).trim().length > max) {
-      if (cur) lines.push(cur);
-      cur = w;
-    } else {
-      cur = (cur + ' ' + w).trim();
-    }
-  }
-  if (cur) lines.push(cur);
-  if (lines.length > maxLines) {
-    lines.length = maxLines;
-    lines[maxLines - 1] = lines[maxLines - 1].replace(/[.,!?;:—-]?$/, '…');
-  }
-  return lines;
-};
 
 // TR dosyaları kökte, EN dosyaları en/ alt klasöründe.
 // Her biri için { path, slug (en/ önekli), lang, dir } topluyoruz.
@@ -54,6 +33,18 @@ const collect = (dir, prefix, lang) =>
 const entries = [...collect(contentDir, '', 'tr')];
 const enDir = join(contentDir, 'en');
 if (existsSync(enDir)) entries.push(...collect(enDir, 'en/', 'en'));
+
+// Köşe markası: köpek 24 px × 3 = 72, kelime markası 49 × 5 = 245 px.
+const kopek = await kopekIsareti(sharp, 3);
+const WM = 5;
+const markaX = 1120 - WORDMARK_W * WM;
+const markaY = 590 - WORDMARK_H * WM;
+const kopekX = markaX - 16 - kopek.w;
+const kopekY = 590 - kopek.h + 2;
+const kose = `<image href="${kopek.uri}" x="${kopekX}" y="${kopekY}" width="${kopek.w}" height="${kopek.h}"/>
+    ${wordmark({ x: markaX, y: markaY, olcek: WM, govde: renk.bg, vurgu: renk.accent })}`;
+// Alt satırdaki köken yazısı köşe markasına çarpmasın.
+const altYaziMax = kopekX - 40 - 80;
 
 // Etiketler dile göre
 const labels = {
@@ -74,41 +65,39 @@ for (const { path: filePath, slug, lang, dir } of entries) {
   const rating = data.rating?.overall ?? 0;
   const coverRel = data.coverImage;
 
-  const titleLines = wrapLines(title, 26, 3);
+  const titleLines = satirla(font.serif, title, 66, 880, 3);
   const titleStartY = 270 - (titleLines.length - 1) * 36;
-  const subtitle = [origin, region].filter(Boolean).join(' · ');
+  let subtitle = [origin, region].filter(Boolean).join(' · ');
+  while (subtitle.length > 1 && olc(font.italic, subtitle, 32) > altYaziMax) subtitle = subtitle.slice(0, -2).trimEnd() + '…';
+  // Kavurucu adları çoğunlukla yabancı: yerel ayarsız büyük harf (MILESTONES, MİLESTONES değil).
+  const roasterText = roaster.toUpperCase();
 
   const svgOverlay = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
     <defs>
       <linearGradient id="dim" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#1a0f08" stop-opacity="0.55"/>
-        <stop offset="55%" stop-color="#1a0f08" stop-opacity="0.78"/>
-        <stop offset="100%" stop-color="#1a0f08" stop-opacity="0.94"/>
+        <stop offset="0%" stop-color="${renk.ink}" stop-opacity="0.55"/>
+        <stop offset="55%" stop-color="${renk.ink}" stop-opacity="0.80"/>
+        <stop offset="100%" stop-color="${renk.ink}" stop-opacity="0.95"/>
       </linearGradient>
     </defs>
     <rect width="1200" height="630" fill="url(#dim)"/>
-    <rect x="0" y="0" width="1200" height="6" fill="#c77b46"/>
-    <rect x="0" y="624" width="1200" height="6" fill="#c77b46"/>
+    <rect x="0" y="0" width="1200" height="6" fill="${renk.accent}"/>
+    <rect x="0" y="624" width="1200" height="6" fill="${renk.accent}"/>
 
-    <g transform="translate(1040, 60)">
-      <circle cx="60" cy="60" r="60" fill="#c77b46"/>
-      <text x="60" y="62" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="46" font-weight="500" fill="#faf7f2">${rating}</text>
-      <text x="60" y="96" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" letter-spacing="3" fill="#faf7f2">${labels[lang].score}</text>
-    </g>
+    <circle cx="1100" cy="120" r="60" fill="${renk.accent}"/>
+    ${yazi(font.serif, String(rating), { x: 1100, y: 136, boyut: 46, renk: renk.bg, hiza: 'middle' })}
+    ${yazi(font.sans, labels[lang].score, { x: 1100, y: 158, boyut: 13, renk: renk.bg, harfAraligi: 3, hiza: 'middle' })}
 
-    <text x="80" y="105" font-family="Inter, sans-serif" font-size="22" letter-spacing="6" fill="#c77b46">${escape(roaster.toUpperCase())}</text>
+    ${roasterText ? yazi(font.sans, roasterText, { x: 80, y: 105, boyut: 22, renk: renk.accent, harfAraligi: 6 }) : ''}
 
     ${titleLines
-      .map(
-        (line, i) =>
-          `<text x="80" y="${titleStartY + i * 78}" font-family="Fraunces, Georgia, serif" font-size="66" font-weight="500" fill="#faf7f2" letter-spacing="-1">${escape(line)}</text>`
-      )
+      .map((line, i) => yazi(font.serif, line, { x: 80, y: titleStartY + i * 78, boyut: 66, renk: renk.bg, harfAraligi: -1 }))
       .join('\n    ')}
 
-    <line x1="80" y1="500" x2="200" y2="500" stroke="#c77b46" stroke-width="2"/>
-    <text x="80" y="555" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="32" fill="#e8d4bf">${escape(subtitle)}</text>
+    <rect x="80" y="499" width="120" height="2" fill="${renk.accent}"/>
+    ${subtitle ? yazi(font.italic, subtitle, { x: 80, y: 555, boyut: 32, renk: renk.line }) : ''}
 
-    <text x="1120" y="590" text-anchor="end" font-family="Inter, sans-serif" font-size="18" letter-spacing="4" fill="#e8d4bf">KAHVETADIM.COM</text>
+    ${kose}
   </svg>`;
 
   let pipeline;
@@ -138,7 +127,7 @@ for (const { path: filePath, slug, lang, dir } of entries) {
   mkdirSync(dirname(outPath), { recursive: true });
   writeFileSync(outPath, buf);
   const meta = await sharp(buf).metadata();
-  console.log(`Generated public/og/${slug}.jpg  ${meta.width}x${meta.height}  ${(meta.size / 1024).toFixed(1)} KB`);
+  console.log(`Generated public/og/${OG_SURUM}/${slug}.jpg  ${meta.width}x${meta.height}  ${(meta.size / 1024).toFixed(1)} KB`);
 }
 
 console.log(`\nTotal: ${entries.length} OG image(s) generated.`);

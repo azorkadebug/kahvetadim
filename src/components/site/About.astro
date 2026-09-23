@@ -31,7 +31,7 @@ const altUrl = localizePath(otherLang, '/hakkinda/');
   locale={locale}
   altUrl={altUrl}
 >
-  <section class="py-8 md:py-16 grid lg:grid-cols-[minmax(0,42rem)_1fr] gap-x-12 gap-y-12 items-start">
+  <section class="py-8 md:py-16 grid lg:grid-cols-[minmax(0,38rem)_1fr] gap-x-16 gap-y-12 items-start">
     {/* Dar ekran: çizim en üstte, metnin hemen üstünde. Geniş ekranda
         sağ sütundaki kopya görünür, bu gizlenir.
         Çizimlerin iki ölçek katmanı var: metne EŞLİK EDEN çizimler
@@ -42,15 +42,15 @@ const altUrl = localizePath(otherLang, '/hakkinda/');
       alt={t('about.illustrationAlt')}
       width="56"
       height="80"
-      class="order-1 lg:hidden w-24 sm:w-32 h-auto [image-rendering:pixelated]"
+      class="order-1 lg:hidden w-[112px] h-auto [image-rendering:pixelated]"
     />
 
     <div class="order-2 lg:order-1">
       {entry.data.kicker && (
-        <p class="font-sans text-xs uppercase tracking-[0.2em] text-[var(--color-ink-soft)]">{entry.data.kicker}</p>
+        <p class="etiket">{entry.data.kicker}</p>
       )}
       <h1 class="mt-4 font-serif text-4xl sm:text-5xl leading-tight">{entry.data.title}</h1>
-      <div class="mt-5 font-serif text-lg leading-[1.75] text-[var(--color-ink)] [&>p]:mt-5 [&>p:first-child]:mt-0">
+      <div class="mt-5 max-w-[38rem] font-serif text-lg leading-[1.75] text-[var(--color-ink)] [&>p]:mt-5 [&>p:first-child]:mt-0 [&>p]:[text-wrap:pretty]">
         <Content />
       </div>
     </div>
@@ -68,7 +68,7 @@ const altUrl = localizePath(otherLang, '/hakkinda/');
         aria-hidden="true"
         width="56"
         height="80"
-        class="hidden lg:block w-40 h-auto [image-rendering:pixelated]"
+        class="hidden lg:block w-[168px] h-auto [image-rendering:pixelated]"
       />
 
       {latest.length > 0 && (
@@ -79,11 +79,11 @@ const altUrl = localizePath(otherLang, '/hakkinda/');
             const d = e.data;
             return (
               <li class="flex items-baseline gap-3">
-                <span class="font-serif tnum text-lg text-[var(--color-accent)] w-8 shrink-0">{d.rating.overall}</span>
+                <span class="font-serif text-lg text-[var(--color-accent-deep)] w-8 shrink-0">{d.rating.overall}</span>
                 <span>
                   <a
                     href={tastingUrl(locale, tastingSlug(e.id))}
-                    class="font-serif leading-snug hover:text-[var(--color-ink-soft)]"
+                    class="baslik-link font-serif leading-snug"
                   >{d.title}</a>
                   <span class="block font-sans text-xs text-[var(--color-ink-soft)]">
                     {formatDate(locale, d.date, { day: 'numeric', month: 'short', year: 'numeric' })} · {d.coffee.roaster}

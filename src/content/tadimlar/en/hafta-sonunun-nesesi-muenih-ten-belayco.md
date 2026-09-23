@@ -20,7 +20,7 @@ brew:
   grindSize: 20 clicks
   ratio: '1:16.6'
   water: 12/200
-  time: '2:20 - 2:30'
+  time: '2:20–2:30'
   waterTemp: '94°C'
   bloom: '30 seconds'
   pour: '4 stages (4x50g)'

@@ -1,5 +1,5 @@
 ---
-title: 'Hafta Sonunun Neşesi: Münih''ten Belayco'
+title: 'Hafta Sonunun Neşesi: Münih’ten Belayco'
 date: 2026-04-26
 coverImage: ./hafta-sonunun-nesesi-muenih-ten-belayco/coverImage.png
 summary: >-
@@ -19,7 +19,7 @@ brew:
   grindSize: 20 Klik
   ratio: '1:16.6'
   water: 12/200
-  time: '2:20 - 2:30'
+  time: '2:20–2:30'
   waterTemp: '94°C'
   bloom: '30 saniye'
   pour: '4 aşamalı (4x50g)'

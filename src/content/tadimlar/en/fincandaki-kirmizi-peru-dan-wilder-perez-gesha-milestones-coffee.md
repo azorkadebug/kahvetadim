@@ -15,14 +15,14 @@ coffee:
   process:
     discriminant: natural
   roastDate: 2026-05-20
-  altitude: '1700m'
+  altitude: '1700 m'
 brew:
   method:
     discriminant: V60
   grindSize: Kinu 3.7.2
   ratio: '1:16.6'
   water: '15/250'
-  time: '2:25 - 2:30'
+  time: '2:25–2:30'
   waterTemp: '94°C'
   bloom: '30 seconds'
   pour: '5 stages (5x50g)'

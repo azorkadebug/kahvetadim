@@ -17,7 +17,7 @@ coffee:
   process:
     discriminant: other
     value: Semi Washed
-  altitude: '2000m'
+  altitude: '2000 m'
   roastLevel: Light
 brew:
   method:
