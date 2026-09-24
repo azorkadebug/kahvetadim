@@ -5,7 +5,6 @@
      Gövde SOFT 0; başlıklar SOFT 100 (yuvarlak, 70'ler tabelası). İtalik v1
      dosyası SOFT=0 sabit, değişmedi.
    IBM Plex Mono 400/500: künye, etiket, arayüz (Inter'in yerine, 2026-09-25).
-   Silkscreen: yalnız puan rakamları (8'in katı puntoda temiz).
    Yeniden üretmek: fonttools varLib.instancer (Fraunces WONK=1 wght=300:700) + pyftsubset --flavor=woff2; dosya adı sürümlü çünkü
    /fonts/* bir yıl önbellekte. */
 @font-face {
@@ -36,11 +35,6 @@
   font-display: swap;
   src: url("/fonts/plexmono-500-tr-v1.woff2") format("woff2");
 }
-@font-face {
-  font-family: "Silkscreen";
-  font-display: swap;
-  src: url("/fonts/silkscreen-v1.woff2") format("woff2");
-}
 
 @theme {
   --color-bg: #f7f5f0;
@@ -63,7 +57,6 @@
 
   --font-serif: "Fraunces Variable", ui-serif, Georgia, serif;
   --font-sans: "Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  --font-pixel: "Silkscreen", "Plex Mono", ui-monospace, monospace;
 }
 
 html {
@@ -105,6 +98,15 @@ body {
   font-variation-settings: "SOFT" 100;
   font-weight: 600;
   letter-spacing: -0.01em;
+}
+
+/* Puan rakamları: başlıklarla aynı yumuşak Fraunces. Sitede iki aile var
+   (Fraunces + Plex Mono); piksel yazı yalnız logoda. */
+.puan {
+  font-family: var(--font-serif);
+  font-variation-settings: "SOFT" 100;
+  font-weight: 600;
+  font-variant-numeric: lining-nums;
 }
 
 /* Büyük harfli küçük etiketler için tek sistem (önceden 5 boy, 4 aralık). */
