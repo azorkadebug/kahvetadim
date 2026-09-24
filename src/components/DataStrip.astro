@@ -54,37 +54,42 @@ if (brew.pour) items.push({ label: t('data.pour'), value: brew.pour, num: true }
 if (coffee.roastDate) items.push({ label: t('data.roasted'), value: fmt(coffee.roastDate)!, num: true });
 
 /* Sütun sayısı alan sayısına göre: son satırda tek hücre kalmasın
-   (7 alan 3/3/1, 10 alan 3/3/3/1 diziliyordu). Mobilde 2 sütun; tek sayıda
-   alan varsa son hücre iki sütuna yayılır. */
+   (7 alan 3/3/1, 10 alan 3/3/3/1 diziliyordu). Form çerçeveli olduğu için
+   son satırda boş hücre de kalmamalı: son alan kalan sütunlara yayılır.
+   Mobilde 2 sütun. */
 const n = items.length;
-const wideCols = n % 3 === 1 ? 'sm:grid-cols-4' : 'sm:grid-cols-3';
-const lastSpan = n % 2 === 1 ? 'max-sm:col-span-2' : '';
+const cols = n % 3 === 1 ? 4 : 3;
+const wideCols = cols === 4 ? 'sm:grid-cols-4' : 'sm:grid-cols-3';
+const rem = n % cols;
+const smSpan = rem ? ({ 2: 'sm:col-span-2', 3: 'sm:col-span-3' } as Record<number, string>)[cols - rem + 1] ?? '' : '';
+const lastSpan = `${n % 2 === 1 ? 'max-sm:col-span-2' : ''} ${smSpan}`;
 ---
 
-{/* Ölçüm paneli: sitenin kendine ait tek dili. Değerler gövde metniyle
-    yarışacak boyutta, etiketler geride.
-    Düzen: mobilde demleme ve puan üstte tek satırda iki uçta, ızgara altta
-    (önceden üç ayrı tam genişlik bant, şerit bir ekran boyu tutuyordu);
-    lg'de demleme | ızgara | puan, üçü de üste hizalı. */}
-<section class="font-sans border-y border-[var(--color-line)] bg-[var(--color-bg)] break-inside-avoid">
-  <div class="grid grid-cols-[minmax(0,1fr)_auto] lg:grid-cols-[auto_minmax(0,1fr)_auto] items-start">
+{/* Ölçüm paneli = elle doldurulmuş cupping formu: etiketler basılı (mono),
+    değerler tükenmez kalemle (Caveat, --color-pen), hücreler mürekkep
+    çerçeveli. Sitenin kalıbı kırdığı tek yer; el yazısı başka yere yayılmasın.
+    Puan: piksel rakamlı, sert gölgeli damga (Çakıl'ın dili).
+    Düzen: mobilde demleme ve puan üstte iki uçta, form altta;
+    lg'de demleme | form | puan. */}
+<section class="font-sans py-6 bg-[var(--color-bg)] break-inside-avoid">
+  <div class="grid grid-cols-[minmax(0,1fr)_auto] lg:grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-y-6">
     {/* demleme yöntemi — el çizimi ikon, sitenin en özgün grafik varlığı */}
-    <div class="flex items-center lg:items-start gap-4 py-5 lg:py-6 lg:pr-8 lg:border-r border-[var(--color-line)] lg:self-stretch">
+    <div class="flex items-center lg:items-start gap-4 lg:pr-8">
       <BrewIcon method={brew.method.kind} size={56} class="text-[var(--color-accent)] shrink-0" />
       <div>
         <div class="etiket">{t('data.brew')}</div>
-        <div class="mt-1 text-xl leading-tight text-[var(--color-ink)]">{methodLabel(locale, brew.method)}</div>
+        <div class="mt-1 font-hand text-[28px] leading-[1.05] text-[var(--color-pen)]">{methodLabel(locale, brew.method)}</div>
       </div>
     </div>
 
-    <ul class={`col-span-2 lg:col-span-1 lg:order-none order-last grid list-none m-0 p-0 grid-cols-2 ${wideCols} gap-x-6 lg:gap-x-8 gap-y-5 lg:px-8 py-6 border-t lg:border-t-0 border-[var(--color-line)]`}>
-      {items.map(({ label, value, num }, i) => (
-        <li class={`min-w-0 ${i === n - 1 ? lastSpan : ''}`}>
+    <ul class={`col-span-2 lg:col-span-1 lg:order-none order-last grid list-none m-0 p-0 grid-cols-2 ${wideCols} border-l-[1.5px] border-t-[1.5px] border-[var(--color-ink)]`}>
+      {items.map(({ label, value }, i) => (
+        <li class={`min-w-0 px-3 pt-2 pb-2.5 border-r-[1.5px] border-b-[1.5px] border-[var(--color-ink)] ${i === n - 1 ? lastSpan : ''}`}>
           <span class="etiket block">{label}</span>
-          <span class={`block mt-1 text-xl leading-tight text-[var(--color-ink)] [overflow-wrap:anywhere] ${num ? 'tnum' : ''}`}>
+          <span class="block mt-1 font-hand text-[26px] leading-[1.05] text-[var(--color-pen)] [overflow-wrap:anywhere]">
             {label === t('data.grind') ? (
               <span class="flex items-start gap-2">
-                <GrinderIcon size={20} class="text-[var(--color-accent)] shrink-0 mt-0.5" />
+                <GrinderIcon size={20} class="text-[var(--color-accent)] shrink-0 mt-1" />
                 <span class="min-w-0">{value}</span>
               </span>
             ) : (
@@ -95,12 +100,13 @@ const lastSpan = n % 2 === 1 ? 'max-sm:col-span-2' : '';
       ))}
     </ul>
 
-    {/* puan: sayfanın ikinci büyük ölçek anı */}
-    <div class="flex flex-col items-end justify-center lg:justify-start py-5 lg:py-6 lg:pl-8 lg:border-l border-[var(--color-line)] lg:self-stretch">
-      <div class="font-serif text-6xl lg:text-7xl leading-[0.85] text-[var(--color-accent)]">
-        {overall}<span class="font-sans text-xs tracking-wide text-[var(--color-ink-soft)] align-super">/100</span>
+    {/* puan: piksel rakamlı damga */}
+    <div class="flex flex-col items-end lg:pl-8">
+      <div class="flex items-start gap-1 border-[3px] border-[var(--color-accent)] bg-[var(--color-bg)] px-4 pt-3 pb-2 shadow-[5px_5px_0_var(--color-ink)]">
+        <span class="font-pixel text-[48px] lg:text-[64px] leading-none text-[var(--color-accent)]">{overall}</span>
+        <span class="text-xs text-[var(--color-ink-soft)]">/100</span>
       </div>
-      <div class="etiket mt-1.5">{t('data.score')}</div>
+      <div class="etiket mt-3">{t('data.score')}</div>
     </div>
   </div>
 </section>

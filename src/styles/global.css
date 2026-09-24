@@ -63,6 +63,8 @@
   /* Küçük metin ve bağlantılar için koyultulmuş ton — 5.84:1, AA normal metin. */
   --color-accent-deep: #8a5214;
   --color-line: #e2ded5;
+  /* Cupping formundaki el yazısının mürekkebi: mavi tükenmez (zeminde 10:1). */
+  --color-pen: #1f3a8a;
   /* Cetvelin boş çentikleri ve taban çizgisi: line (1.29:1) neredeyse
      görünmüyordu; 3.2:1 ile grafik öğe eşiğini geçiyor. */
   --color-rule: #938770;
