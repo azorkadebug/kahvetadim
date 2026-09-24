@@ -6,9 +6,7 @@
      dosyası SOFT=0 sabit, değişmedi.
    IBM Plex Mono 400/500: künye, etiket, arayüz (Inter'in yerine, 2026-09-25).
    Silkscreen: yalnız puan rakamları (8'in katı puntoda temiz).
-   Caveat 600: cupping formundaki el yazısı değerler — yalnız DataStrip.
-   Yeniden üretmek: fonttools varLib.instancer (Fraunces WONK=1 wght=300:700,
-   Caveat wght=600) + pyftsubset --flavor=woff2; dosya adı sürümlü çünkü
+   Yeniden üretmek: fonttools varLib.instancer (Fraunces WONK=1 wght=300:700) + pyftsubset --flavor=woff2; dosya adı sürümlü çünkü
    /fonts/* bir yıl önbellekte. */
 @font-face {
   font-family: "Fraunces Variable";
@@ -43,12 +41,6 @@
   font-display: swap;
   src: url("/fonts/silkscreen-v1.woff2") format("woff2");
 }
-@font-face {
-  font-family: "Caveat";
-  font-weight: 400 700;
-  font-display: swap;
-  src: url("/fonts/caveat-600-tr-v1.woff2") format("woff2");
-}
 
 @theme {
   --color-bg: #f7f5f0;
@@ -63,8 +55,6 @@
   /* Küçük metin ve bağlantılar için koyultulmuş ton — 5.84:1, AA normal metin. */
   --color-accent-deep: #8a5214;
   --color-line: #e2ded5;
-  /* Cupping formundaki el yazısının mürekkebi: mavi tükenmez (zeminde 10:1). */
-  --color-pen: #1f3a8a;
   /* Cetvelin boş çentikleri ve taban çizgisi: line (1.29:1) neredeyse
      görünmüyordu; 3.2:1 ile grafik öğe eşiğini geçiyor. */
   --color-rule: #938770;
@@ -74,7 +64,6 @@
   --font-serif: "Fraunces Variable", ui-serif, Georgia, serif;
   --font-sans: "Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --font-pixel: "Silkscreen", "Plex Mono", ui-monospace, monospace;
-  --font-hand: "Caveat", "Bradley Hand", cursive;
 }
 
 html {

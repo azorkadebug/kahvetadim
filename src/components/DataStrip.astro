@@ -65,9 +65,9 @@ const smSpan = rem ? ({ 2: 'sm:col-span-2', 3: 'sm:col-span-3' } as Record<numbe
 const lastSpan = `${n % 2 === 1 ? 'max-sm:col-span-2' : ''} ${smSpan}`;
 ---
 
-{/* Ölçüm paneli = elle doldurulmuş cupping formu: etiketler basılı (mono),
-    değerler tükenmez kalemle (Caveat, --color-pen), hücreler mürekkep
-    çerçeveli. Sitenin kalıbı kırdığı tek yer; el yazısı başka yere yayılmasın.
+{/* Ölçüm paneli = daktiloyla doldurulmuş cupping formu: etiket ve değer
+    mono, hücreler mürekkep çerçeveli. Sitenin kalıbı kırdığı tek yer.
+    (El yazısı değerler 2026-09-25'te denendi, rahatsız etti, çıkarıldı.)
     Puan: piksel rakamlı, sert gölgeli damga (Çakıl'ın dili).
     Düzen: mobilde demleme ve puan üstte iki uçta, form altta;
     lg'de demleme | form | puan. */}
@@ -78,7 +78,7 @@ const lastSpan = `${n % 2 === 1 ? 'max-sm:col-span-2' : ''} ${smSpan}`;
       <BrewIcon method={brew.method.kind} size={56} class="text-[var(--color-accent)] shrink-0" />
       <div>
         <div class="etiket">{t('data.brew')}</div>
-        <div class="mt-1 font-hand text-[28px] leading-[1.05] text-[var(--color-pen)]">{methodLabel(locale, brew.method)}</div>
+        <div class="mt-1 text-lg leading-snug text-[var(--color-ink)]">{methodLabel(locale, brew.method)}</div>
       </div>
     </div>
 
@@ -86,10 +86,10 @@ const lastSpan = `${n % 2 === 1 ? 'max-sm:col-span-2' : ''} ${smSpan}`;
       {items.map(({ label, value }, i) => (
         <li class={`min-w-0 px-3 pt-2 pb-2.5 border-r-[1.5px] border-b-[1.5px] border-[var(--color-ink)] ${i === n - 1 ? lastSpan : ''}`}>
           <span class="etiket block">{label}</span>
-          <span class="block mt-1 font-hand text-[26px] leading-[1.05] text-[var(--color-pen)] [overflow-wrap:anywhere]">
+          <span class="block mt-1 text-lg leading-snug text-[var(--color-ink)] [overflow-wrap:anywhere]">
             {label === t('data.grind') ? (
               <span class="flex items-start gap-2">
-                <GrinderIcon size={20} class="text-[var(--color-accent)] shrink-0 mt-1" />
+                <GrinderIcon size={20} class="text-[var(--color-accent)] shrink-0 mt-0.5" />
                 <span class="min-w-0">{value}</span>
               </span>
             ) : (
