@@ -9,6 +9,7 @@ summary: >-
 seoDescription: >-
   Special Guests Release 066 tasting: Panama Finca Lérida Pacamara, Origami Air S
   brew recipe, palate and finish notes, scored 89.
+renk: cilek
 coffee:
   roaster: Special Guests
   origin: Panama

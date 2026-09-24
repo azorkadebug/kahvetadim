@@ -9,6 +9,7 @@ summary: >-
 seoDescription: >-
   Assembly Linarco Rodriguez Castillo tasting: Colombian coffee from Huila, Orea
   v4 brew recipe, chamomile and cherry notes, scored 90.
+renk: papatya
 coffee:
   roaster: Assembly
   origin: Colombia

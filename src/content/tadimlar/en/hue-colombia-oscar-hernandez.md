@@ -6,6 +6,7 @@ summary: >-
   The first entry in this journal: a natural Gesha from Huila, roasted by Hue and
   carried back from Thessaloniki by a friend. A whole flower garden on the nose,
   citrus and a long, sweet finish on the palate.
+renk: limon
 coffee:
   roaster: Hue
   origin: Colombia

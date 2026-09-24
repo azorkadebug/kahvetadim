@@ -6,6 +6,7 @@ summary: >-
   A coffee you almost chew on, this Muntasha; warm, it brings to mind the
   astringency of orange. Within 2-3 minutes, red fruits, yellow plum and citrus
   arrive — every sip a layered, complex cup.
+renk: turuncu
 coffee:
   roaster: Mazelab
   origin: Ethiopia

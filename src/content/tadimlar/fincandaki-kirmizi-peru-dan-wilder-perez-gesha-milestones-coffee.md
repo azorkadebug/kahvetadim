@@ -7,6 +7,7 @@ summary: >-
   Damakta iz bırakan parlak bir asidite ve tatlı pekmez aromaları... Milestones
   kavrumuyla Peru Amazonas’tan gelen Wilder Perez Gesha, Türkiye’de nadir
   rastladığımız derinlikte, çok katmanlı ve heyecan verici bir kahve.
+renk: kirmizi
 coffee:
   roaster: Milestones Coffee
   origin: Peru

@@ -5,6 +5,7 @@ coverImage: ./hafta-sonunun-nesesi-muenih-ten-belayco/coverImage.png
 summary: >-
   Bazı kahvelerin bir karakteri vardır; bir nota kahveye bir altlık gibi eşlik
   eder. İşte Belayco tam olarak böyle bir kahve.
+renk: seftali
 coffee:
   roaster: Café Blá
   origin: Etiyopya

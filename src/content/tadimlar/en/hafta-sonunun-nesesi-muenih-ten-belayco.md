@@ -6,6 +6,7 @@ summary: >-
   Some coffees carry a single note underneath the whole cup like an underlay.
   Belayco is one of them: bubblegum below, yellow plum and peach sweetness above,
   and months in the freezer did nothing to dull it.
+renk: seftali
 coffee:
   roaster: Café Blá
   origin: Ethiopia

@@ -1,4 +1,5 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
+import { renkler, renkAdlari } from './src/lib/renkler';
 
 // Tadım şeması hem TR hem EN koleksiyonunda kullanılıyor.
 // Görsel dizini koleksiyona göre değiştiği için parametre olarak alınıyor.
@@ -30,6 +31,12 @@ const tadimSchema = (imageDirectory: string) => ({
           multiline: true,
           description: 'Google sonuçlarında ve link önizlemelerinde görünen meta description (155-160 karakter ideal). Boş bırakılırsa Özet kullanılır.',
           validation: { isRequired: false },
+        }),
+        renk: fields.select({
+          label: 'Renk',
+          description: 'Kahvenin baskın lezzet notası. Tadım sayfasında ikon, puan ve bağlantılar bu renge boyanır.',
+          options: renkAdlari.map((value) => ({ label: renkler[value].ad, value })),
+          defaultValue: 'turuncu',
         }),
         coffee: fields.object(
           {

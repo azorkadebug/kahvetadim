@@ -8,6 +8,7 @@ import FlavorChips from '../FlavorChips.astro';
 import SectionLabel from '../SectionLabel.astro';
 import { useTranslations, type Lang } from '../../i18n/ui';
 import { formatDate, localizePath, processLabel } from '../../i18n/utils';
+import { renkStil } from '../../lib/renkler';
 
 interface Props {
   entry: CollectionEntry<'tadimlar'>;
@@ -82,7 +83,7 @@ const subRatings = [
 
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(reviewLd)} is:inline />
 
-  <article>
+  <article style={renkStil(d.renk)}>
     <header class="py-8 md:py-16">
       {/* künye satırı: bölüm başlıklarından farklı rol → harf aralığı yok */}
       <p class="font-sans text-xs text-[var(--color-ink-soft)]">

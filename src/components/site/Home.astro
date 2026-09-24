@@ -5,6 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionLabel from '../SectionLabel.astro';
 import { useTranslations, type Lang } from '../../i18n/ui';
 import { formatDate, tastingLang, tastingSlug, tastingUrl, localizePath, processLabel } from '../../i18n/utils';
+import { renkStil } from '../../lib/renkler';
 
 interface Props {
   locale: Lang;
@@ -36,7 +37,7 @@ const altUrl = localizePath(otherLang, '/');
           const href = tastingUrl(locale, tastingSlug(lead.id));
           const d = lead.data;
           return (
-            <article class="group pb-12 md:pb-16 border-b border-[var(--color-line)]">
+            <article class="group pb-12 md:pb-16 border-b border-[var(--color-line)]" style={renkStil(d.renk)}>
               {/* Görsel bağlantısı başlığınkinin kopyası: sekme sırasından ve ekran
                   okuyucudan çıkarıldı (kart başına iki durak, başlık üç kez okunuyordu).
                   Oran 4:3 — kapakların çoğu dikey; 16:10 yarısını kesiyordu. */}
@@ -95,7 +96,7 @@ const altUrl = localizePath(otherLang, '/');
               const href = tastingUrl(locale, tastingSlug(entry.id));
               const d = entry.data;
               return (
-                <article class="group">
+                <article class="group" style={renkStil(d.renk)}>
                   <a href={href} tabindex="-1" aria-hidden="true" class="relative block aspect-square bg-[var(--color-bg-soft)] overflow-hidden">
                     {d.coverImage && (
                       <Image

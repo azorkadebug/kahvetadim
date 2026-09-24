@@ -9,6 +9,7 @@ summary: >-
 seoDescription: >-
   Special Guests Release 066 tadımı: Panama Finca Lérida Pacamara, Origami Air S
   demleme reçetesi, damak ve bitiş notları, 89 puan.
+renk: cilek
 coffee:
   roaster: Special Guests
   origin: Panama

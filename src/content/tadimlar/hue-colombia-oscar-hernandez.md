@@ -5,6 +5,7 @@ coverImage: ./hue-colombia-oscar-hernandez/coverImage.png
 summary: >-
   Çok sevdiğim bir dostumun Selanik’e gittiğini duyunca, bir süredir radarımda
   olan Hue seçkisini denemek için harika bir fırsat yakaladığımı düşündüm.
+renk: limon
 coffee:
   roaster: Hue
   origin: Kolombiya

@@ -9,6 +9,7 @@ summary: >-
 seoDescription: >-
   Assembly Linarco Rodriguez Castillo tadımı: Kolombiya Huila kahvesi, Orea v4
   demleme reçetesi, papatya ve kiraz notları, 90 puan.
+renk: papatya
 coffee:
   roaster: Assembly
   origin: Kolombiya

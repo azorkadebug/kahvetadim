@@ -6,6 +6,7 @@ summary: >-
   A bright acidity that lingers on the palate and sweet grape molasses (pekmez)
   aromas... Roasted by Milestones, this Wilder Perez Gesha from Amazonas, Peru is
   a multi-layered, thrilling coffee with a depth I rarely come across in Turkey.
+renk: kirmizi
 coffee:
   roaster: Milestones Coffee
   origin: Peru

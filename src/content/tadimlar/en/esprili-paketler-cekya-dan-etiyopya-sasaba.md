@@ -7,6 +7,7 @@ summary: >-
   Prague. A cheerful nose that calls to mind jasmine and peach iced tea; a
   balanced cup that takes a bit of coaxing to open up but turns mouthwatering
   with the right adjustments.
+renk: cicek
 coffee:
   roaster: Not Another Boring Roastery
   origin: Ethiopia

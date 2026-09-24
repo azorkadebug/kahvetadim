@@ -6,6 +6,7 @@ summary: >-
   Adeta çiğnenen bir kahve, Muntasha; sıcak hali portakal kekremsiliğini
   andırıyor. 2-3 dakika içerisinde kırmızı meyveler, sarı erik ve turunçgiller —
   her yudumu katmanlı, kompleks bir fincan.
+renk: turuncu
 coffee:
   roaster: Mazelab
   origin: Etiyopya

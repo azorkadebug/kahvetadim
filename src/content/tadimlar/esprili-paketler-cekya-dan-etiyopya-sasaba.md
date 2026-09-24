@@ -6,6 +6,7 @@ summary: >-
   Prag’lı NABR’ın esprili paketlerinden çıkan yıkanmış bir Etiyopya Guji.
   Yasemin ve şeftalili soğuk çayı andıran neşeli bir burun; çözülmesi biraz
   uğraştıran ama doğru dokunuşlarla ağız sulandıran, dengeli bir fincan.
+renk: cicek
 coffee:
   roaster: Not Another Boring Roastery
   origin: Etiyopya

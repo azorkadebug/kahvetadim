@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { renkAdlari } from './lib/renkler';
 
 const processEnum = z.enum([
   'washed',
@@ -45,6 +46,7 @@ const tadimlar = defineCollection({
       coverImage: image().optional(),
       summary: z.string(),
       seoDescription: z.string().optional(),
+      renk: z.enum(renkAdlari).default('turuncu'),
       coffee: z.object({
         roaster: z.string(),
         origin: z.string(),
