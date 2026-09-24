@@ -27,16 +27,16 @@ export const root = resolve(__dirname, '..');
 /* Önbellek kırıcı: /og/* 7 gün önbellekleniyor (public/_headers). Tasarım
    değişince bunu artır; çıktılar /og/<sürüm>/ altına yazılır, sayfalar da
    aynı sabiti kullanmalı. */
-export const OG_SURUM = 'v2';
+export const OG_SURUM = 'v3';
 
 export const renk = {
-  bg: '#faf4e7',
-  bgSoft: '#f2e7cf',
+  bg: '#f7f5f0',
+  bgSoft: '#eeebe4',
   ink: '#23262c',
   inkSoft: '#5a5f68',
   accent: '#c97b1e',
   accentDeep: '#8a5214',
-  line: '#e4d8be',
+  line: '#e2ded5',
 };
 
 const yukle = (ad) => create(readFileSync(resolve(__dirname, 'fonts', ad)));

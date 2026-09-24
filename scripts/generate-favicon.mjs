@@ -24,7 +24,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const pub = resolve(__dirname, '..', 'public');
 const p = (ad) => resolve(pub, ad);
 
-const ZEMIN = { r: 0xfa, g: 0xf4, b: 0xe7, alpha: 1 }; // --color-bg
+const ZEMIN = { r: 0xf7, g: 0xf5, b: 0xf0, alpha: 1 }; // --color-bg
 
 const buyut = (ad, kat) =>
   sharp(p(ad))
