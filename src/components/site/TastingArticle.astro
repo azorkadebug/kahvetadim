@@ -25,7 +25,7 @@ const pageURL = new URL(Astro.url.pathname, Astro.site).toString();
 const productName = [d.coffee.roaster, d.coffee.origin, d.coffee.region].filter(Boolean).join(' — ');
 // Şemada ham kapak PNG'sine (2-6 MB) değil, build'in ürettiği hazır OG
 // görseline işaret et — crawler'lar bu alanı çekiyor.
-const coverURL = new URL(`/og/v3/${entry.id}.jpg`, Astro.site).toString();
+const coverURL = new URL(`/og/v4/${entry.id}.jpg`, Astro.site).toString();
 const authorUrl = new URL(localizePath(locale, '/hakkinda/'), Astro.site).toString();
 
 const reviewLd = {
@@ -74,7 +74,7 @@ const subRatings = [
 <BaseLayout
   title={`${d.title} — ${t('site.name')}`}
   description={d.seoDescription ?? d.summary}
-  ogImage={`/og/v3/${entry.id}.jpg`}
+  ogImage={`/og/v4/${entry.id}.jpg`}
   ogType="article"
   locale={locale}
   altUrl={altUrl}

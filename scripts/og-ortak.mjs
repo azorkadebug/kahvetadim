@@ -27,7 +27,7 @@ export const root = resolve(__dirname, '..');
 /* Önbellek kırıcı: /og/* 7 gün önbellekleniyor (public/_headers). Tasarım
    değişince bunu artır; çıktılar /og/<sürüm>/ altına yazılır, sayfalar da
    aynı sabiti kullanmalı. */
-export const OG_SURUM = 'v3';
+export const OG_SURUM = 'v4';
 
 export const renk = {
   bg: '#f7f5f0',

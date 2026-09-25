@@ -38,9 +38,9 @@ const siteLd = ogType === 'website' ? {
   inLanguage: locale,
   author: { '@type': 'Person', name: 'Sabri', url: new URL(localizePath(locale, '/hakkinda/'), Astro.site).toString() },
 } : null;
-// OG görselleri sürümlü yolda (/og/v3/…): 7 gün önbellekte kalıyorlar,
+// OG görselleri sürümlü yolda (/og/v4/…): 7 gün önbellekte kalıyorlar,
 // tasarım değişince scripts/og-ortak.mjs'deki OG_SURUM ile birlikte artır.
-const ogImageURL = new URL(ogImage ?? `/og/v3/site-${locale}.png`, Astro.site).toString();
+const ogImageURL = new URL(ogImage ?? `/og/v4/site-${locale}.png`, Astro.site).toString();
 
 const otherLang: Lang = locale === 'tr' ? 'en' : 'tr';
 const otherPath = altUrl ?? localizePath(otherLang, '/');
