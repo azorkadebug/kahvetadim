@@ -4,7 +4,7 @@
 // tek sayfa iki dili taşıyordu ve /tr/ altında İngilizce çerçeveyle açılıyordu.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { useTranslations, type Lang } from '../../i18n/ui';
-import { localizePath } from '../../i18n/utils';
+import { localizePath, routePath } from '../../i18n/utils';
 
 interface Props {
   locale: Lang;
@@ -22,7 +22,7 @@ const link = 'border-b border-[var(--color-ink)] pb-1 hover:text-[var(--color-ac
       <h1 class="mt-4 font-serif text-4xl sm:text-5xl leading-tight [text-wrap:balance]">{t('nf.title')}</h1>
       <p class="mt-5 max-w-[38rem] text-lg text-[var(--color-ink-soft)] font-serif [text-wrap:pretty]">{t('nf.body')}</p>
       <p class="mt-8 flex flex-wrap gap-x-8 gap-y-3 font-sans text-sm uppercase tracking-[0.18em]">
-        <a href={localizePath(locale, '/tadimlar/')} class={link}>{t('nav.archive')}</a>
+        <a href={routePath(locale, 'archive')} class={link}>{t('nav.archive')}</a>
         <a href={localizePath(locale, '/')} class={link}>{t('nf.home')}</a>
       </p>
     </div>

@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionLabel from '../SectionLabel.astro';
 import { useTranslations, type Lang } from '../../i18n/ui';
-import { formatDate, tastingLang, tastingSlug, tastingUrl, localizePath, processLabel } from '../../i18n/utils';
+import { formatDate, tastingLang, tastingSlug, tastingUrl, localizePath, processLabel, routePath } from '../../i18n/utils';
 import { renkStil } from '../../lib/renkler';
 
 interface Props {
@@ -130,7 +130,7 @@ const altUrl = localizePath(otherLang, '/');
 
     {sorted.length > 3 && (
       <div class="mt-16">
-        <a href={localizePath(locale, '/tadimlar/')} class="font-sans text-sm uppercase tracking-[0.2em] border-b border-[var(--color-ink)] pb-1 hover:text-[var(--color-accent-deep)] hover:border-[var(--color-accent-deep)] transition-colors">
+        <a href={routePath(locale, 'archive')} class="font-sans text-sm uppercase tracking-[0.2em] border-b border-[var(--color-ink)] pb-1 hover:text-[var(--color-accent-deep)] hover:border-[var(--color-accent-deep)] transition-colors">
           {t('home.all')}
         </a>
       </div>

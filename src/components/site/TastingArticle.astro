@@ -7,7 +7,7 @@ import DataStrip from '../DataStrip.astro';
 import FlavorChips from '../FlavorChips.astro';
 import SectionLabel from '../SectionLabel.astro';
 import { useTranslations, type Lang } from '../../i18n/ui';
-import { formatDate, localizePath, processLabel } from '../../i18n/utils';
+import { formatDate, processLabel, routePath } from '../../i18n/utils';
 import { renkStil } from '../../lib/renkler';
 
 interface Props {
@@ -26,7 +26,7 @@ const productName = [d.coffee.roaster, d.coffee.origin, d.coffee.region].filter(
 // Şemada ham kapak PNG'sine (2-6 MB) değil, build'in ürettiği hazır OG
 // görseline işaret et — crawler'lar bu alanı çekiyor.
 const coverURL = new URL(`/og/v4/${entry.id}.jpg`, Astro.site).toString();
-const authorUrl = new URL(localizePath(locale, '/hakkinda/'), Astro.site).toString();
+const authorUrl = new URL(routePath(locale, 'about'), Astro.site).toString();
 
 const reviewLd = {
   '@context': 'https://schema.org',
@@ -172,7 +172,7 @@ const subRatings = [
   </article>
 
   <div class="mt-16 pt-8 border-t border-[var(--color-line)] print:hidden">
-    <a href={localizePath(locale, '/tadimlar/')} class="font-sans text-sm uppercase tracking-[0.2em] text-[var(--color-ink-soft)] hover:text-[var(--color-ink)] transition-colors">
+    <a href={routePath(locale, 'archive')} class="font-sans text-sm uppercase tracking-[0.2em] text-[var(--color-ink-soft)] hover:text-[var(--color-ink)] transition-colors">
       {t('detail.back')}
     </a>
   </div>

@@ -21,12 +21,21 @@ export function getLangFromUrl(url: URL): Lang {
   return seg === 'tr' ? 'tr' : 'en';
 }
 
-/**
- * Bir kök yolu (İngilizce yol) aktif dile göre önekler.
- * en: '/tadimlar/' → '/tadimlar/'
- * tr: '/tadimlar/' → '/tr/tadimlar/'
- * tr: '/' → '/tr/'
- */
+/** Sayfa adresleri menü kelimeleriyle aynı: EN Cups / Nose, TR Fincanlar / Çakıl.
+    (2026-09-26'ya kadar yollar Türkçeydi: /tadimlar/, /hakkinda/, /tadim/<slug>/ —
+    eski adresler public/_redirects'te 301.) */
+const routes = {
+  archive: { en: '/cups/', tr: '/tr/fincanlar/' },
+  about: { en: '/nose/', tr: '/tr/cakil/' },
+} as const;
+export type Route = keyof typeof routes;
+
+/** Bir sayfanın dile göre adresi. */
+export function routePath(lang: Lang, route: Route): string {
+  return routes[route][lang];
+}
+
+/** Ana sayfa ve dil kökü: en '/', tr '/tr/'. */
 export function localizePath(lang: Lang, path: string): string {
   if (lang === defaultLang) return path;
   if (path === '/') return '/tr/';
@@ -44,9 +53,10 @@ export function tastingSlug(id: string): string {
 }
 
 /** Tadım detay sayfasının dile göre URL'i. İçerik dosyaları yerinde durur
-    (kök = Türkçe dosya, en/ = İngilizce dosya); değişen yalnızca adres. */
+    (kök = Türkçe dosya, en/ = İngilizce dosya); değişen yalnızca adres.
+    Slug iki dilde ortak ve dilden bağımsız: kavurucu-kahve (special-guests-lerida-pacamara). */
 export function tastingUrl(lang: Lang, slug: string): string {
-  return lang === 'tr' ? `/tr/tadim/${slug}/` : `/tadim/${slug}/`;
+  return lang === 'tr' ? `/tr/fincanlar/${slug}/` : `/cups/${slug}/`;
 }
 
 /** Dile göre tarih biçimlendirme. */

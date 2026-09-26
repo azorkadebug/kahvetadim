@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BrewIcon from '../BrewIcon.astro';
 import { useTranslations, archiveCount, archiveDescription, type Lang } from '../../i18n/ui';
-import { formatDate, tastingLang, tastingSlug, tastingUrl, localizePath, processLabel, methodLabel } from '../../i18n/utils';
+import { formatDate, tastingLang, tastingSlug, tastingUrl, processLabel, methodLabel, routePath } from '../../i18n/utils';
 import { renkStil } from '../../lib/renkler';
 
 interface Props {
@@ -16,7 +16,7 @@ const all = await getCollection('tadimlar', (e) => tastingLang(e.id) === locale)
 const sorted = all.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const otherLang: Lang = locale === 'tr' ? 'en' : 'tr';
-const altUrl = localizePath(otherLang, '/tadimlar/');
+const altUrl = routePath(otherLang, 'archive');
 ---
 
 <BaseLayout

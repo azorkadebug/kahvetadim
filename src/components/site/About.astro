@@ -3,7 +3,7 @@ import { getEntry, getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionLabel from '../SectionLabel.astro';
 import { useTranslations, type Lang } from '../../i18n/ui';
-import { formatDate, localizePath, tastingLang, tastingSlug, tastingUrl } from '../../i18n/utils';
+import { formatDate, tastingLang, tastingSlug, tastingUrl, routePath } from '../../i18n/utils';
 
 interface Props {
   locale: Lang;
@@ -22,7 +22,7 @@ const all = await getCollection('tadimlar', (e) => tastingLang(e.id) === locale)
 const latest = all.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
 
 const otherLang: Lang = locale === 'tr' ? 'en' : 'tr';
-const altUrl = localizePath(otherLang, '/hakkinda/');
+const altUrl = routePath(otherLang, 'about');
 ---
 
 <BaseLayout

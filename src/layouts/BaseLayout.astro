@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { useTranslations, ogLocale, defaultLang, type Lang } from '../i18n/ui';
-import { localizePath } from '../i18n/utils';
+import { localizePath, routePath } from '../i18n/utils';
 import Wordmark from '../components/site/Wordmark.astro';
 
 interface Props {
@@ -36,7 +36,7 @@ const siteLd = ogType === 'website' ? {
   name: t('site.name'),
   url: new URL(localizePath(locale, '/'), Astro.site).toString(),
   inLanguage: locale,
-  author: { '@type': 'Person', name: 'Sabri', url: new URL(localizePath(locale, '/hakkinda/'), Astro.site).toString() },
+  author: { '@type': 'Person', name: 'Sabri', url: new URL(routePath(locale, 'about'), Astro.site).toString() },
 } : null;
 // OG görselleri sürümlü yolda (/og/v4/…): 7 gün önbellekte kalıyorlar,
 // tasarım değişince scripts/og-ortak.mjs'deki OG_SURUM ile birlikte artır.
@@ -79,8 +79,8 @@ const tasmaBekcisi = `
 })();
 `;
 
-const navArchive = localizePath(locale, '/tadimlar/');
-const navAbout = localizePath(locale, '/hakkinda/');
+const navArchive = routePath(locale, 'archive');
+const navAbout = routePath(locale, 'about');
 const homeHref = localizePath(locale, '/');
 ---
 
